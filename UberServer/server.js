@@ -5,8 +5,7 @@ var amqp = require('amqp')
 
 var routes = require('./routes');
 var user = require('./routes/user');
-var login = require('./routes/login');
-var group = require('./routes/group');
+var login = require('./services/login');
 var http = require('http');
 var path = require('path');
 var amqp = require('amqp')
