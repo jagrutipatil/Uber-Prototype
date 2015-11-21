@@ -1,13 +1,15 @@
-var amqp = require('amqp');
-var http=require('http');
-var  util = require('util');
+//super simple rpc server example
+//Advanced Message Queuing Protocol (AMQP)
+var amqp = require('amqp')
+, util = require('util');
 
-var login = require('./services/login');
-var mongoSessionConnectURL = "mongodb://localhost:27017/sessions";
-var expressSession = require("express-session");
-var mongoStore = require("connect-mongo")(expressSession);
-var mongo = require("./services/mongo");
-var mysql = require("./services/mysqlpool");
+var routes = require('./routes');
+var user = require('./routes/user');
+var login = require('./routes/login');
+var group = require('./routes/group');
+var http = require('http');
+var path = require('path');
+var amqp = require('amqp')
 
 var cnn = amqp.createConnection({host:'127.0.0.1'});
 
@@ -20,9 +22,8 @@ cnn.on('ready', function(){
 			util.log("Message: "+JSON.stringify(message));
 			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
 			
-			switch(message.functions){	
-			case "signin":
-				login.handle_request(message, function(err,res){
+			login.handle_request(message, function(err,res){
+
 				//return index sent
 				cnn.publish(m.replyTo, res, {
 					contentType:'application/json',
@@ -30,26 +31,8 @@ cnn.on('ready', function(){
 					correlationId:m.correlationId
 				});
 			});
-			break;
-			
-			case "signup":
-				login.handle_request_signup(message, function(err,res){
-				//return index sent
-				cnn.publish(m.replyTo, res, {
-					contentType:'application/json',
-					contentEncoding:'utf-8',
-					correlationId:m.correlationId
-				});
-			});
-			break;
-			
-			}			
 		});
 	});
 	
-});
 
-
-mongo.connect(mongoSessionConnectURL, function(){
-	console.log('Connected to mongo at: ' + mongoSessionConnectURL);
 });
