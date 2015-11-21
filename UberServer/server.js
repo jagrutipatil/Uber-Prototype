@@ -43,8 +43,7 @@ cnn.on('ready', function(){
 			});
 			break;
 			
-			}
-			
+			}			
 		});
 	});
 	
