@@ -3,7 +3,7 @@ var mySqlDb = require("./mysqldb");
 var tableName = "testdb.drivers";
 
 /* Driver Information
- driverid, ssn, First Name
+ ssn, First Name
  Last Name,Address,City,State,Zip Code,Phone number,Email,Car details,Rating,Reviews
  Own introduction in form of images and video.,Rides history
 */
