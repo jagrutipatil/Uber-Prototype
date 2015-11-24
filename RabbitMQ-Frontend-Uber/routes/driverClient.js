@@ -9,7 +9,7 @@ function signup(req, res) {
 			"cardno": req.param("cardno"), "cvv": req.param("cvv"),
 			"exp_date": req.param("exp_date"),"postalcode": req.param("postalcode"),"requestQueue":"signup"};
 	
-	mq_client.make_request('customer',msg_payload, function(err,results){
+	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
@@ -24,7 +24,7 @@ function signup(req, res) {
 
 function signin(req, res) {
 	var msg_payload = { "email": req.param("email"), "password": req.param("password"),"requestQueue":"signin"};	
-	mq_client.make_request('customer',msg_payload, function(err,results){
+	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
@@ -38,7 +38,7 @@ function signin(req, res) {
 
 function remove_with_email(req, res) {
 	var msg_payload = { "email": req.param("email"),"requestQueue":"remove_with_email"};	
-	mq_client.make_request('customer',msg_payload, function(err,results){
+	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
@@ -52,7 +52,7 @@ function remove_with_email(req, res) {
 
 function remove_with_ssn(req, res) {
 	var msg_payload = { "ssn": req.param("ssn"),"requestQueue":"remove_with_ssn"};	
-	mq_client.make_request('customer',msg_payload, function(err,results){
+	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
@@ -66,7 +66,7 @@ function remove_with_ssn(req, res) {
 
 function selectAll(req, res) {
 	var msg_payload = {"requestQueue":"selectAll"};	
-	mq_client.make_request('customer',msg_payload, function(err,results){
+	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
@@ -80,7 +80,7 @@ function selectAll(req, res) {
 
 function search_with_name(req, res) {
 	var msg_payload = {"firstname": req.param("firstname"), "lastname": req.param("lastname"), "requestQueue":"search_with_name"};	
-	mq_client.make_request('customer',msg_payload, function(err,results){
+	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
@@ -94,7 +94,7 @@ function search_with_name(req, res) {
 
 function search_with_ssn(req, res) {
 	var msg_payload = {"ssn": req.param("ssn"), "requestQueue":"search_with_ssn"};	
-	mq_client.make_request('customer',msg_payload, function(err,results){
+	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
@@ -111,7 +111,7 @@ function update(req, res) {
 			"password":req.param("password"), "firstname":req.param("firstname")
 			,"lastname": req.param("lastname"),"mobileno": req.param("mobileno"),
 			"postalcode": req.param("postalcode"), "requestQueue":"update"};	
-	mq_client.make_request('customer',msg_payload, function(err,results){
+	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
@@ -125,7 +125,7 @@ function update(req, res) {
 
 function approve(req, res) {
 	var msg_payload = {"ssn": req.param("ssn"), "requestQueue":"approve"};	
-	mq_client.make_request('customer',msg_payload, function(err,results){
+	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
