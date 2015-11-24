@@ -30,7 +30,6 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-
 app.post('/customer_signin', customer.signin);
 app.post('/customer_signup', customer.signup);
 app.post('/customer_remove_with_email', customer.remove_with_email);
