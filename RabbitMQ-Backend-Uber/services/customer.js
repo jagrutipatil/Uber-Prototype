@@ -62,7 +62,7 @@ function update(ssn, email, password, firstname, lastname, mobileno, postalcode,
 	}, sqlQuery);
 }
 
-function search_with_ssn(ssn) {
+function search_with_ssn(ssn, callback) {
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE ssn='"+ ssn +"'";
 	
 	mySqlDb.executeQuery(function(err, rows) {
@@ -80,7 +80,7 @@ function search_with_ssn(ssn) {
 	}, sqlQuery);	
 }
 
-function search_with_email(email) {
+function search_with_email(email, callback) {
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"'";
 	
 	mySqlDb.executeQuery(function(err, rows) {
@@ -98,7 +98,7 @@ function search_with_email(email) {
 	}, sqlQuery);	
 }
 
-function search_with_name(firstname, lastname) {
+function search_with_name(firstname, lastname, callback) {
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE firstname='"+ firstname +"' AND lastname = '" + lastname + "'";
 	
 	mySqlDb.executeQuery(function(err, rows) {
@@ -117,7 +117,7 @@ function search_with_name(firstname, lastname) {
 }
 
 
-function signin(email, password) {	
+function signin(email, password, callback) {	
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"'";
 	
 	mySqlDb.executeQuery(function(err, rows) {
@@ -135,7 +135,7 @@ function signin(email, password) {
 	}, sqlQuery);
 }
 
-function selectAll() {	
+function selectAll(callback) {	
 	var sqlQuery = "SELECT * FROM " + tableName ;
 	
 	mySqlDb.executeQuery(function(err, rows) {
@@ -153,7 +153,7 @@ function selectAll() {
 	}, sqlQuery);
 }
 
-function remove_with_ssn(ssn) {	
+function remove_with_ssn(ssn, callback) {	
 	var sqlQuery = "DELETE FROM " + tableName + " WHERE ssn='"+ ssn +"'";
 	
 	mySqlDb.executeQuery(function(err, rows) {
@@ -169,7 +169,7 @@ function remove_with_ssn(ssn) {
 	}, sqlQuery);
 }
 
-function remove_with_email(email) {	
+function remove_with_email(email, callback) {	
 	var sqlQuery = "DELETE FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"'";
 	
 	mySqlDb.executeQuery(function(err, rows) {
