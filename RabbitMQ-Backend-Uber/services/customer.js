@@ -68,7 +68,7 @@ function search_with_ssn(ssn, callback) {
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 			if (rows.length > 0) {
-				res.val = rows[0];
+				res.value = rows[0];
 				res.code = "200";
 			} else {
 				console.log(err);
@@ -86,7 +86,7 @@ function search_with_email(email, callback) {
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 			if (rows.length > 0) {
-				res.val = rows[0];
+				res.value = rows[0];
 				res.code = "200";
 			} else {
 				console.log(err);
@@ -104,7 +104,7 @@ function search_with_name(firstname, lastname, callback) {
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 			if (rows.length > 0) {
-				res.val = rows[0];
+				res.value = rows[0];
 				res.code = "200";
 			} else {
 				console.log(err);
@@ -123,7 +123,7 @@ function signin(email, password, callback) {
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 			if (rows.length > 0) {
-				res.val = rows[0];
+				res.value = rows[0];
 				res.code = "200";
 			} else {
 				console.log(err);
@@ -141,7 +141,7 @@ function selectAll(callback) {
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 			if (rows.length > 0) {
-				res.val = rows;
+				res.value = rows;
 				res.code = "200";
 			} else {
 				console.log(err);
