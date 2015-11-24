@@ -4,8 +4,8 @@ var amqp = require('amqp')
 , util = require('util');
 
 var routes = require('./routes');
-var user = require('./routes/user');
-var login = require('./services/login');
+var driverHandler = require('./services/driverHandler');
+var customerHandler = require('./services/customerHandler');
 var http = require('http');
 var path = require('path');
 var amqp = require('amqp')
@@ -21,7 +21,7 @@ cnn.on('ready', function(){
 			util.log("Message: "+JSON.stringify(message));
 			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
 			
-			login.handle_request(message, function(err,res){
+			customerHandler.handle_request(message, function(err,res){
 
 				//return index sent
 				cnn.publish(m.replyTo, res, {
@@ -32,6 +32,21 @@ cnn.on('ready', function(){
 			});
 		});
 	});
-	
 
+	cnn.queue('driver', function(q){
+		q.subscribe(function(message, headers, deliveryInfo, m){
+			util.log(util.format( deliveryInfo.routingKey, message));
+			util.log("Message: "+JSON.stringify(message));
+			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
+			driverHandler.handle_request(message, function(err,res){
+
+				//return index sent
+				cnn.publish(m.replyTo, res, {
+					contentType:'application/json',
+					contentEncoding:'utf-8',
+					correlationId:m.correlationId
+				});
+			});
+		});
+	});
 });
