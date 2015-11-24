@@ -2,15 +2,13 @@ var ejs = require("ejs");
 var mq_client = require('./client');
 //var bcrypt = require('bcryptjs');
 
-function home(req, res) {
-	ejs.renderFile("./views/login.ejs", function(err, result) {
-		if (!err) {
-			res.end(result);
-		}
-	});
-}
-
-
+//function home(req, res) {
+//	ejs.renderFile("./views/login.ejs", function(err, result) {
+//		if (!err) {
+//			res.end(result);
+//		}
+//	});
+//}
 		
 function signup(req, res) {
 	var msg_payload = { "ssn": req.param("ssn"), "email": req.param("email"), 
@@ -147,7 +145,10 @@ function approve(req, res) {
 	});
 }
 
-exports.home = home;
+function search_with_email(req, res) {
+}
+
+//exports.home = home;
 exports.signup = signup;
 exports.signin = signin;
 exports.remove_with_email = remove_with_email;

@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<Title>Signup Driver</Title>
+    <link rel="stylesheet" href="/stylesheets/uber-icons.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/superfine.css" type="text/css">
+	<link rel="stylesheet" href="/stylesheets/Signup.css">
+</head>
+<body>
+<section class="wrapper">
+	<header class="contextual">
+		<a href="https://www.uber.com/">
+	    	<i class="icon icon_uber push-large--top push--bottom"></i>
+	 	</a>
+	</header>
+
+	<section class="content ">
+		<div class="signup-wrapper">
+			<section class="signup-top">
+				<div class="signup-top-images">
+					<div class="signup-top-phones"></div>
+				</div>
+				<div class="signup-top-text">
+					<div class="signup-top-text-title"> Sign Up to Drive </div>
+					<div class="signup-top-text-subtitle">
+						<p class="inner-text">Drive with Uber and earn great money as an independent contractor.</p>
+						<p class="inner-text">Get paid weekly just for helping our community of riders get rides around town. Be your own boss and get paid in fares for driving on your own schedule.</p>
+					</div>
+				</div>
+			</section>
+			<section class="signup-form">
+				<article class="form-container">
+					<form class="form-vertical" autocomplete="on" method="POST" action="/signup_submit/">
+						<div class="signup-form-section account">
+							<div class="signup-form-section-title">
+								<p>Account</p>
+							</div>
+							<div class="signup-form-section-required">Required</div>
+							<div class="signup-form-section-number blue">1</div>
+							<div class="signup-form-section-line blue"></div>
+							<div class="form-group required ">
+								<label for="email">Email</label>
+								<input id="email" type="email" placeholder="name@example.com" name="email" value="">
+								<div class="error-notice"></div>
+							</div>
+							<div class="form-group required ">
+								<label for="password">Password</label>
+								<input id="password" type="password" placeholder="At least 5 characters" name="password" value="">
+								<div class="error-notice"></div>
+							</div>
+						</div>
+						
+						<div class="signup-form-section profile">
+							<div class="signup-form-section-title">
+								<p>Profile</p>
+							</div>
+							<div class="signup-form-section-number blue">2</div>
+							<div class="signup-form-section-line  blue"></div>
+							<div class="form-group required ">
+								<label for="name">Name</label>
+								<div class="row form-row">
+									<div class="col-md-6 col-xs-6 md-push-right-half sm-push-right-half xs-push-right-half">
+										<input id="first_name" type="text" placeholder="First Name" name="first_name" value="">
+										<div class="error-notice"></div>
+									</div>
+									<div class="col-md-6 col-xs-6 md-push-left-half xs-push-left-half">
+										<input id="last_name" type="text" placeholder="Last Name" name="last_name" value="">
+										<div class="error-notice"></div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group js-mobile-country required mobile-number">
+								<label for="mobile">Mobile Number</label>
+								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" value="">
+								<div class="error-notice"></div>
+							</div>
+						</div>
+						
+						<div class="signup-form-section payment">
+							<div class="signup-form-section-title">
+								<p>Social Security Number</p>
+							</div>
+							<div class="signup-form-section-number blue">3</div>
+							<div class="signup-form-section-line blue"></div>
+							
+							<div class="credit-card-info">
+							            <div class="form-group required ">
+							                <label for="ssn_number">SSN#</label>
+							                <input id="ssn_number" type="text" placeholder="AAA-GG-SSSS" name="ssn_number" value="">							                
+							                <div class="error-notice"></div>
+							            </div>						    
+							</div>
+							
+						</div>
+						
+						<div class="signup-form-section submit ">
+							<div class="col-md-12">							
+								<div class="form-group">
+									<button class="btn btn-primary js-submit" type="submit">Create Account</button>
+								</div>
+								<div class="signup-form-section-notice">
+									Please fill out all required (
+									<span class="star">*</span>
+									) fields.
+								</div>
+							</div>
+							<div class="signup-form-section-number  blue"></div>
+						</div>
+						
+						
+						<div class="form-group agree-terms">
+							<p>
+								By clicking "Create Account" , you agree to Uber's
+								<a href="https://www.uber.com/legal/terms">Terms and Conditions</a>
+								and
+								<a href="https://www.uber.com/legal/privacy">Privacy Policy</a>
+								.
+							</p>
+						</div>
+						
+					</form>
+				</article>
+			</section>
+		</div>
+	</section>
+
+
+
+</section>
+</body>
+</html>

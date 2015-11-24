@@ -1,0 +1,434 @@
+html {
+    font-size: 62.5%;
+}
+html {
+    font-family: sans-serif;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: ff-clan-web-pro-wide;
+}
+body {
+    color: #333;
+    font-size: 14px;
+    line-height: 1.57;
+    margin:0;
+}
+
+body, button, figure, input, select, textarea {
+    margin: 0;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: ff-clan-web-pro-wide;
+}
+label, li, p, span {
+    color: #000;
+}
+
+
+a {
+    color: #37b9f3;
+    text-decoration: none;
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+.wrapper {
+    padding: 80px 0 0;
+}
+.wrapper {
+    padding-top: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+    display: block;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+body, button, figure, input, select, textarea {
+    margin: 0;
+}
+
+
+header {
+    background-color: transparent;    
+}
+
+header.contextual {
+    background-color: #000;
+    padding: 24px 20px;
+    position: static;
+    z-index: 1;
+    text-align:center;    
+}
+
+header.contextual a{
+	text-decoration:none !important;
+}
+
+.icon {
+    font-family: uber-icons;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    font-weight: 400;
+    font-style: normal;
+    speak: none;
+    text-decoration: inherit;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon_uber {
+    color: white !important;
+    font-size: 21px;
+    box-sizing: border-box;
+}
+
+.icon_uber:before {
+    content: "\f13a";
+}
+
+.icon-item a{
+	text-decoration:none !important;
+}
+
+.signup-wrapper {
+    margin: 0 auto;
+    width: 680px;
+}
+
+.signup-top {
+    height: 230px;
+    margin: 60px 0;
+}
+
+.signup-top .signup-top-images {
+    display: inline-block;
+    width: 23%;
+}
+
+.signup-top .signup-top-images .signup-top-phones {
+    background: rgba(0, 0, 0, 0) url("../images/phones-signup.png") no-repeat scroll left top;
+    height: 235px;
+    margin-left: -55%;
+    width: 212px;
+}
+
+.signup-top .signup-top-text {
+    display: inline-block;
+    margin-top: 40px;
+    vertical-align: top;
+    width: 73%;
+}
+
+.signup-top .signup-top-text .signup-top-text-title {
+    color: #1fbad6;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.signup-top .signup-top-text .signup-top-text-subtitle {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.signup-top-text-subtitle .inner-text{
+	font-size:13px;
+}
+
+.form-container {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.form-group {
+    font-family: ff-clan-web-pro-wide,sans-serif;
+    padding-bottom: 19px;
+    width: 100%;
+}
+
+.form-group input::-moz-placeholder {
+    color: #c2c2c2;
+}
+
+.form-group input {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.form-group button, .form-group input, .form-group select {
+    font-size: 14px;
+    height: 40px;
+    line-height: 20px;
+    padding: 2px 0 0 12px;
+    transition: all 0.3s linear 0s;
+    width: 100%;
+}
+
+.form-group select {    
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.form-group select.gray {
+    color: #c2c2c2;
+    font-weight: 400;
+}
+
+.form-group input.gray {
+    color: #c2c2c2;
+    font-weight: 400;
+}
+
+.form-group label {
+    color: #666;
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-bottom: 8px;
+}
+
+.form-group.required label::before {
+    color: #1fbad6;
+    content: "*";
+    font-size: 16px;
+    padding-right: 4px;
+}
+
+.add-a-promo-code, .btn, .error-list, .form-group label, .sticker, h1, h2, h3, h4, h5, h6 {
+    text-transform: uppercase;
+}
+
+.error-notice {
+    color: #ed145b;
+    display: none;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.signup-form-section {
+    position: relative;
+}
+.signup-form-section {
+    margin-bottom: -25px;
+    padding-bottom: 50px;
+}
+
+.signup-form-section .signup-form-section-title {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.signup-form-section .signup-form-section-required {
+    font-size: 10px;
+    font-weight: 500;
+    position: absolute;
+    right: 0;
+    top: 4px;
+}
+
+.signup-form-section .signup-form-section-required::before {
+    color: #1fbad6;
+    content: "*";
+    font-size: 16px;
+    padding-right: 4px;
+}
+
+.signup-form-section .signup-form-section-number {
+    background-color: #fff;
+    border: 1px solid #f1f1f1;
+    border-radius: 50%;
+    color: #f1f1f1;
+    font-size: 14px;
+    height: 36px;
+    left: -75px;
+    padding: 7px 0 0 12px;
+    position: absolute;
+    top: 0;
+    width: 36px;
+    z-index: 10;
+}
+
+.signup-form-section .signup-form-section-number.blue {
+    border-color: #1fbad6;
+    border-left: 1px solid #1fbad6;
+    color: #1fbad6;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in;
+}
+
+.signup-form-section .signup-form-section-line {
+    border-left: 1px solid #f1f1f1;
+    height: 100%;
+    left: -57px;
+    position: absolute;
+    top: 0;
+    width: 36px;
+}
+
+.signup-form-section .signup-form-section-line.blue {
+    border-left: 1px solid #1fbad6;
+    transition: border-left 0.5s ease-in 0s;
+}
+
+.signup-form-section.payment .payment-errors {
+    padding-bottom: 20px;
+}
+
+.submit {
+    margin-bottom: 40px;
+    padding-bottom: 0;
+}
+
+.submit .col-md-12 {
+    padding: 0;
+}
+
+.submit button:not(:disabled) {
+    transition: all 0.5s ease-in 0s;
+}
+
+.submit button.disabled {
+    background-color: #c1ecf4;
+    pointer-events: none;
+}
+
+.submit button {
+    height: 50px;
+}
+
+.submit .signup-form-section-notice {
+    color: #666;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.submit .signup-form-section-notice .star {
+    color: #1fbad6;
+}
+
+.submit .signup-form-section-number.blue {
+    background: #fff url("../images/signup-lite-check-blue@1x.aa218f0f478e33cc4af79cb3b020f673.png") no-repeat scroll center center;
+}
+
+.submit .signup-form-section-number {    
+    padding: 0;
+}
+
+.agree-terms {
+    font-size: 12px;
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+}
+
+
+.btn-primary {
+    background-color: #1fbad6;
+    color: #fff;
+    font-family: ff-clan-web-pro-wide,sans-serif;
+}
+
+.btn {
+    border: 0 none;
+    display: block;
+}
+
+.btn-hollow, .btn-primary {
+    font-size: 18px;
+    height: 45px;
+    width: 100%;
+}
+
+.btn, .dot-pagination, .page-title, .tile-container {
+    text-align: center;
+}
+
+.row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.container::after, .container::before, .row::after, .row::before {
+    content: " ";
+    display: table;
+}
+
+.row::after {
+    clear: both;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    min-height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+}
+
+.col-xs-6 {
+    width: 50%;
+}
+
+.col-xs-12 {
+    width: 100%;
+}
+
+.col-md-4 {
+    width: 33.3333%;
+}
+.col-md-6 {
+    width: 50%;
+}
+
+.col-md-8 {
+    width: 66.6667%;
+}
+
+.col-md-12 {
+    width: 100%;
+}
+
+.md-half-padding, .md-push-right-half {
+    padding-right: 5px;
+}
+
+.col-md-1, .col-md-10, .col-md-11, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
+    float: left;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    min-height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+}
+
+.carousel section, .carousel > article, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    float: left;
+}
+
+.credit-card-icon {
+    background: rgba(0, 0, 0, 0) url("../images/credit-card-icons-sprite@1x.45a735c64ca3ebf64030f6df81451d62.jpg") no-repeat scroll left top;
+    height: 25px;
+    position: absolute;
+    right: 18px;
+    top: 37px;
+    width: 40px;
+}
+
+.step-list .step a, button, select {
+    text-transform: none;
+}

@@ -137,7 +137,11 @@ function approve(req, res) {
 	});
 }
 
-exports.home = home;
+function search_with_email(req, res) {
+	
+}
+
+//exports.home = home;
 exports.signup = signup;
 exports.signin = signin;
 exports.remove_with_email = remove_with_email;
