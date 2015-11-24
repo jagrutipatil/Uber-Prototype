@@ -75,6 +75,7 @@ function search_with_ssn(ssn) {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
+			callback(res);
 		}
 	}, sqlQuery);	
 }
@@ -92,6 +93,7 @@ function search_with_email(email) {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
+			callback(res);
 		}
 	}, sqlQuery);	
 }
@@ -109,6 +111,7 @@ function search_with_name(firstname, lastname) {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
+			callback(res);
 		}
 	}, sqlQuery);	
 }
@@ -127,10 +130,10 @@ function signin(email, password) {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
+			callback(res);
 		}
 	}, sqlQuery);
 }
-
 
 function selectAll() {	
 	var sqlQuery = "SELECT * FROM " + tableName ;
@@ -145,6 +148,7 @@ function selectAll() {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
+			callback(res);
 		}
 	}, sqlQuery);
 }
@@ -161,6 +165,7 @@ function remove_with_ssn(ssn) {
 			  res.code = "401";
 			  res.value = "Failed Login";
 		}
+		callback(res);
 	}, sqlQuery);
 }
 
@@ -176,6 +181,7 @@ function remove_with_email(email) {
 			  res.code = "401";
 			  res.value = "Failed Login";
 		}
+		callback(res);
 	}, sqlQuery);
 }
 
