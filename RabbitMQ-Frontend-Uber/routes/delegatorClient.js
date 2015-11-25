@@ -37,7 +37,24 @@ function signupDriver(req, res) {
 	});
 }
 
+function updateDriver(req, res) {
+	ejs.renderFile("./views/UpdateDriver.ejs", function(err, result) {
+		if (!err) {
+			res.end(result);
+		}
+	});
+}
+function updateCustomer(req, res) {
+	ejs.renderFile("./views/UpdateCustomer.ejs", function(err, result) {
+		if (!err) {
+			res.end(result);
+		}
+	});
+}
+
 exports.loginCustomer = loginCustomer;
 exports.signupCustomer = signupCustomer;
 exports.loginDriver = loginDriver;
 exports.signupDriver = signupDriver;
+exports.updateDriver = updateDriver;
+exports.updateCustomer = updateCustomer;
