@@ -6,6 +6,7 @@ var driver = require("./driver");
 	function handle_request (msg, callback) {
 	if(msg.requestQueue=="signup"){
 		driver.signup(msg.ssn, msg.email, msg.password, msg.firstname, msg.lastname, msg.mobileno, msg.cardno, msg.cvv, msg.exp_date, msg.postalcode, function(res) {
+			
 			callback(res);
 		});
 	}

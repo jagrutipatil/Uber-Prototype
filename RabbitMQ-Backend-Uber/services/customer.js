@@ -1,12 +1,12 @@
 var ejs = require("ejs");
 var mySqlDb = require("./mysqldb");
-var tableName = "testdb.customers";
+var tableName = "uber.customers";
 
 function signup(ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_month, exp_year, postalcode, callback) {
+	var res = {};
 	console.log("in singup backend module");
-	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, cardno, cvv, ex_month, ex_year, postalcode, approved) VALUES ( '" + email 
-	+ "' , '" + ssn +
-	  "' , '" + email +
+	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_month, exp_year, postalcode, approved) VALUES ( '" + ssn 
+	+ "' , '" + email +
 	  "' , '" + password +  
 	  "' , '" + firstname  +
 	  "' , '" + lastname +
@@ -27,11 +27,12 @@ function signup(ssn, email, password, firstname, lastname, mobileno, cardno, cvv
 			  res.code = "401";
 			  res.value = "error";
 		}
-		callback(res);
+		callback(err, res);
 	}, sqlQuery);
 }
 
 function approve(ssn, callback) {
+	var res = {};
 	var sqlQuery = "UPDATE "+ tableName + " SET approved = 'true' WHERE ssn = '" + ssn+"'";
 	  	
 	mySqlDb.executeQuery(function(err, rows) {
@@ -43,7 +44,7 @@ function approve(ssn, callback) {
 			  res.code = "401";
 			  res.value = "error";
 		}
-		callback(res);
+		callback(err, res);
 	}, sqlQuery);
 }
 
@@ -52,6 +53,7 @@ function update(ssn, email, password, firstname, lastname, mobileno, postalcode,
 	+ "', password = '"+password+"' , firstname = '"+firstname+"' , lastname = '"+lastname+"', +" +
 			" mobileno = '"+mobileno+"', postalcode = '"+postalcode+"') WHERE ssn = '" + ssn+"'";
 	  	
+	var res = {};
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
@@ -61,12 +63,13 @@ function update(ssn, email, password, firstname, lastname, mobileno, postalcode,
 			  res.code = "401";
 			  res.value = "error";
 		}
-		callback(res);
+		callback(err, res);
 	}, sqlQuery);
 }
 
 function search_with_ssn(ssn, callback) {
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE ssn='"+ ssn +"'";
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -78,13 +81,14 @@ function search_with_ssn(ssn, callback) {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
-			callback(res);
+			callback(err, res);
 		}
 	}, sqlQuery);	
 }
 
 function search_with_email(email, callback) {
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"'";
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -96,13 +100,14 @@ function search_with_email(email, callback) {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
-			callback(res);
+			callback(err, res);
 		}
 	}, sqlQuery);	
 }
 
 function search_with_name(firstname, lastname, callback) {
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE firstname='"+ firstname +"' AND lastname = '" + lastname + "'";
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -114,7 +119,7 @@ function search_with_name(firstname, lastname, callback) {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
-			callback(res);
+			callback(err, res);
 		}
 	}, sqlQuery);	
 }
@@ -122,6 +127,7 @@ function search_with_name(firstname, lastname, callback) {
 
 function signin(email, password, callback) {	
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"'";
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -133,13 +139,14 @@ function signin(email, password, callback) {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
-			callback(res);
+			callback(err, res);
 		}
 	}, sqlQuery);
 }
 
 function selectAll(callback) {	
 	var sqlQuery = "SELECT * FROM " + tableName ;
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -151,13 +158,14 @@ function selectAll(callback) {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
-			callback(res);
+			callback(err, res);
 		}
 	}, sqlQuery);
 }
 
 function remove_with_ssn(ssn, callback) {	
 	var sqlQuery = "DELETE FROM " + tableName + " WHERE ssn='"+ ssn +"'";
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -168,12 +176,13 @@ function remove_with_ssn(ssn, callback) {
 			  res.code = "401";
 			  res.value = "Failed Login";
 		}
-		callback(res);
+		callback(err, res);
 	}, sqlQuery);
 }
 
 function remove_with_email(email, callback) {	
 	var sqlQuery = "DELETE FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"'";
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -184,7 +193,7 @@ function remove_with_email(email, callback) {
 			  res.code = "401";
 			  res.value = "Failed Login";
 		}
-		callback(res);
+		callback(err, res);
 	}, sqlQuery);
 }
 

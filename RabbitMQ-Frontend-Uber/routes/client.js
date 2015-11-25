@@ -7,12 +7,7 @@ var rpc = new (require('./amqprpc'))(connection);
 function make_request(queue_name, msg_payload, callback){
 	
 	rpc.makeRequest(queue_name, msg_payload, function(err, response){
-		if(err)
-			console.error(err);
-		else{
-			console.log("response", response);
-			callback(null, response);
-		}
+		callback(err, response);
 	});
 }
 

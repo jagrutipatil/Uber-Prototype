@@ -18,9 +18,9 @@ function signup(req, res) {
 			"exp_year": req.param("exp_year"),"postalcode": req.param("postalcode"),"requestQueue":"signup"};
 	
 	mq_client.make_request('customer',msg_payload, function(err,results){
-		    console.log(results);
+		console.log("Got callback from server");
 			if(results.code == 200){
-				console.log("valid Login");				
+				console.log("Inserted customer entry sucessfully");				
 				res.send({"result":"success"});
 			} else {    
 				console.log("Invalid Login");

@@ -22,6 +22,7 @@ function signupCustomerController($scope, $http, $window) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
+				alert("Success");
 			} else {
 			}			
 		}).error(function(error) {

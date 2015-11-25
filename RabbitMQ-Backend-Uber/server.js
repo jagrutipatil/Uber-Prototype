@@ -12,7 +12,7 @@ var amqp = require('amqp')
 var cnn = amqp.createConnection({host:'127.0.0.1'});
 
 cnn.on('ready', function(){
-	console.log("listening on login_queue");
+	console.log("listening on queues");
 
 	cnn.queue('customer', function(q){
 		q.subscribe(function(message, headers, deliveryInfo, m){
@@ -21,7 +21,8 @@ cnn.on('ready', function(){
 			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
 			
 			customerHandler.handle_request(message, function(err,res){
-
+				console.log("Sent response from server");
+				console.log(res);
 				//return index sent
 				cnn.publish(m.replyTo, res, {
 					contentType:'application/json',
