@@ -8,6 +8,7 @@ function signupCustomerController($scope, $http, $window) {
 			method : 'POST',
 			url : '/bk_customer_signup',
 			data : {
+				"ssn" : $scope.ssn,
 				"email" : $scope.email,
 				"password": $scope.password,
 				"firstname" : $scope.firstname,

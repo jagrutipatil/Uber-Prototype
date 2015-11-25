@@ -3,9 +3,10 @@ var mySqlDb = require("./mysqldb");
 var tableName = "testdb.customers";
 
 function signup(ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_month, exp_year, postalcode, callback) {
+	console.log("in singup backend module");
 	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, cardno, cvv, ex_month, ex_year, postalcode, approved) VALUES ( '" + email 
 	+ "' , '" + ssn +
-	 "' , '" + email +
+	  "' , '" + email +
 	  "' , '" + password +  
 	  "' , '" + firstname  +
 	  "' , '" + lastname +
@@ -20,7 +21,7 @@ function signup(ssn, email, password, firstname, lastname, mobileno, cardno, cvv
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
-			  res.value = "succes";
+			  res.value = "success";
 		} else {
 			  console.log(err);
 			  res.code = "401";
@@ -54,7 +55,7 @@ function update(ssn, email, password, firstname, lastname, mobileno, postalcode,
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
-			  res.value = "sucess";
+			  res.value = "success";
 		} else {
 			  console.log(err);
 			  res.code = "401";

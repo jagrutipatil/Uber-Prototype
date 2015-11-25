@@ -6,7 +6,7 @@ function getConnection() {
 		host : 'localhost',
 		user : 'root',
 		password : 'linux2015',
-		database : 'testdb',
+		database : 'uber',
 		port : 3306
 	});
 	return conn;
