@@ -167,7 +167,18 @@ var getPriceDeviationPeekTime = function(startTime,endTime){
 	return priceDeviation;
 };
 
-
+var generateUniqueId = function(){
+	  function s4() {
+		    return Math.floor((1 + Math.random()) * 0x1000);
+		  }
+		  function s3() {
+		    return Math.floor((1 + Math.random()) * 0x100);
+		  }
+		function s2() {
+		    return Math.floor((1 + Math.random()) * 0x10);
+		  }
+		  return s3() + '-' + s2() + '-' + s4();
+};
 
 var billGenerate = function(req,res){
 	var billID = 0;
@@ -219,8 +230,8 @@ var billGenerate = function(req,res){
 	}	
 	
 /*	if(price!== null){
-		
-		var insertBill = "insert into bills(ID , date, pickUpTime , DropOffTime , distance, amount, sourceLocation, destinationLocation, driverId, customerId) values (1001," + "'" + currentDate + "','" + startTime + "','" + endTime + "','" + distance + "','" + price + "','" + source + "','" + destination + "','" + driverId + "','" + customerId +"')";
+		var uniqueId = generateUniqueId();
+		var insertBill = "insert into bills(ID , date, pickUpTime , DropOffTime , distance, amount, sourceLocation, destinationLocation, driverId, customerId) values ('" + uniqueId + "','" + currentDate + "','" + startTime + "','" + endTime + "','" + distance + "','" + price + "','" + source + "','" + destination + "','" + driverId + "','" + customerId +"')";
 
         Section for inserting in the billing table
         
@@ -286,6 +297,56 @@ var estimate = function(req,res){
 	res.send({price:price});
 };
 
+var getUserBills = function(req,res){
+	var customerId = req.param("customerId");
+	
+	var fetchData = "select * from bills where customerId='" + customerId + "'";
+    //Section for fetching a particular user bills from the bill table
+    
+    mysql.fetchData(function(err,results1){
+      if(err){
+        throw err;
+      }
+      else 
+      {
+        if(results1 !== undefined){
+          console.log("Inserted Successfully ");
+        }
+        else {              
+          console.log("Failed to insert");                  
+          res.end('An error occurred');
+          console.log(err);                   
+        }
+      }
+    },fetchData);
+};
+
+var getBill = function(req,res){
+	var customerId = req.param("customerId");
+	var driverId = req.param("driverId");
+	
+	var fetchData = "select * from bills where customerId='" + customerId + "' and driverId='" + driverId + "'";
+	//Section for fetching a particular user and driver bills from the bill table
+    
+    mysql.fetchData(function(err,results1){
+      if(err){
+        throw err;
+      }
+      else 
+      {
+        if(results1 !== undefined){
+          console.log("Inserted Successfully ");
+        }
+        else {              
+          console.log("Failed to insert");                  
+          res.end('An error occurred');
+          console.log(err);                   
+        }
+      }
+    },fetchData);
+};
 
 exports.billGenerate=billGenerate;
 exports.estimate=estimate;
+exports.getUserBills=getUserBills;
+exports.getBill=getBill;
