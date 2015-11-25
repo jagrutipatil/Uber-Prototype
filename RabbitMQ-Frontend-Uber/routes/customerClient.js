@@ -14,8 +14,8 @@ function signup(req, res) {
 	var msg_payload = { "ssn": req.param("ssn"), "email": req.param("email"), 
 			"password":req.param("password"), "firstname":req.param("firstname")
 			,"lastname": req.param("lastname"),"mobileno": req.param("mobileno"),
-			"cardno": req.param("cardno"), "cvv": req.param("cvv"),
-			"exp_date": req.param("exp_date"),"postalcode": req.param("postalcode"),"requestQueue":"signup"};
+			"cardno": req.param("cardno"), "cvv": req.param("cvv"), "exp_month": req.param("exp_month"),
+			"exp_year": req.param("exp_year"),"postalcode": req.param("postalcode"),"requestQueue":"signup"};
 	
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		    console.log(results);

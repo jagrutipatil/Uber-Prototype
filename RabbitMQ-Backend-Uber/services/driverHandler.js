@@ -1,7 +1,9 @@
 var ejs = require("ejs");
 var driver = require("./driver");
 
-	var res = {};	
+	var res = {};
+	
+	function handle_request (msg, callback) {
 	if(msg.requestQueue=="signup"){
 		driver.signup(msg.ssn, msg.email, msg.password, msg.firstname, msg.lastname, msg.mobileno, msg.cardno, msg.cvv, msg.exp_date, msg.postalcode, function(res) {
 			callback(res);

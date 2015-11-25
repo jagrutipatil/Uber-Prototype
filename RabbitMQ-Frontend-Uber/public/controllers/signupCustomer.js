@@ -27,5 +27,4 @@ function signupCustomerController($scope, $http, $window) {
 			console.log(error);
 		});
 	};
-
 }

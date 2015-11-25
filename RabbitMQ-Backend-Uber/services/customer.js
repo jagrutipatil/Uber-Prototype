@@ -2,27 +2,29 @@ var ejs = require("ejs");
 var mySqlDb = require("./mysqldb");
 var tableName = "testdb.customers";
 
-function signup(ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_date, postalcode, callback) {
-	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, cardno, cvv, ex_date, postalcode, approved) VALUES ( '" + email 
+function signup(ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_month, exp_year, postalcode, callback) {
+	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, cardno, cvv, ex_month, ex_year, postalcode, approved) VALUES ( '" + email 
 	+ "' , '" + ssn +
+	 "' , '" + email +
 	  "' , '" + password +  
 	  "' , '" + firstname  +
 	  "' , '" + lastname +
 	  "' , '" + mobileno +
 	  "' , '" + cardno +
 	  "' , '" + cvv +
-	  "' , '" + exp_date +
+	  "' , '" + exp_month +
+	  "' , '" + exp_year +
 	  "' , '" + postalcode +
 	  "' , ' false' )";
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
-			  res.value = "Succes Login";
+			  res.value = "succes";
 		} else {
 			  console.log(err);
 			  res.code = "401";
-			  res.value = "Failed Login";
+			  res.value = "error";
 		}
 		callback(res);
 	}, sqlQuery);
@@ -34,11 +36,11 @@ function approve(ssn, callback) {
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
-			  res.value = "Succes approve";
+			  res.value = "sucess";
 		} else {
 			  console.log(err);
 			  res.code = "401";
-			  res.value = "Failed approve";
+			  res.value = "error";
 		}
 		callback(res);
 	}, sqlQuery);
@@ -52,11 +54,11 @@ function update(ssn, email, password, firstname, lastname, mobileno, postalcode,
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
-			  res.value = "Succes update";
+			  res.value = "sucess";
 		} else {
 			  console.log(err);
 			  res.code = "401";
-			  res.value = "Failed update";
+			  res.value = "error";
 		}
 		callback(res);
 	}, sqlQuery);

@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="/stylesheets/uber-icons.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/superfine.css" type="text/css">
 	<link rel="stylesheet" href="/stylesheets/Signup.css">
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script type="text/javascript" src="/controllers/signupCustomer.js"></script>    
 </head>
-<body>
+<body  ng-app="signupCustomer" ng-controller="signupCustomerController">
 <section class="wrapper">
 	<header class="contextual">
 		<a href="https://www.uber.com/">
@@ -41,12 +43,12 @@
 							<div class="signup-form-section-line blue"></div>
 							<div class="form-group required ">
 								<label for="username">Email</label>
-								<input id="username" type="email" placeholder="name@example.com" name="username" value="">
+								<input id="username" type="email" placeholder="name@example.com" name="username" ng-model="email">
 								<div class="error-notice"></div>
 							</div>
 							<div class="form-group required ">
 								<label for="password">Password</label>
-								<input id="password" type="password" placeholder="At least 5 characters" name="password" value="">
+								<input id="password" type="password" placeholder="At least 5 characters" name="password" ng-model="password">
 								<div class="error-notice"></div>
 							</div>
 						</div>
@@ -61,18 +63,18 @@
 								<label for="name">Name</label>
 								<div class="row form-row">
 									<div class="col-md-6 col-xs-6 md-push-right-half sm-push-right-half xs-push-right-half">
-										<input id="firstname" type="text" placeholder="First Name" name="firstname" value="">
+										<input id="firstname" type="text" placeholder="First Name" name="firstname" ng-model="firstname">
 										<div class="error-notice"></div>
 									</div>
 									<div class="col-md-6 col-xs-6 md-push-left-half xs-push-left-half">
-										<input id="lastname" type="text" placeholder="Last Name" name="lastname" value="">
+										<input id="lastname" type="text" placeholder="Last Name" name="lastname" ng-model="lastname">
 										<div class="error-notice"></div>
 									</div>
 								</div>
 							</div>
 							<div class="form-group js-mobile-country required mobile-number">
 								<label for="mobile">Mobile Number</label>
-								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" value="">
+								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" ng-model="mobileno">
 								<div class="error-notice"></div>
 							</div>
 						</div>
@@ -89,7 +91,7 @@
 							        <div class="col-md-9 col-xs-9 xs-push-right-half">
 							            <div class="form-group required ">
 							                <label for="card_number">Credit Card Number</label>
-							                <input id="card_number" type="tel" placeholder="1234 5678 9012 3456" name="card_number" value="">
+							                <input id="card_number" type="tel" placeholder="1234 5678 9012 3456" name="card_number" ng-model="cardno">
 							                <div class="credit-card-icon"></div>
 							                <div class="error-notice"></div>
 							            </div>
@@ -97,7 +99,7 @@
 							        <div class="col-md-3 col-xs-3 xs-push-left-half">
 							            <div class="form-group required ">
 							                <label for="card_code">CVV</label>
-							                <input id="card_code" type="tel" placeholder="123" name="card_code" value="">
+							                <input id="card_code" type="tel" placeholder="123" name="card_code" ng-model="cvv">
 							                <div class="error-notice"></div>
 							            </div>
 							        </div>
@@ -108,7 +110,7 @@
 							                <label for="card_expiration">Expiration Date</label>
 							                <div class="row form-row">
 							                    <div class="col-md-6 col-xs-6 xs-push-right-half col-xs-row">
-							                        <select id="card_expiration_month-month" class="gray" name="card_expiration_month">
+							                        <select id="card_expiration_month-month" class="gray" name="card_expiration_month" ng-model="exp_month">
 							                            <option selected="" disabled="" label="month" value="">month</option>
 							                            <option label="1" value="1"> 1 </option>
 							                            <option label="2" value="2"> 2 </option>
@@ -125,7 +127,7 @@
 							                        </select>
 							                    </div>
 							                    <div class="col-md-6 col-xs-6 xs-push-left-half col-xs-row">
-							                        <select id="card_expiration_year-year" class="gray" name="card_expiration_year">
+							                        <select id="card_expiration_year-year" class="gray" name="card_expiration_year" ng-model="exp_year">
 							                            <option selected="" disabled="" label="year" value="">year</option>
 							                            <option label="2015" value="2015"> 2015 </option>
 							                            <option label="2016" value="2016"> 2016 </option>
@@ -153,13 +155,12 @@
 							            </div>
 							            <div class="col-md-4 col-xs-12">
 							                <label for="billing_zip">Postal Code</label>
-							                <input id="billing_zip" type="text" placeholder="94103" name="billing_zip" value="">
+							                <input id="billing_zip" type="text" placeholder="94103" name="billing_zip" ng-model="postalcode">
 							                <div class="error-notice"></div>
 							            </div>
 							        </div>
 							    </div>
 							</div>
-							
 						</div>
 						
 						<div class="signup-form-section payment">
@@ -172,17 +173,16 @@
 							<div class="credit-card-info">
 							            <div class="form-group required ">
 							                <label for="ssn_number">SSN#</label>
-							                <input id="ssn_number" type="text" placeholder="AAA-GG-SSSS" name="ssn_number" value="">							                
+							                <input id="ssn_number" type="text" placeholder="AAA-GG-SSSS" name="ssn_number" ng-model="ssn">
 							                <div class="error-notice"></div>
 							            </div>						    
 							</div>
-							
 						</div>
 						
 						<div class="signup-form-section submit ">
 							<div class="col-md-12">							
 								<div class="form-group">
-									<button class="btn btn-primary js-submit" type="submit">Create Account</button>
+									<button class="btn btn-primary js-submit" type="submit" ng-click="signup()">Create Account</button>
 								</div>
 								<div class="signup-form-section-notice">
 									Please fill out all required (

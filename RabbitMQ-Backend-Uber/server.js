@@ -3,7 +3,6 @@
 var amqp = require('amqp')
 , util = require('util');
 
-var routes = require('./routes');
 var driverHandler = require('./services/driverHandler');
 var customerHandler = require('./services/customerHandler');
 var http = require('http');
