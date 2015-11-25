@@ -45,6 +45,7 @@ app.post('/bk_customer_remove_with_ssn', customer.remove_with_ssn);
 app.post('/bk_customer_selectAll', customer.selectAll);
 app.post('/bk_customer_search_with_name', customer.search_with_name);
 app.post('/bk_customer_search_with_ssn', customer.search_with_ssn);
+app.post('/bk_customer_search_with_email', customer.search_with_email);
 app.post('/bk_customer_update', customer.update);
 app.post('/bk_customer_approve', customer.approve);
 

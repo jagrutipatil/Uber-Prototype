@@ -16,7 +16,7 @@ function signup(ssn, email, password, firstname, lastname, mobileno, cardno, cvv
 	  "' , '" + exp_month +
 	  "' , '" + exp_year +
 	  "' , '" + postalcode +
-	  "' , ' false' )";
+	  "' , 'false' )";
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -112,7 +112,7 @@ function search_with_name(firstname, lastname, callback) {
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 			if (rows.length > 0) {
-				res.value = rows[0];
+				res.value = rows;
 				res.code = "200";
 			} else {
 				console.log(err);

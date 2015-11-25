@@ -1,3 +1,4 @@
+
 var ejs = require("ejs");
 var mq_client = require('./client');
 //var bcrypt = require('bcryptjs');
@@ -35,7 +36,7 @@ function signin(req, res) {
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
-				console.log("valid Login");				
+				res.send({"value": result.value, "result":"success"});
 				res.send({"result":"success"});
 			} else {    
 				console.log("Invalid Login");
@@ -49,10 +50,8 @@ function remove_with_email(req, res) {
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
-				console.log("valid Login");				
 				res.send({"result":"success"});
 			} else {    
-				console.log("Invalid Login");
 				res.send({"result":"error"});
 			}
 	});
@@ -63,7 +62,6 @@ function remove_with_ssn(req, res) {
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
-				console.log("valid Login");				
 				res.send({"result":"success"});
 			} else {    
 				console.log("Invalid Login");
@@ -78,7 +76,7 @@ function selectAll(req, res) {
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
-				res.send({"result":"success"});
+				res.send({"value": result.value, "result":"success"});
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
@@ -91,8 +89,8 @@ function search_with_name(req, res) {
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
-				console.log("valid Login");				
-				res.send({"result":"success"});
+				console.log("valid Login");		
+				res.send({"value": result.value, "result":"success"});
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
@@ -106,7 +104,7 @@ function search_with_ssn(req, res) {
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
-				res.send({"result":"success"});
+				res.send({"value": result.value, "result":"success"});
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
@@ -146,6 +144,15 @@ function approve(req, res) {
 }
 
 function search_with_email(req, res) {
+	var msg_payload = {"email": req.param("emal"), "requestQueue":"search_with_ssn"};	
+	mq_client.make_request('customer',msg_payload, function(err,results){
+		    console.log(results);
+			if(results.code == 200){
+				res.send({"value": result.value, "result":"success"});
+			} else {    
+				res.send({"result":"error"});
+			}
+	});
 }
 
 //exports.home = home;
