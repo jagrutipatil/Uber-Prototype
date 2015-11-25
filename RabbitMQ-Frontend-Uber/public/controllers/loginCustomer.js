@@ -1,9 +1,8 @@
-var app = angular.module('UberDriverLoginSignup', []);
-app.controller("UberDriverController", UberCustomerController);
-UberDriverController.$inject = [ '$scope', '$http'];
-function UberDriverController($scope, $http) {
-	
-	
+var app = angular.module('loginCustomer', []);
+app.controller("loginCustomerController", loginCustomerController);
+loginCustomerController.$inject = [ '$scope', '$http', '$window'];
+function loginCustomerController($scope, $http, $window) {
+		
 	//Function for signup
 	$scope.signup = function() {				
 		$http({
