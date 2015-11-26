@@ -1,0 +1,731 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Admin</title>
+    <script src="../Chart.js"></script>
+    <script src="../Chart.js"></script>
+    <script src="../Chart.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap.vertical-tabs.css">
+    
+    
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+    <link rel="import" href="doughnut1.html">
+    <script src="http://code.jquery.com/jquery-1.4.min.js" type="text/javascript"></script>
+    
+    
+    <script src="../src/Chart.Core.js"></script>
+		<script src="../src/Chart.Doughnut.js"></script>
+    
+    
+    
+
+<title>My Example</title>
+<!-- Bootstrap 4 alpha CSS -->
+<!-- IMPORTANT: Don't use this .css file in production. Use Bootstrap 3 until Bootstrap 4.0.0 is released. -->
+<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+<style type="text/css">
+    
+		
+    
+    <style>
+  
+			body{
+				padding: 0;
+				margin: 0;
+                
+			}
+			#canvas-holder{
+				width:100%;
+			}
+		</style>
+
+    
+</head>
+<body >
+    
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Administrator<small> | Dave Craig </small></h1>
+    </div>
+
+ 
+    
+    <div class="row" style="min-height:100px;" >
+      <div  class="col-sm-6 ">
+        <h3>Requests</h3>
+        <hr/>
+ 
+        <div class="col-xs-4" > <!-- required for floating -->
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs tabs-left">
+            <li class="active"><a href="#home" data-toggle="tab">Driver Requests</a></li>
+            <li><a href="#profile" data-toggle="tab">Customer Requests</a></li>
+            
+          </ul>
+        </div>
+
+          
+        <div class="col-xs-7">
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                <div class="col-md-5">
+                1.Jack Kale 
+                </div>
+               <button type="button" class="btn btn-primary">Add </button>
+                <button type="button" class="btn btn-info">Deny </button> 
+                  <br><br>
+                <div class="col-md-5">
+                2.Darcy Dave 
+                </div>
+                    <button type="button" class="btn btn-primary">Add </button>
+                <button type="button" class="btn btn-info">Deny </button> 
+                  <br><br>
+                    <div class="col-md-5">
+               3.Bharat Shah
+                </div>    
+                        <button type="button" class="btn btn-primary">Add </button>
+                <button type="button" class="btn btn-info">Deny </button> 
+                  <br><br>
+                <div class="col-md-5">
+            4.Clay Classey
+                </div>
+                <button type="button" class="btn btn-primary">Add </button>
+                <button type="button" class="btn btn-info">Deny </button> 
+                  <br><br>
+                 </a></div>
+              
+            <div class="tab-pane" id="profile">
+                <div class="col-md-5">
+              1.Ralph Soras 
+                    </div>
+                <button type="button" class="btn btn-primary">Add </button>
+                <button type="button" class="btn btn-info">Deny </button> 
+                  <br><br>
+                <div class="col-md-5">
+              2.Erika Erlang 
+                </div>
+                <button type="button" class="btn btn-primary">Add </button>
+                <button type="button" class="btn btn-info">Deny </button> 
+                  <br><br>
+               
+                <div class="col-md-5">
+              3.Patrick Naval
+                </div>
+                <button type="button" class="btn btn-primary">Add </button>
+                <button type="button" class="btn btn-info">Deny </button> 
+                  <br><br>
+              </div>
+            
+            
+          </div>
+        </div>
+
+      
+
+      
+         </div> 
+     
+    </div>
+      
+    
+     
+     
+     
+    
+      <div  class="col-sm-6">
+        <h3>Review Drivers</h3>
+        <hr/>
+        <div class="col-xs-6">
+          <!-- Tab panes -->
+          <div class="tab-content">
+              
+                <div class="tab-pane active" id="home-r">
+                    <div class="col-md-6">
+                    DriverID 1 <br><br>
+                    Firstname Lastname <br><br>
+                    Address <br><br>
+                    City <br><br>
+                    State <br><br>
+                    Zip Code<br><br>
+                    Phone number <br><br>
+                    Email <br><br>
+                    Car Details <br><br>
+                    Rating <br><br>
+                    Reviews <br><br>
+                    Introduction<br><br>
+                    Ride History <br><br>
+                    </div>
+                     <div class="col-md-2">
+                         <img src="" height="100" width="100">
+                     </div>
+
+                    </div>
+            
+                <div class="tab-pane" id="profile-r">
+                
+                
+                    <div class="col-md-6">
+                    DriverID 2<br><br>
+                    Firstname Lastname <br><br>
+                    Address <br><br>
+                    City <br><br>
+                    State <br><br>
+                    Zip Code<br><br>
+                    Phone number <br><br>
+                    Email <br><br>
+                    Car Details <br><br>
+                    Rating <br><br>
+                    Reviews <br><br>
+                    Introduction<br><br>
+                    Ride History <br><br>
+                    </div>
+                     <div class="col-md-2">
+                         <img src="" height="100" width="100">
+                     </div>
+
+                </div>
+                
+              
+              
+                 <div class="tab-pane" id="messages-r">
+                
+                    <div class="col-md-6">
+                    DriverID 3<br><br>
+                    Firstname Lastname <br><br>
+                    Address <br><br>
+                    City <br><br>
+                    State <br><br>
+                    Zip Code<br><br>
+                    Phone number <br><br>
+                    Email <br><br>
+                    Car Details <br><br>
+                    Rating <br><br>
+                    Reviews <br><br>
+                    Introduction<br><br>
+                    Ride History <br><br>
+                    </div>
+                     <div class="col-md-2">
+                         <img src="" height="100" width="100">
+                     </div>
+
+                </div>
+                
+              
+              
+                 <div class="tab-pane" id="settings-r">
+                
+                    <div class="col-md-6">
+                    DriverID 4<br><br>
+                    Firstname Lastname <br><br>
+                    Address <br><br>
+                    City <br><br>
+                    State <br><br>
+                    Zip Code<br><br>
+                    Phone number <br><br>
+                    Email <br><br>
+                    Car Details <br><br>
+                    Rating <br><br>
+                    Reviews <br><br>
+                    Introduction<br><br>
+                    Ride History <br><br>
+                    </div>
+                     <div class="col-md-2">
+                         <img src="" height="100" width="100">
+                     </div>
+
+                 </div>
+              
+             </div> 
+        </div>
+          
+              
+        <div class="col-xs-3"> <!-- required for floating -->
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs tabs-right">
+            <li class="active"><a href="#home-r" data-toggle="tab">Driver 1</a></li>
+            <li><a href="#profile-r" data-toggle="tab">Driver 2</a></li>
+            <li><a href="#messages-r" data-toggle="tab">Driver 3</a></li>
+            <li><a href="#settings-r" data-toggle="tab">Driver 4</a></li>
+          </ul>
+        </div>
+          
+      </div>
+    
+      
+   
+    
+    
+    
+   
+   
+    
+    
+
+        <div class="row" style="min-height:100px;">
+      <div  class="col-sm-6">
+        <h3>Review Customers</h3>
+        <hr/>
+        <div class="col-xs-6">
+          <!-- Tab panes -->
+          <div class="tab-content">
+              
+                <div class="tab-pane active" id="home-a">
+                    <div class="col-md-7">
+                    CustomerID 1 <br><br>
+                    Firstname Lastname <br><br>
+                    Address <br><br>
+                    City <br><br>
+                    State <br><br>
+                    Zip Code<br><br>
+                    Phone number <br><br>
+                    Email <br><br>
+                    Car Details <br><br>
+                    Rating <br><br>
+                    Reviews <br><br>
+                    Introduction<br><br>
+                    Ride History <br><br>
+                    </div>
+                     <div class="col-md-2">
+                         <img src="" height="100" width="100">
+                     </div>
+
+                </div>
+              
+            <div class="tab-pane" id="profile-a">
+                
+                
+                    <div class="col-md-7">
+                    CustomerID 2<br><br>
+                    Firstname Lastname <br><br>
+                    Address <br><br>
+                    City <br><br>
+                    State <br><br>
+                    Zip Code<br><br>
+                    Phone number <br><br>
+                    Email <br><br>
+                    Car Details <br><br>
+                    Rating <br><br>
+                    Reviews <br><br>
+                    Introduction<br><br>
+                    Ride History <br><br>
+                    </div>
+                     <div class="col-md-2">
+                         <img src="" height="100" width="100">
+                     </div>
+
+                </div>
+                
+              
+              
+            <div class="tab-pane" id="messages-a">
+                
+                    <div class="col-md-7">
+                    CustomerID 3<br><br>
+                    Firstname Lastname <br><br>
+                    Address <br><br>
+                    City <br><br>
+                    State <br><br>
+                    Zip Code<br><br>
+                    Phone number <br><br>
+                    Email <br><br>
+                    Car Details <br><br>
+                    Rating <br><br>
+                    Reviews <br><br>
+                    Introduction<br><br>
+                    Ride History <br><br>
+                    </div>
+                     <div class="col-md-2">
+                         <img src="" height="100" width="100">
+                     </div>
+
+                </div>
+                
+              
+              
+            <div class="tab-pane" id="settings-a">
+                
+                    <div class="col-md-7">
+                    CustomerID 4<br><br>
+                    Firstname Lastname <br><br>
+                    Address <br><br>
+                    City <br><br>
+                    State <br><br>
+                    Zip Code<br><br>
+                    Phone number <br><br>
+                    Email <br><br>
+                    Car Details <br><br>
+                    Rating <br><br>
+                    Reviews <br><br>
+                    Introduction<br><br>
+                    Ride History <br><br>
+                    </div>
+                     <div class="col-md-2">
+                         <img src="" height="100" width="100">
+                     </div>
+
+                
+              
+              </div>
+          </div>
+        </div>
+              
+        <div class="col-xs-5"> <!-- required for floating -->
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs tabs-right">
+            <li class="active"><a href="#home-a" data-toggle="tab">Customer 1</a></li>
+            <li><a href="#profile-a" data-toggle="tab">Customer 2</a></li>
+            <li><a href="#messages-a" data-toggle="tab">Customer 3</a></li>
+            <li><a href="#settings-a" data-toggle="tab">Customer 4</a></li>
+          </ul>
+        </div>
+      </div>
+    
+       
+    </div>
+   
+    
+    
+   
+    <div  class="col-sm-6">
+        <h3>Revenue - Day Wise</h3>
+        <hr/>
+        
+        <div class="col-xs-9">
+          <!-- Tab panes -->
+          <div class="tab-content">
+              <div id="chart"></div>
+             	
+            
+        
+      </div>
+    </div>
+  </div>
+    
+    
+    
+    
+     <div  class="col-sm-6">
+        <h3>Revenue - Area Wise</h3>
+        <hr/>
+        <div class="col-xs-6">
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane active" id="home-vr">Cupertino.
+                
+              </div>
+            <div class="tab-pane" id="profile-vr">Los Gatos.
+           </div>
+            <div class="tab-pane" id="messages-vr">Silver Creek</div>
+            <div class="tab-pane" id="settings-vr">Almaden.
+              </div>
+          </div>
+        </div>
+
+        <div class="col-xs-3"> <!-- required for floating -->
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs tabs-right sideways">
+            <li class="active"><a href="#home-vr" data-toggle="tab">Cupertino
+                </a></li>
+            <li><a href="#profile-vr" data-toggle="tab">Los Gatos</a></li>
+            <li><a href="#messages-vr" data-toggle="tab">Silver Creek</a></li>
+            <li><a href="#settings-vr" data-toggle="tab">Almaden</a></li>
+          </ul>
+        </div>
+      </div>
+
+  
+
+   
+   <div class="row">
+      <div  class="col-sm-6">
+        <h3>Ride - Area Wise </h3>
+        <hr/>
+        <div class="col-xs-3"> <!-- required for floating -->
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs tabs-left sideways">
+            <li class="active"><a href="#home-v" data-toggle="tab">Cupertino</a></li>
+            <li><a href="#profile-v" data-toggle="tab">Almaden</a></li>
+            <li><a href="#messages-v" data-toggle="tab">Los Gatos</a></li>
+            <li><a href="#settings-v" data-toggle="tab">Silver Creek</a></li>
+              <li><a href="#settings-v" data-toggle="tab">Willow Glen</a></li>
+          </ul>
+        </div>
+
+      <div class="col-xs-4">
+          <!-- Tab panes -->
+        <div class="tab-content">
+              <div class="tab-pane active" id="home-v">Cupertino
+              </div>
+            
+              <div class="tab-pane" id="profile-v">Almaden
+              <div style="width: 100%">
+			  <canvas id="canvas" height="500" width="800"></canvas>
+		      </div></div>
+            
+              <div class="tab-pane" id="messages-v">Los Gatos
+              <div style="width: 100%">
+			  <canvas id="canvas" height="500" width="800"></canvas>
+		      </div></div>
+            
+              <div class="tab-pane" id="settings-v">Silver Creek
+              <div style="width: 100%">
+			  <canvas id="canvas" height="500" width="800"></canvas>
+		      </div></div>
+            
+            <div class="tab-pane" id="settings-v">Willow Glen
+              <div style="width: 100%">
+			  <canvas id="canvas" height="500" width="800"></canvas>
+		      </div></div>
+            
+          </div>
+        </div>
+</div>
+    
+     <div  class="col-sm-6">
+        <h3> Rides - Area Wise</h3>
+        <hr/>
+        <div class="col-xs-6">
+          <!-- Tab panes -->
+            
+            <div id="canvas-holder">
+			<canvas id="chart-area" width="300" height="300"/>
+		    </div>   
+         </div>
+       </div>
+        </div>
+       <br><br>
+    
+<div class="row">
+ <div  class="col-sm-6">
+        <h3> Rides - Driver Wise</h3>
+        <hr/>
+        <div class="col-xs-6">
+          <!-- Tab panes -->
+            
+            <div id="canvas-holder">
+			<canvas id="chart-area" width="300" height="300"/>
+		</div>   
+         </div>
+       </div>
+    
+ 
+
+    
+    
+     
+      <div  class="col-sm-6">
+        <h3> Rides - Customer Wise</h3>
+        <hr/>
+        <div class="col-xs-6">
+          <!-- Tab panes -->
+            
+            
+         </div>
+       </div>
+       </div>
+    <div  class="col-sm-7">
+        <h3>Search Bill</h3>
+        <hr/>
+    
+        
+    <div class="tabbable" style="margin-bottom: 18px;">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1" data-toggle="tab">Bill Attribute 1</a></li>
+            <li class=""><a href="#tab2" data-toggle="tab">Bill Attribute 2</a></li>
+            <li class=""><a href="#tab3" data-toggle="tab">Bill Attribute 3</a></li>
+            <li class=""><a href="#tab4" data-toggle="tab">Bill Attribute 4</a></li>
+          </ul>
+        
+        <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+            <div class="tab-pane active" id="tab1" >
+              <br><br>
+                <button type="button" class="btn btn-warning">Search by Attribute 1</button>
+            </div>
+            <div class="tab-pane" id="tab2">
+              <br><br>
+                <button type="button" class="btn btn-warning">Search by Attribute 2</button>
+            </div>
+            <div class="tab-pane" id="tab3">
+                <br><br>
+              <button type="button" class="btn btn-warning">Search by Attribute 3</button>
+            </div>
+            <div class="tab-pane" id="tab4">
+                <br><br>
+                <button type="button" class="btn btn-warning">Search by Attribute 4</button>
+            </div>
+            <br>
+            <br>
+        </div>
+        
+   
+       
+    
+
+
+	<br><br>
+  <footer class="footer" style="width:100%; text-align:center; padding-bottom:20px;">
+  
+   
+    
+  </footer>
+        
+   
+        
+        
+    <script src="http://d3js.org/d3.v2.min.js"></script>
+    <script>
+function renderChart() {
+
+var data = d3.csv.parse(d3.select('#csv').text());
+var valueLabelWidth = 40; // space reserved for value labels (right)
+var barHeight = 20; // height of one bar
+var barLabelWidth = 100; // space reserved for bar labels
+var barLabelPadding = 5; // padding between bar and bar labels (left)
+var gridLabelHeight = 18; // space reserved for gridline labels
+var gridChartOffset = 3; // space between start of grid and first bar
+var maxBarWidth = 420; // width of the bar with the max value
+ 
+// accessor functions 
+var barLabel = function(d) { return d['Name']; };
+var barValue = function(d) { return parseFloat(d['Population (mill)']); };
+ 
+// scales
+var yScale = d3.scale.ordinal().domain(d3.range(0, data.length)).rangeBands([0, data.length * barHeight]);
+var y = function(d, i) { return yScale(i); };
+var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
+var x = d3.scale.linear().domain([0, d3.max(data, barValue)]).range([0, maxBarWidth]);
+// svg container element
+var chart = d3.select('#chart').append("svg")
+  .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
+  .attr('height', gridLabelHeight + gridChartOffset + data.length * barHeight);
+// grid line labels
+var gridContainer = chart.append('g')
+  .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
+gridContainer.selectAll("text").data(x.ticks(10)).enter().append("text")
+  .attr("x", x)
+  .attr("dy", -3)
+  .attr("text-anchor", "middle")
+  .text(String);
+// vertical grid lines
+gridContainer.selectAll("line").data(x.ticks(10)).enter().append("line")
+  .attr("x1", x)
+  .attr("x2", x)
+  .attr("y1", 0)
+  .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
+  .style("stroke", "#ccc");
+// bar labels
+var labelsContainer = chart.append('g')
+  .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
+labelsContainer.selectAll('text').data(data).enter().append('text')
+  .attr('y', yText)
+  .attr('stroke', 'none')
+  .attr('fill', 'black')
+  .attr("dy", ".35em") // vertical-align: middle
+  .attr('text-anchor', 'end')
+  .text(barLabel);
+// bars
+var barsContainer = chart.append('g')
+  .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
+barsContainer.selectAll("rect").data(data).enter().append("rect")
+  .attr('y', y)
+  .attr('height', yScale.rangeBand())
+  .attr('width', function(d) { return x(barValue(d)); })
+  .attr('stroke', 'white')
+  .attr('fill', 'orange');
+// bar value labels
+barsContainer.selectAll("text").data(data).enter().append("text")
+  .attr("x", function(d) { return x(barValue(d)); })
+  .attr("y", yText)
+  .attr("dx", 3) // padding-left
+  .attr("dy", ".35em") // vertical-align: middle
+  .attr("text-anchor", "start") // text-align: right
+  .attr("fill", "black")
+  .attr("stroke", "none")
+  .text(function(d) { return d3.round(barValue(d), 2); });
+// start line
+barsContainer.append("line")
+  .attr("y1", -gridChartOffset)
+  .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
+  .style("stroke", "#000");
+
+}
+    </script>
+    <script id="csv" type="text/csv">Name,Population (mill),Average Life Expectancy,Area (1000 sq mi),Continent
+1-11-2015,33.6,80.7,3854.085,America
+2-11-2015,308.3,78.2,3784.191,America
+3-11-2015,82.3,79.4,137.847,Europe
+4-11-2015,141.9,65.5,6601.668,Europe
+5-11-2015,677.4,76.06,758.449,America
+6-11-2015,193.3,71.99,3287.612,America
+7-11-2015,46.9,80.9,195.365,Europe
+8-11-2015,65.4,80.98,244.339,Europe
+9-11-2015,398,73,3705.407,Asia
+9-11-2015,342.4,81.2,2969.907,Australia
+10-11-2015,62,79.4,93.800,Europe
+11-11-2015,60.3,80.5,116.346,Europe
+12-11-2015,584,64.7,1236.085,Asia
+13-11-2015,127.4,82.6,145.920,Asia
+14-11-2015,0.3,81.8,40.000,Europe
+15-11-2015,10.6,78.1,35.560,Europe
+16-11-2015,50,49.3,471.445,Africa
+17-11-2015,78.9,71.3,387.000,Africa
+18-11-2015,9.3,80.9,170.410,Europe</script>
+    <script>renderChart();</script>
+        
+        
+
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    
+       
+        
+	<script>
+
+		var doughnutData = [
+				{
+					value: 1,
+					label: "One"
+				},
+				{
+					value: 2,
+					label: "Two"
+				},
+				{
+					value: 3,
+					label: "Three"
+				},
+				{
+					value: 4,
+					label: "Four"
+				},
+				{
+					value: 5,
+					label: "Five"
+				}
+
+			];
+
+			window.onload = function(){
+				var ctx = document.getElementById("chart-area").getContext("2d");
+				window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
+			};
+
+
+
+	</script>
+        
+        <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- Bootstrap 4 Alpha JS -->
+<!-- IMPORTANT: Don't use this .js file in production. Use Bootstrap 3 until Bootstrap 4.0.0 is released. -->
+<script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script> 
+    
+      
+     
+</body>
+</html>
