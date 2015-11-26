@@ -14,10 +14,7 @@ function signupCustomerController($scope, $http, $window) {
 				"firstname" : $scope.firstname,
 				"lastname" : $scope.lastname,
 				"mobileno" : $scope.mobileno,
-				"cardno" : $scope.cardno,
-				"cvv" : $scope.cvv,
-				"exp_month" : $scope.exp_month,
-				"exp_year" : $scope.exp_year,
+				
 				"postalcode" : $scope.postalcode
 			}
 		}).success(function(response) {
