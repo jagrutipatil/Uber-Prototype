@@ -44,12 +44,12 @@
 							<div class="signup-form-section-line blue"></div>
 							<div class="form-group required ">
 								<label for="username">Email</label>
-								<input id="username" type="email" placeholder="name@example.com" name="username" value="">
+								<input id="username" type="email" placeholder="name@example.com" name="username" ng-model="email">
 								<div class="error-notice"></div>
 							</div>
 							<div class="form-group required ">
 								<label for="password">Password</label>
-								<input id="password" type="password" placeholder="At least 5 characters" name="password" value="">
+								<input id="password" type="password" placeholder="At least 5 characters" name="password" ng-model="password">
 								<div class="error-notice"></div>
 							</div>
 						</div>
@@ -64,34 +64,34 @@
 								<label for="name">Name</label>
 								<div class="row form-row">
 									<div class="col-md-6 col-xs-6 md-push-right-half sm-push-right-half xs-push-right-half">
-										<input id="firstname" type="text" placeholder="First Name" name="firstname" value="">
+										<input id="firstname" type="text" placeholder="First Name" name="firstname" ng-model="firstname">
 										<div class="error-notice"></div>
 									</div>
 									<div class="col-md-6 col-xs-6 md-push-left-half xs-push-left-half">
-										<input id="lastname" type="text" placeholder="Last Name" name="lastname" value="">
+										<input id="lastname" type="text" placeholder="Last Name" name="lastname" ng-model="lastname">
 										<div class="error-notice"></div>
 									</div>
 								</div>
 							</div>
 							<div class="form-group js-mobile-country required mobile-number">
 								<label for="mobile">Mobile Number</label>
-								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" value="">
+								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" ng-model="mobileno">
 								<div class="error-notice"></div>
 							</div>
 							
 							<div class="form-group required">
 								<label for="Address">Address</label>
-								<input id="addressLineOne" type="text" placeholder="Address Line #1" name="Address1" value="">
+								<input id="addressLineOne" type="text" placeholder="Address Line #1" name="Address1" ng-model="address">
 								<br/><br/>
-								<input id="addressLineTwo" type="text" placeholder="Address Line #2" name="Address2" value="">
+								<input id="city" type="text" placeholder="city" name="city" ng-model="city">
 								<br/><br/>
 								<div class="row form-row">
 									<div class="col-md-6 col-xs-6 md-push-right-half sm-push-right-half xs-push-right-half">
-										<input id="state" type="text" placeholder="State" name="state" value="">
+										<input id="state" type="text" placeholder="State" name="state" ng-model="state">
 										<div class="error-notice"></div>
 									</div>
 									<div class="col-md-6 col-xs-6 md-push-left-half xs-push-left-half">
-										<input id="zipcode" type="text" placeholder="Zipcode" name="zipcode" value="">
+										<input id="zipcode" type="text" placeholder="Zipcode" name="zipcode" ng-model="postalcode">
 										<div class="error-notice"></div>
 									</div>
 								</div>

@@ -8,7 +8,7 @@ var routes = require('./routes');
 var customer = require('./routes/customerClient');
 var driver = require('./routes/driverClient');
 var delegator = require('./routes/delegatorClient');
-var bill = require('./routes/billing');
+//var bill = require('./routes/billing');
 var http = require('http');
 var path = require('path');
 var amqp = require('amqp')
@@ -63,10 +63,10 @@ app.post('/bk_driver_update', driver.update);
 app.post('/bk_driver_approve', driver.approve);
 
 //billing module
-app.post('/billGenerate', bill.billGenerate);
-app.post('/estimate', bill.estimate);
-app.get('/getUserBills', bill.getUserBills);
-app.get('/getBill', bill.getBill);
+//app.post('/billGenerate', bill.billGenerate);
+//app.post('/estimate', bill.estimate);
+//app.get('/getUserBills', bill.getUserBills);
+//app.get('/getBill', bill.getBill);
 
 
 http.createServer(app).listen(app.get('port'), function(){
