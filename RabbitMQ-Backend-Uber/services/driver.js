@@ -1,127 +1,90 @@
 var ejs = require("ejs");
 var mySqlDb = require("./mysqldb");
-var tableName = "testdb.drivers";
+var tableName = "uber.drivers";
 
 /* Driver Information
- ssn, First Name
- Last Name,Address,City,State,Zip Code,Phone number,Email,Car details,Rating,Reviews
- Own introduction in form of images and video.,Rides history
-*/
+"ssn" : $scope.ssn,
+				"email" : $scope.email,
+				"password": $scope.password,
+				"firstname" : $scope.firstname,
+				"lastname" : $scope.lastname,
+				"mobileno" : $scope.mobileno,
+				"address":   $scope.address,
+				"city":      $scope.city,
+				"state":     $scope.state,
+				"postalcode" : $scope.postalcode
+				"dlno":      $scope.dlno,
+				*/
 
-function signup(ssn, email, password, firstname, lastname, address, city, state, postalcode, mobileno, carno,callback) {
-	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, address, city, state, postalcode, mobileno, carno, approved) VALUES ( '" + email 
-	+ "' , '" + ssn +
+
+function signup(ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno, callback) {
+	var res = {};
+	console.log("in singup backend module");
+	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno, approved) VALUES ( '" + ssn 
+	+ "' , '" + email +
 	  "' , '" + password +  
 	  "' , '" + firstname  +
 	  "' , '" + lastname +
+	  "' , '" + mobileno +
 	  "' , '" + address +
 	  "' , '" + city +
 	  "' , '" + state +
 	  "' , '" + postalcode +
-	  "' , '" + mobileno +
-	  "' , '" + carno +
-	  "' , ' false' )";
+	  "' , '" + dlno +
+	  "' , 'false' )";
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
-			  res.value = "Succes Login";
+			  res.value = "success";
 		} else {
 			  console.log(err);
 			  res.code = "401";
-			  res.value = "Failed Login";
+			  res.value = "error";
 		}
-		callback(res);
-	}, sqlQuery);
-}
-
-
-function selectAll(email, password) {	
-	var sqlQuery = "SELECT * FROM " + tableName ;
-	
-	mySqlDb.executeQuery(function(err, rows) {
-		if (!err) {
-			if (rows.length > 0) {
-				res.value = rows;
-				res.code = "200";
-			} else {
-				console.log(err);
-		        res.code = "401";
-				res.value = "Failed Login";				
-			}			
-		}
-	}, sqlQuery);
-}
-
-function signin(email, password) {	
-	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"'";
-	
-	mySqlDb.executeQuery(function(err, rows) {
-		if (!err) {
-			if (rows.length > 0) {
-				res.value = rows[0];
-				res.code = "200";
-			} else {
-				console.log(err);
-		        res.code = "401";
-				res.value = "Failed Login";				
-			}			
-		}
-	}, sqlQuery);
-}
-
-function remove(email, password) {	
-	var sqlQuery = "DELETE FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"'";
-	
-	mySqlDb.executeQuery(function(err, rows) {
-		if (!err) {
-	    	  res.code = "200";
-			  res.value = "Succes Login";
-		} else {
-			  console.log(err);
-			  res.code = "401";
-			  res.value = "Failed Login";
-		}
+		callback(err, res);
 	}, sqlQuery);
 }
 
 function approve(ssn, callback) {
+	var res = {};
 	var sqlQuery = "UPDATE "+ tableName + " SET approved = 'true' WHERE ssn = '" + ssn+"'";
 	  	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
-			  res.value = "Succes approve";
+			  res.value = "sucess";
 		} else {
 			  console.log(err);
 			  res.code = "401";
-			  res.value = "Failed approve";
+			  res.value = "error";
 		}
-		callback(res);
+		callback(err, res);
 	}, sqlQuery);
 }
 
-function update(ssn, email, password, firstname, lastname, address, city, state, postalcode, mobileno, carno, callback) {
+function update(ssn, email, password, firstname, lastname, mobileno, postalcode, callback) {
 	var sqlQuery = "UPDATE "+ tableName + " SET email = '"+ email 
-	+ "', password = '"+ password +"' , firstname = '"+ firstname +"' , lastname = '"+ lastname +"', +" +
-	+ "', address = '"+ address +"' , city = '"+ city+"' , state = '"+ state +"', " +
-	" carno = '"+ carno +"', mobileno = '"+ mobileno +"', postalcode = '"+ postalcode +"') WHERE ssn = '" + ssn+"'";
+	+ "', password = '"+password+"' , firstname = '"+firstname+"' , lastname = '"+lastname+"', +" +
+			" mobileno = '"+mobileno+"', postalcode = '"+postalcode+"') WHERE ssn = '" + ssn+"'";
 	  	
+	var res = {};
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
-			  res.value = "Succes update";
+			  res.value = "success";
 		} else {
 			  console.log(err);
 			  res.code = "401";
-			  res.value = "Failed update";
+			  res.value = "error";
 		}
-		callback(res);
+		callback(err, res);
 	}, sqlQuery);
 }
 
-function search_with_ssn(ssn) {
+function search_with_ssn(ssn, callback) {
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE ssn='"+ ssn +"'";
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -132,14 +95,15 @@ function search_with_ssn(ssn) {
 				console.log(err);
 		        res.code = "401";
 				res.value = "Failed Login";				
-			}
-			callback(res);
+			}			
+			callback(err, res);
 		}
 	}, sqlQuery);	
 }
 
-function search_with_email(email) {
+function search_with_email(email, callback) {
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"'";
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -151,51 +115,14 @@ function search_with_email(email) {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
-			callback(res);
+			callback(err, res);
 		}
 	}, sqlQuery);	
 }
 
-function search_with_name(firstname, lastname) {
+function search_with_name(firstname, lastname, callback) {
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE firstname='"+ firstname +"' AND lastname = '" + lastname + "'";
-	
-	mySqlDb.executeQuery(function(err, rows) {
-		if (!err) {
-			if (rows.length > 0) {
-				res.value = rows[0];
-				res.code = "200";
-			} else {
-				console.log(err);
-		        res.code = "401";
-				res.value = "Failed Login";				
-			}			
-			callback(res);
-		}
-	}, sqlQuery);	
-}
-
-
-function signin(email, password) {	
-	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"'";
-	
-	mySqlDb.executeQuery(function(err, rows) {
-		if (!err) {
-			if (rows.length > 0) {
-				res.value = rows[0];
-				res.code = "200";
-			} else {
-				console.log(err);
-		        res.code = "401";
-				res.value = "Failed Login";				
-			}			
-			callback(res);
-		}
-	}, sqlQuery);
-}
-
-
-function selectAll() {	
-	var sqlQuery = "SELECT * FROM " + tableName ;
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -207,13 +134,73 @@ function selectAll() {
 		        res.code = "401";
 				res.value = "Failed Login";				
 			}			
-			callback(res);
+			callback(err, res);
+		}
+	}, sqlQuery);	
+}
+
+
+function signin(email, password, callback) {	
+	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"'";
+	var res = {};
+	
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+			if (rows.length > 0) {
+				res.value = rows[0];
+				res.code = "200";
+			} else {
+				console.log(err);
+		        res.code = "401";
+				res.value = "Failed Login";				
+			}			
+			callback(err, res);
 		}
 	}, sqlQuery);
 }
 
-function remove_with_ssn(ssn) {	
+function selectAllUnApproved(callback) {	
+	var sqlQuery = "SELECT * FROM " + tableName + " WHERE approved='false'";
+	var res = {};
+	
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+			if (rows.length > 0) {
+				res.value = rows;
+				res.code = "200";
+			} else {
+				console.log(err);
+		        res.code = "401";
+				res.value = "Failed Login";				
+			}			
+			callback(err, res);
+		}
+	}, sqlQuery);
+}
+
+
+function selectAll(callback) {	
+	var sqlQuery = "SELECT * FROM " + tableName ;
+	var res = {};
+	
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+			if (rows.length > 0) {
+				res.value = rows;
+				res.code = "200";
+			} else {
+				console.log(err);
+		        res.code = "401";
+				res.value = "Failed Login";				
+			}			
+			callback(err, res);
+		}
+	}, sqlQuery);
+}
+
+function remove_with_ssn(ssn, callback) {	
 	var sqlQuery = "DELETE FROM " + tableName + " WHERE ssn='"+ ssn +"'";
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -224,12 +211,13 @@ function remove_with_ssn(ssn) {
 			  res.code = "401";
 			  res.value = "Failed Login";
 		}
-		callback(res);
+		callback(err, res);
 	}, sqlQuery);
 }
 
-function remove_with_email(email) {	
+function remove_with_email(email, callback) {	
 	var sqlQuery = "DELETE FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"'";
+	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
@@ -240,9 +228,10 @@ function remove_with_email(email) {
 			  res.code = "401";
 			  res.value = "Failed Login";
 		}
-		callback(res);
+		callback(err, res);
 	}, sqlQuery);
 }
+
 
 exports.signup = signup;
 exports.signin = signin;
@@ -254,3 +243,4 @@ exports.search_with_email = search_with_email;
 exports.search_with_ssn = search_with_ssn;
 exports.update = update;
 exports.approve = approve;
+exports.selectAllUnApproved = selectAllUnApproved;

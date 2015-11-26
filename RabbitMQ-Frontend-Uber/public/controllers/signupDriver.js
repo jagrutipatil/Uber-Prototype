@@ -14,13 +14,17 @@ function signupCustomerController($scope, $http, $window) {
 				"firstname" : $scope.firstname,
 				"lastname" : $scope.lastname,
 				"mobileno" : $scope.mobileno,
-				
+				"address":   $scope.address,
+				"city":      $scope.city,
+				"state":     $scope.state,
+				"dlno":      $scope.dlno,
 				"postalcode" : $scope.postalcode
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
 				alert("Success");
 			} else {
+				alert("error");
 			}			
 		}).error(function(error) {
 			console.log(error);

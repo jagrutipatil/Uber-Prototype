@@ -158,7 +158,7 @@ function approve(req, res) {
 }
 
 function search_with_email(req, res) {
-	var msg_payload = {"email": req.param("emal"), "requestQueue":"search_with_ssn"};	
+	var msg_payload = {"email": req.param("email"), "requestQueue":"search_with_email"};	
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){

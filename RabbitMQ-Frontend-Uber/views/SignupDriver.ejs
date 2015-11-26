@@ -34,7 +34,7 @@
 			</section>
 			<section class="signup-form">
 				<article class="form-container">
-					<form class="form-vertical" autocomplete="on" method="POST" action="/signup_submit/">
+					<form class="form-vertical" autocomplete="on">
 						<div class="signup-form-section account">
 							<div class="signup-form-section-title">
 								<p>Account</p>
@@ -109,7 +109,7 @@
 							<div class="credit-card-info">
 							            <div class="form-group required ">
 							                <label for="ssn_number">SSN#</label>
-							                <input id="ssn_number" type="text" placeholder="AAA-GG-SSSS" name="ssn_number" value="">							                
+							                <input id="ssn_number" type="text" placeholder="AAA-GG-SSSS" name="ssn_number" ng-model="ssn">
 							                <div class="error-notice"></div>
 							            </div>						    
 							</div>
@@ -126,7 +126,7 @@
 							<div class="credit-card-info">
 							            <div class="form-group required ">
 							                <label for="dl_number">License#</label>
-							                <input id="dl_number" type="text" placeholder="########" name="dl_number" value="">							                
+							                <input id="dl_number" type="text" placeholder="########" name="dl_number" ng-model="dlno">
 							                <div class="error-notice"></div>
 							            </div>						    
 							</div>
@@ -136,7 +136,7 @@
 						<div class="signup-form-section submit ">
 							<div class="col-md-12">							
 								<div class="form-group">
-									<button class="btn btn-primary js-submit" type="submit">Create Account</button>
+									<button class="btn btn-primary js-submit" type="submit" ng-click="signup()">Create Account</button>
 								</div>
 								<div class="signup-form-section-notice">
 									Please fill out all required (
