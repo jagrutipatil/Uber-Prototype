@@ -1,7 +1,7 @@
 var app = angular.module('signupDriver', []);
-app.controller("signupDriverController", signupCustomerController);
-signupCustomerController.$inject = [ '$scope', '$http', '$window'];
-function signupCustomerController($scope, $http, $window) {
+app.controller("signupDriverController", signupDriverController);
+signupDriverController.$inject = [ '$scope', '$http', '$window'];
+function signupDriverController($scope, $http, $window) {
 			
 	$scope.signup = function() {
 		$http({
