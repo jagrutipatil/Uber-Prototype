@@ -33,6 +33,12 @@ var customer = require("./customer");
 		});
 	}
 	
+	if(msg.requestQueue=="selectAllUnApproved"){
+		customer.selectAllUnApproved(function(err, res) {
+			callback(err, res);
+		});
+	}
+	
 	if(msg.requestQueue=="search_with_name"){
 		customer.search_with_name(msg.firstname, msg.lastname, function(err, res) {
 			callback(err, res);

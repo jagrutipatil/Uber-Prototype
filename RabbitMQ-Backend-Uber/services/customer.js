@@ -144,6 +144,26 @@ function signin(email, password, callback) {
 	}, sqlQuery);
 }
 
+function selectAllUnApproved(callback) {	
+	var sqlQuery = "SELECT * FROM " + tableName + " WHERE approved='false'";
+	var res = {};
+	
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+			if (rows.length > 0) {
+				res.value = rows;
+				res.code = "200";
+			} else {
+				console.log(err);
+		        res.code = "401";
+				res.value = "Failed Login";				
+			}			
+			callback(err, res);
+		}
+	}, sqlQuery);
+}
+
+
 function selectAll(callback) {	
 	var sqlQuery = "SELECT * FROM " + tableName ;
 	var res = {};
@@ -207,3 +227,4 @@ exports.search_with_email = search_with_email;
 exports.search_with_ssn = search_with_ssn;
 exports.update = update;
 exports.approve = approve;
+exports.selectAllUnApproved = selectAllUnApproved;

@@ -39,11 +39,13 @@ app.get('/signupDriver', delegator.signupDriver);
 app.get('/updateDriver', delegator.updateDriver);
 app.get('/updateCustomer', delegator.updateCustomer);
 
+
 app.post('/bk_customer_signin', customer.signin);
 app.post('/bk_customer_signup', customer.signup);
 app.post('/bk_customer_remove_with_email', customer.remove_with_email);
 app.post('/bk_customer_remove_with_ssn', customer.remove_with_ssn);
 app.post('/bk_customer_selectAll', customer.selectAll);
+app.post('/bk_customer_selectAllUnApproved', customer.selectAllUnApproved);
 app.post('/bk_customer_search_with_name', customer.search_with_name);
 app.post('/bk_customer_search_with_ssn', customer.search_with_ssn);
 app.post('/bk_customer_search_with_email', customer.search_with_email);

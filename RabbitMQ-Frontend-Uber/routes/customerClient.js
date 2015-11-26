@@ -84,6 +84,20 @@ function selectAll(req, res) {
 	});
 }
 
+function selectAllUnApproved(req, res) {
+	var msg_payload = {"requestQueue":"selectAllUnApproved"};	
+	mq_client.make_request('customer',msg_payload, function(err,results){
+		    console.log(results);
+			if(results.code == 200){
+				console.log("valid Login");				
+				res.send({"value": result.value, "result":"success"});
+			} else {    
+				console.log("Invalid Login");
+				res.send({"result":"error"});
+			}
+	});
+}
+
 function search_with_name(req, res) {
 	var msg_payload = {"firstname": req.param("firstname"), "lastname": req.param("lastname"), "requestQueue":"search_with_name"};	
 	mq_client.make_request('customer',msg_payload, function(err,results){
@@ -161,6 +175,7 @@ exports.signin = signin;
 exports.remove_with_email = remove_with_email;
 exports.remove_with_ssn = remove_with_ssn;
 exports.selectAll = selectAll;
+exports.selectAllUnApproved = selectAllUnApproved;
 exports.search_with_name = search_with_name;
 exports.search_with_email = search_with_email; 
 exports.search_with_ssn = search_with_ssn;
