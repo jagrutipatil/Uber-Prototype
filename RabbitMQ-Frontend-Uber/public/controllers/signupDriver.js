@@ -6,7 +6,7 @@ function signupDriverController($scope, $http, $window) {
 	$scope.signup = function() {
 		$http({
 			method : 'POST',
-			url : '/bk_driver_signup',
+			url  : '/bk_driver_signup',
 			data : {
 				"ssn" : $scope.ssn,
 				"email" : $scope.email,
