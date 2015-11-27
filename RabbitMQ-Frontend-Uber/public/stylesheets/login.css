@@ -385,3 +385,27 @@ input[type="checkbox"]:disabled:checked + .checkbox:hover:after, input[type="rad
 .transition, .btn, .text-input, .input-group, .select, .checkbox::before, .radio::before, .checkbox::after, .radio::after, .pagination__item, .pagination li {
     transition: all 200ms cubic-bezier(0.72, 0.01, 0.56, 1) 0s !important;
 }
+
+.driverButton{
+	background-color:#b2b2b2;
+	border-color:#b2b2b2;
+}
+
+.icon-font{
+	font-size:23px !important;
+}
+
+.driverButton:hover{
+	background-color:#c2c2c2;
+	border-color:#c2c2c2;
+}
+
+.login-home-font{
+	font-weight: 400;
+	font-size:14px;
+}
+
+.login-home-button-size{
+	line-height: 15px !important;
+	padding:1.3em 3.5em;
+}
