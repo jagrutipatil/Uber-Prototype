@@ -48,10 +48,11 @@ function approve(ssn, callback) {
 	}, sqlQuery);
 }
 
-function update(ssn, email, password, firstname, lastname, mobileno, postalcode, callback) {
+
+function update(ssn, email, password, firstname, lastname, mobileno, callback) {
 	var sqlQuery = "UPDATE "+ tableName + " SET email = '"+ email 
-	+ "', password = '"+password+"' , firstname = '"+firstname+"' , lastname = '"+lastname+"', +" +
-			" mobileno = '"+mobileno+"', postalcode = '"+postalcode+"') WHERE ssn = '" + ssn+"'";
+	    + "' , password = '"+password+"' , firstname = '"+firstname+"' , lastname = '"+lastname+"', " +
+			" mobileno = '"+ mobileno +"' WHERE ssn = '" + ssn+"'";
 	  	
 	var res = {};
 	mySqlDb.executeQuery(function(err, rows) {

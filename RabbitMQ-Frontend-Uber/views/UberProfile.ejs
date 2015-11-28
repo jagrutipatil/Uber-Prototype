@@ -7,11 +7,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+<script type="text/javascript" src="/controllers/customerProfile.js"></script> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body ng-app="account" ng-controller="accountController">
+<body ng-app="customerProfile" ng-controller="customerProfileController">
 <div class="container" style="padding-top: 60px;">
-  <h1 class="page-header">Create Profile</h1>
+  <h1 class="page-header">Update Profile</h1>
   <div class="row">
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
@@ -36,10 +37,16 @@
             <input class="form-control" value="" placeholder="Enter Last Name" type="text" ng-model="lastname">
           </div>
         </div>
-          <div class="form-group">
+        <div class="form-group">
           <label class="col-lg-3 control-label">Mobile no:</label>
           <div class="col-lg-8">
             <input class="form-control" value="" placeholder="Enter Mobile no" type="number" ng-model="mobileno">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Email:</label>
+          <div class="col-lg-8">
+            <input class="form-control" placeholder="Enter Email id" type="email" ng-model="email">
           </div>
         </div>
         <div class="form-group">
@@ -57,7 +64,7 @@
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
-            <input class="btn btn-primary" value="Create Account" type="button" ng-click="create_account()">
+            <input class="btn btn-primary" value="Update" type="button" ng-click="update()">
             <span></span>
             <input class="btn btn-default" value="Cancel" type="reset">
           </div>

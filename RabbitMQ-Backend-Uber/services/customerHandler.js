@@ -52,7 +52,7 @@ var customer = require("./customer");
 	}
 	
 	if(msg.requestQueue=="update"){
-		customer.update(msg.ssn, msg.email, msg.password, msg.firstname, msg.lastname, msg.mobileno, msg.postalcode, function(err, res) {
+		customer.update(msg.ssn, msg.email, msg.password, msg.firstname, msg.lastname, msg.mobileno, function(err, res) {
 			callback(err, res);
 		});
 	}

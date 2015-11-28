@@ -44,8 +44,17 @@ function updateDriver(req, res) {
 		}
 	});
 }
+
 function updateCustomer(req, res) {
 	ejs.renderFile("./views/UpdateCustomer.ejs", function(err, result) {
+		if (!err) {
+			res.end(result);
+		}
+	});
+}
+
+function updateCustomer(req, res) {
+	ejs.renderFile("./views/UberProfile.ejs", function(err, result) {
 		if (!err) {
 			res.end(result);
 		}

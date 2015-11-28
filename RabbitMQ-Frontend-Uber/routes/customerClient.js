@@ -127,17 +127,17 @@ function search_with_ssn(req, res) {
 }
 
 function update(req, res) {
-	var msg_payload = {"ssn": req.param("ssn"), "email": req.param("email"), 
-			"password":req.param("password"), "firstname":req.param("firstname")
-			,"lastname": req.param("lastname"),"mobileno": req.param("mobileno"),
-			"postalcode": req.param("postalcode"), "requestQueue":"update"};	
+	
+	var msg_payload = {"ssn": req.param("ssn"), "email":req.param("email"), "password":req.param("password"),
+			"firstname":req.param("firstname"), "lastname": req.param("lastname"),
+			"mobileno": req.param("mobileno"), "requestQueue":"update"};
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
-				console.log("valid Login");				
+				console.log("valid update");				
 				res.send({"result":"success"});
 			} else {    
-				console.log("Invalid Login");
+				console.log("Invalid update");
 				res.send({"result":"error"});
 			}
 	});

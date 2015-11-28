@@ -38,6 +38,8 @@ app.get('/loginDriver', delegator.loginDriver);
 app.get('/signupDriver', delegator.signupDriver);
 app.get('/updateDriver', delegator.updateDriver);
 app.get('/updateCustomer', delegator.updateCustomer);
+app.get('/customerProfile', delegator.updateCustomer);
+
 
 
 app.post('/bk_customer_signin', customer.signin);
