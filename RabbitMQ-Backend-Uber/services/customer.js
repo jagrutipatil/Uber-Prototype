@@ -49,7 +49,7 @@ function approve(ssn, callback) {
 }
 
 
-function update(ssn, email, password, firstname, lastname, mobileno, callback) {
+function updateProfile(ssn, email, password, firstname, lastname, mobileno, callback) {
 	var sqlQuery = "UPDATE "+ tableName + " SET email = '"+ email 
 	    + "' , password = '"+password+"' , firstname = '"+firstname+"' , lastname = '"+lastname+"', " +
 			" mobileno = '"+ mobileno +"' WHERE ssn = '" + ssn+"'";
@@ -67,6 +67,25 @@ function update(ssn, email, password, firstname, lastname, mobileno, callback) {
 		callback(err, res);
 	}, sqlQuery);
 }
+
+function updatePayment(ssn, cardno, cvv, exp_month, exp_year, callback) {
+	var sqlQuery = "UPDATE "+ tableName + " SET cardno = '"+ cardno + "' , cvv = '" 
+	+ cvv + "' , exp_month = '" + exp_month + "' , exp_year = '" + exp_year + "' WHERE ssn = '" + ssn+"'";
+	  	
+	var res = {};
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+	    	  res.code = "200";
+			  res.value = "success";
+		} else {
+			  console.log(err);
+			  res.code = "401";
+			  res.value = "error";
+		}
+		callback(err, res);
+	}, sqlQuery);
+}
+
 
 function search_with_ssn(ssn, callback) {
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE ssn='"+ ssn +"'";
@@ -226,6 +245,7 @@ exports.selectAll = selectAll;
 exports.search_with_name = search_with_name;
 exports.search_with_email = search_with_email; 
 exports.search_with_ssn = search_with_ssn;
-exports.update = update;
+exports.update = updateProfile;
+exports.updatePayment = updatePayment;
 exports.approve = approve;
 exports.selectAllUnApproved = selectAllUnApproved;

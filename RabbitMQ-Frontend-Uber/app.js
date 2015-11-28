@@ -39,6 +39,7 @@ app.get('/signupDriver', delegator.signupDriver);
 app.get('/updateDriver', delegator.updateDriver);
 app.get('/updateCustomer', delegator.updateCustomer);
 app.get('/customerProfile', delegator.updateCustomer);
+app.get('/customerPayment', delegator.updatePaymentCustomer);
 
 
 
@@ -52,6 +53,7 @@ app.post('/bk_customer_search_with_name', customer.search_with_name);
 app.post('/bk_customer_search_with_ssn', customer.search_with_ssn);
 app.post('/bk_customer_search_with_email', customer.search_with_email);
 app.post('/bk_customer_update', customer.update);
+app.post('/bk_customer_updatePayment', customer.updatePayment);
 app.post('/bk_customer_approve', customer.approve);
 
 app.post('/bk_driver_signin', driver.signin);

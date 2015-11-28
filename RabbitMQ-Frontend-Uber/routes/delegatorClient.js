@@ -53,8 +53,8 @@ function updateCustomer(req, res) {
 	});
 }
 
-function updateCustomer(req, res) {
-	ejs.renderFile("./views/UberProfile.ejs", function(err, result) {
+function updatePaymentCustomer(req, res) {
+	ejs.renderFile("./views/UberPayment.ejs", function(err, result) {
 		if (!err) {
 			res.end(result);
 		}
@@ -67,3 +67,4 @@ exports.loginDriver = loginDriver;
 exports.signupDriver = signupDriver;
 exports.updateDriver = updateDriver;
 exports.updateCustomer = updateCustomer;
+exports.updatePaymentCustomer = updatePaymentCustomer;

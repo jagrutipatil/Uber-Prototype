@@ -57,6 +57,12 @@ var customer = require("./customer");
 		});
 	}
 	
+	if(msg.requestQueue=="updatePayment"){
+		customer.updatePayment(msg.ssn, msg.cardno, msg.cvv, msg.exp_month, msg.exp_year, function(err, res) {
+			callback(err, res);
+		});
+	}
+	
 	if(msg.requestQueue=="approve"){
 		customer.approve(msg.ssn, function(err, res) {
 			callback(err, res);

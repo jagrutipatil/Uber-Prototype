@@ -127,10 +127,25 @@ function search_with_ssn(req, res) {
 }
 
 function update(req, res) {
-	
 	var msg_payload = {"ssn": req.param("ssn"), "email":req.param("email"), "password":req.param("password"),
 			"firstname":req.param("firstname"), "lastname": req.param("lastname"),
 			"mobileno": req.param("mobileno"), "requestQueue":"update"};
+	mq_client.make_request('customer',msg_payload, function(err,results){
+		    console.log(results);
+			if(results.code == 200){
+				console.log("valid update");				
+				res.send({"result":"success"});
+			} else {    
+				console.log("Invalid update");
+				res.send({"result":"error"});
+			}
+	});
+}
+
+function updatePayment(req, res) {
+	var msg_payload = {"ssn": req.param("ssn"), "cardno": req.param("cardno"),"cvv": req.param("cvv"),
+			"exp_month": req.param("exp_month") , "exp_year": req.param("exp_year"),
+			"requestQueue":"updatePayment"};
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
@@ -180,4 +195,5 @@ exports.search_with_name = search_with_name;
 exports.search_with_email = search_with_email; 
 exports.search_with_ssn = search_with_ssn;
 exports.update = update;
+exports.updatePayment = updatePayment;
 exports.approve = approve;
