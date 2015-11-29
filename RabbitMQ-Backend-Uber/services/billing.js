@@ -1,4 +1,4 @@
-var mysql = require('./mysql');
+var mysql = require('mysql');
 
 
 var getMinFare = function(carType){
@@ -180,7 +180,7 @@ var generateUniqueId = function(){
 		  return s3() + '-' + s2() + '-' + s4();
 };
 
-var billGenerate = function(distance, startTime, endTime, totalTime, carType, source, destination, customerId, driverId, callback) ){
+var billGenerate = function(distance, startTime, endTime, totalTime, carType, source, destination, customerId, driverId, callback){
 	var billID = 0;
 
 //	var distance = req.param("distance");
