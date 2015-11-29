@@ -76,7 +76,7 @@ function selectAll(req, res) {
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
-				res.send({"value": result.value, "result":"success"});
+				res.send({"value": results.value, "result":"success"});
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
@@ -90,7 +90,7 @@ function selectAllUnApproved(req, res) {
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
-				res.send({"value": result.value, "result":"success"});
+				res.send({"value": results.value, "result":"success"});
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
@@ -104,7 +104,7 @@ function search_with_name(req, res) {
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");		
-				res.send({"value": result.value, "result":"success"});
+				res.send({"value": results.value, "result":"success"});
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
