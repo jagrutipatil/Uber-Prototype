@@ -9,6 +9,9 @@ app.config(function($routeProvider, $locationProvider){
           .when('/payment',{
                 templateUrl: '/UberPayment.ejs', controller: 'customerPaymentController'
           })
+          .when('/mytrips',{
+                templateUrl: '/UberMyTrips.ejs', controller: 'myTrips'
+          })
 		  .when("/requestride",{
 		      templateUrl: "/ride.ejs", controller: 'rideController'
 		  });
@@ -189,3 +192,75 @@ app.controller('sendData', function($scope,$http) {
     	console.log(orig);
 	};
 });
+
+
+app.controller("myTrips", myTrips);
+myTrips.$inject = [ '$scope', '$http', '$window'];
+function myTrips($scope, $http, $window) {
+	
+	
+//	$http({
+//		method : 'POST',
+//		url : '/session_get_ssn',
+//		data : {}
+//	}).success(function(response) {
+//		if (response.result != "error") {
+//			alert("SSN obtained");
+//			$scope.ssn2=response.ssn;
+//		} else {
+//			alert("error");
+//		}			
+//	}).error(function(error) {
+//		console.log(error);
+//	});
+	
+	
+	$scope.bills = [];
+	 $scope.currentPage = 0;
+	 $scope.pageSize = 2;
+	 $scope.data = [];
+	 $scope.q = '';
+	 
+	 
+	 $scope.getData = function () {
+	        var arr = [];
+	        if($scope.q == '') {
+	            arr = $scope.bills;
+	        } else {
+	            for(var ea in $scope.bills) {
+	                if($scope.bills[ea].indexOf($scope.q) > -1) {
+	                    arr.push( $scope.bills[ea] );
+	                }
+	            }
+	        }
+	        return arr;
+	       
+	    };
+	    
+	    $scope.numberOfPages=function(){
+	        return Math.ceil($scope.getData().length/$scope.pageSize);                
+	    };
+	    
+	    for (var i=0; i<200000; i++) {
+	        $scope.data.push("Item "+i);
+	    }
+	 
+	$scope.getUserBills = function() {
+		console.log("recieved" );
+		$http({
+			method : "POST",
+			url : '/getUserBills',
+			data : {
+				"customerId" : "1"
+			}
+		}).success(function(data) {
+			console.log("data recieved : " + data.value[0]);
+		    $scope.bills = data.value;
+			
+		}).error(function(error) {
+			
+		});
+	};
+	
+	
+}

@@ -41,7 +41,7 @@ function estimate(req, res) {
 
 function getUserBills(req, res) {
 	var msg_payload = { "customerId": req.param("customerId"),"requestQueue":"getUserBills"};
-	
+	console.log("customerId in UI" + req.param("customerId"));
 	mq_client.make_request('billing',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){

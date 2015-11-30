@@ -18,6 +18,7 @@ var billing = require("./billing");
 	}
 		
 	if(msg.requestQueue=="getUserBills"){
+		console.log("resQueue : " + msg.requestQueue);
 		billing.getUserBills(msg.customerId, function(err, res) {
 			callback(err, res);
 		});

@@ -97,8 +97,8 @@ app.post('/bk_rides_register', rides.register);
 //billing module
 app.post('/billGenerate', bill.billGenerate);
 app.post('/estimate', bill.estimate);
-app.get('/getUserBills', bill.getUserBills);
-app.get('/getBill', bill.getBill);
+app.post('/getUserBills', bill.getUserBills);
+app.post('/getBill', bill.getBill);
 
 
 

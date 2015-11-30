@@ -326,11 +326,10 @@ var estimate = function(distance, startTime, endTime, totalTime, carType, callba
 
 var getUserBills = function(customerId, callback){
 	var res = {};
-	var customerId = req.param("customerId");
 	
 	var fetchData = "select * from bills where customerId='" + customerId + "'";
     //Section for fetching a particular user bills from the bill table
-    
+    console.log("Query for bills " + fetchData);
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
