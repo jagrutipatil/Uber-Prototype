@@ -12,6 +12,8 @@ var customer = require('./routes/customerClient');
 var driver = require('./routes/driverClient');
 var delegator = require('./routes/delegatorClient');
 var bill = require('./routes/billingClient');
+var rides = require('./routes/ridesClient');
+
 var http = require('http');
 var path = require('path');
 var amqp = require('amqp');
@@ -43,6 +45,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.get('/:name', rides.partials);
 app.get('/loginPage', delegator.loginPage);
 app.get('/loginCustomer', delegator.loginCustomer);
 app.get('/signupCustomer', delegator.signupCustomer);
@@ -82,11 +85,16 @@ app.post('/bk_driver_search_with_ssn', driver.search_with_ssn);
 app.post('/bk_driver_update', driver.update);
 app.post('/bk_driver_approve', driver.approve);
 
+//rides
+app.post('/bk_rides_register', rides.register);
+
 //billing module
 app.post('/billGenerate', bill.billGenerate);
 app.post('/estimate', bill.estimate);
 app.get('/getUserBills', bill.getUserBills);
 app.get('/getBill', bill.getBill);
+
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
