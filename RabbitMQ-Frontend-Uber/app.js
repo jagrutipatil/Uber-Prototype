@@ -3,6 +3,9 @@
  * Module dependencies.
  */
 
+var sessions = require('client-sessions');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var express = require('express');
 var routes = require('./routes');
 var customer = require('./routes/customerClient');
@@ -11,7 +14,8 @@ var delegator = require('./routes/delegatorClient');
 //var bill = require('./routes/billing');
 var http = require('http');
 var path = require('path');
-var amqp = require('amqp')
+var amqp = require('amqp');
+var session = require('./routes/session');
 
 var app = express();
 
@@ -24,9 +28,15 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.bodyParser());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(sessions({
+    cookieName: 'ubersession',
+    secret: 'codeishere',
+    duration: 24 * 60 * 60 * 1000,
+    activeDuration: 1000 * 60 * 5 
+}));
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -40,8 +50,10 @@ app.get('/updateDriver', delegator.updateDriver);
 app.get('/updateCustomer', delegator.updateCustomer);
 app.get('/customerProfile', delegator.updateCustomer);
 app.get('/customerPayment', delegator.updatePaymentCustomer);
+app.get('/loginPage', delegator.loginPage);
 
-
+app.get('/admin', delegator.admin);
+app.post('/session_get_ssn', session.ssn);
 
 app.post('/bk_customer_signin', customer.signin);
 app.post('/bk_customer_signup', customer.signup);

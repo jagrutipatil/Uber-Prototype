@@ -141,7 +141,7 @@ function search_with_email(req, res) {
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
-				res.send({"value": result.value, "result":"success"});
+				res.send({"value": results.value, "result":"success"});
 			} else {    
 				res.send({"result":"error"});
 			}
@@ -154,7 +154,7 @@ function selectAllUnApproved(req, res) {
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
-				res.send({"value": result.value, "result":"success"});
+				res.send({"value": results.value, "result":"success"});
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});

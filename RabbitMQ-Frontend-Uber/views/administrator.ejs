@@ -2,26 +2,16 @@
 <head>
   <meta charset="utf-8">
   <title>Admin</title>
-    <script src="../Chart.js"></script>
-    <script src="../Chart.js"></script>
-    <script src="../Chart.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <script type="text/javascript" src="/controllers/admin.js"></script>
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="bootstrap.vertical-tabs.css">
     
     
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
-    <link rel="import" href="doughnut1.html">
     <script src="http://code.jquery.com/jquery-1.4.min.js" type="text/javascript"></script>
     
-    
-    <script src="../src/Chart.Core.js"></script>
-		<script src="../src/Chart.Doughnut.js"></script>
-    
-    
-    
-
 <title>My Example</title>
 <!-- Bootstrap 4 alpha CSS -->
 <!-- IMPORTANT: Don't use this .css file in production. Use Bootstrap 3 until Bootstrap 4.0.0 is released. -->
@@ -44,7 +34,7 @@
 
     
 </head>
-<body >
+<body ng-app="administrator" ng-controller="adminController">
     
 
   <div class="container">
@@ -73,53 +63,30 @@
           <!-- Tab panes -->
           <div class="tab-content">
             <div class="tab-pane active" id="home">
+            
+            	<div ng-repeat="driver in drivers" style="min-width:400px !important;">
+            
                 <div class="col-md-5">
-                1.Jack Kale 
+                {{driver.number}}.{{driver.firstname}}&nbsp;{{driver.lastname}} 
                 </div>
-               <button type="button" class="btn btn-primary">Add </button>
+                <button type="submit" ng-click="update(driver.ssn)" class="btn btn-primary" style="margin-left:50px !important;">Add </button>
                 <button type="button" class="btn btn-info">Deny </button> 
-                  <br><br>
-                <div class="col-md-5">
-                2.Darcy Dave 
-                </div>
-                    <button type="button" class="btn btn-primary">Add </button>
-                <button type="button" class="btn btn-info">Deny </button> 
-                  <br><br>
-                    <div class="col-md-5">
-               3.Bharat Shah
-                </div>    
-                        <button type="button" class="btn btn-primary">Add </button>
-                <button type="button" class="btn btn-info">Deny </button> 
-                  <br><br>
-                <div class="col-md-5">
-            4.Clay Classey
-                </div>
-                <button type="button" class="btn btn-primary">Add </button>
-                <button type="button" class="btn btn-info">Deny </button> 
-                  <br><br>
-                 </a></div>
+                <br><br>     
+                 </div>            
+             </div>     
               
             <div class="tab-pane" id="profile">
-                <div class="col-md-5">
-              1.Ralph Soras 
+            
+            	<div ng-repeat="customer in customers" style="min-width:400px !important;"> 
+            	<div class="col-md-5"> 
+             {{customer.number}}.{{customer.firstname}}&nbsp;{{customer.lastname}}
                     </div>
-                <button type="button" class="btn btn-primary">Add </button>
+                <button type="submit" ng-click="update(customer.ssn)" class="btn btn-primary" style="margin-left:50px !important;">Add </button>
                 <button type="button" class="btn btn-info">Deny </button> 
                   <br><br>
-                <div class="col-md-5">
-              2.Erika Erlang 
-                </div>
-                <button type="button" class="btn btn-primary">Add </button>
-                <button type="button" class="btn btn-info">Deny </button> 
-                  <br><br>
-               
-                <div class="col-md-5">
-              3.Patrick Naval
-                </div>
-                <button type="button" class="btn btn-primary">Add </button>
-                <button type="button" class="btn btn-info">Deny </button> 
-                  <br><br>
-              </div>
+                 </div> 
+                  
+                
             
             
           </div>
@@ -577,147 +544,10 @@
    
         
         
-    <script src="http://d3js.org/d3.v2.min.js"></script>
-    <script>
-function renderChart() {
-
-var data = d3.csv.parse(d3.select('#csv').text());
-var valueLabelWidth = 40; // space reserved for value labels (right)
-var barHeight = 20; // height of one bar
-var barLabelWidth = 100; // space reserved for bar labels
-var barLabelPadding = 5; // padding between bar and bar labels (left)
-var gridLabelHeight = 18; // space reserved for gridline labels
-var gridChartOffset = 3; // space between start of grid and first bar
-var maxBarWidth = 420; // width of the bar with the max value
- 
-// accessor functions 
-var barLabel = function(d) { return d['Name']; };
-var barValue = function(d) { return parseFloat(d['Population (mill)']); };
- 
-// scales
-var yScale = d3.scale.ordinal().domain(d3.range(0, data.length)).rangeBands([0, data.length * barHeight]);
-var y = function(d, i) { return yScale(i); };
-var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-var x = d3.scale.linear().domain([0, d3.max(data, barValue)]).range([0, maxBarWidth]);
-// svg container element
-var chart = d3.select('#chart').append("svg")
-  .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
-  .attr('height', gridLabelHeight + gridChartOffset + data.length * barHeight);
-// grid line labels
-var gridContainer = chart.append('g')
-  .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
-gridContainer.selectAll("text").data(x.ticks(10)).enter().append("text")
-  .attr("x", x)
-  .attr("dy", -3)
-  .attr("text-anchor", "middle")
-  .text(String);
-// vertical grid lines
-gridContainer.selectAll("line").data(x.ticks(10)).enter().append("line")
-  .attr("x1", x)
-  .attr("x2", x)
-  .attr("y1", 0)
-  .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
-  .style("stroke", "#ccc");
-// bar labels
-var labelsContainer = chart.append('g')
-  .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-labelsContainer.selectAll('text').data(data).enter().append('text')
-  .attr('y', yText)
-  .attr('stroke', 'none')
-  .attr('fill', 'black')
-  .attr("dy", ".35em") // vertical-align: middle
-  .attr('text-anchor', 'end')
-  .text(barLabel);
-// bars
-var barsContainer = chart.append('g')
-  .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-barsContainer.selectAll("rect").data(data).enter().append("rect")
-  .attr('y', y)
-  .attr('height', yScale.rangeBand())
-  .attr('width', function(d) { return x(barValue(d)); })
-  .attr('stroke', 'white')
-  .attr('fill', 'orange');
-// bar value labels
-barsContainer.selectAll("text").data(data).enter().append("text")
-  .attr("x", function(d) { return x(barValue(d)); })
-  .attr("y", yText)
-  .attr("dx", 3) // padding-left
-  .attr("dy", ".35em") // vertical-align: middle
-  .attr("text-anchor", "start") // text-align: right
-  .attr("fill", "black")
-  .attr("stroke", "none")
-  .text(function(d) { return d3.round(barValue(d), 2); });
-// start line
-barsContainer.append("line")
-  .attr("y1", -gridChartOffset)
-  .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
-  .style("stroke", "#000");
-
-}
-    </script>
-    <script id="csv" type="text/csv">Name,Population (mill),Average Life Expectancy,Area (1000 sq mi),Continent
-1-11-2015,33.6,80.7,3854.085,America
-2-11-2015,308.3,78.2,3784.191,America
-3-11-2015,82.3,79.4,137.847,Europe
-4-11-2015,141.9,65.5,6601.668,Europe
-5-11-2015,677.4,76.06,758.449,America
-6-11-2015,193.3,71.99,3287.612,America
-7-11-2015,46.9,80.9,195.365,Europe
-8-11-2015,65.4,80.98,244.339,Europe
-9-11-2015,398,73,3705.407,Asia
-9-11-2015,342.4,81.2,2969.907,Australia
-10-11-2015,62,79.4,93.800,Europe
-11-11-2015,60.3,80.5,116.346,Europe
-12-11-2015,584,64.7,1236.085,Asia
-13-11-2015,127.4,82.6,145.920,Asia
-14-11-2015,0.3,81.8,40.000,Europe
-15-11-2015,10.6,78.1,35.560,Europe
-16-11-2015,50,49.3,471.445,Africa
-17-11-2015,78.9,71.3,387.000,Africa
-18-11-2015,9.3,80.9,170.410,Europe</script>
-    <script>renderChart();</script>
-        
-        
-
+    
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     
-       
-        
-	<script>
-
-		var doughnutData = [
-				{
-					value: 1,
-					label: "One"
-				},
-				{
-					value: 2,
-					label: "Two"
-				},
-				{
-					value: 3,
-					label: "Three"
-				},
-				{
-					value: 4,
-					label: "Four"
-				},
-				{
-					value: 5,
-					label: "Five"
-				}
-
-			];
-
-			window.onload = function(){
-				var ctx = document.getElementById("chart-area").getContext("2d");
-				window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
-			};
-
-
-
-	</script>
         
         <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

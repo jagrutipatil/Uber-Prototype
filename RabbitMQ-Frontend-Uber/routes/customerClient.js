@@ -35,9 +35,12 @@ function signin(req, res) {
 	var msg_payload = { "email": req.param("email"), "password": req.param("password"),"requestQueue":"signin"};	
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		    console.log(results);
-			if(results.code == 200){
-				res.send({"value": result.value, "result":"success"});
-				res.send({"result":"success"});
+			if(results.code === "200"){
+				console.log("valid login");
+				req.ubersession.user = results.value;
+				console.log("Printing session\n\n");
+				res.send({"value": results.value, "result":"success"});			
+				
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
@@ -76,7 +79,7 @@ function selectAll(req, res) {
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
-				res.send({"value": result.value, "result":"success"});
+				res.send({"value": results.value, "result":"success"});
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
@@ -87,10 +90,11 @@ function selectAll(req, res) {
 function selectAllUnApproved(req, res) {
 	var msg_payload = {"requestQueue":"selectAllUnApproved"};	
 	mq_client.make_request('customer',msg_payload, function(err,results){
-		    console.log(results);
+		    //console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
-				res.send({"value": result.value, "result":"success"});
+				//res.send({"result":"success"});
+				res.send({"value": results.value,"result":"success"});
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
@@ -104,7 +108,7 @@ function search_with_name(req, res) {
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");		
-				res.send({"value": result.value, "result":"success"});
+				res.send({"value": results.value, "result":"success"});
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
@@ -118,7 +122,7 @@ function search_with_ssn(req, res) {
 		    console.log(results);
 			if(results.code == 200){
 				console.log("valid Login");				
-				res.send({"value": result.value, "result":"success"});
+				res.send({"value": results.value, "result":"success"});
 			} else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
@@ -177,7 +181,7 @@ function search_with_email(req, res) {
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
-				res.send({"value": result.value, "result":"success"});
+				res.send({"value": results.value, "result":"success"});
 			} else {    
 				res.send({"result":"error"});
 			}
