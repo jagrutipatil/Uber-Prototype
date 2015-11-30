@@ -55,6 +55,10 @@ app.get('/customerPayment', session.isAuthUser, delegator.updatePaymentCustomer)
 
 app.get('/admin', delegator.admin);
 app.get('/', delegator.home);
+app.get('/logout', function (req, res) {
+	  req.ubersession.reset();
+	  res.redirect('/');
+});
 
 app.post('/session_get_ssn', session.ssn);
 
