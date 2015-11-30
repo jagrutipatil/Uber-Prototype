@@ -4,7 +4,9 @@ var billing = require("./billing");
 	var res = {};	
 	function handle_request (msg, callback) {
 	if(msg.requestQueue=="billGenerate"){
+		console.log("imp" + msg.distance);
 		billing.billGenerate(msg.distance, msg.startTime, msg.endTime, msg.totalTime, msg.carType, msg.source, msg.destination, msg.customerId, msg.driverId, function(err, res) {
+			console.log("imp2 " + res);
 			callback(err, res);
 		});
 	}

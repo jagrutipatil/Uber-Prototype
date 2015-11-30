@@ -2,7 +2,7 @@ var ejs = require("ejs");
 var mq_client = require('./client');
 
 function billGenerate(req, res) {
-	var msg_payload = { "startTime": req.param("distance"), "startTime": req.param("startTime"), 
+	var msg_payload = { "distance": req.param("distance"), "startTime": req.param("startTime"), 
 			"endTime":req.param("endTime"), "totalTime":req.param("totalTime")
 			,"carType": req.param("carType"),"source": req.param("source"),
 			"destination": req.param("destination"), "customerId": req.param("customerId"),
