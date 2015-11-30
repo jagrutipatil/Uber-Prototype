@@ -29,30 +29,33 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.bodyParser());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(sessions({
     cookieName: 'ubersession',
     secret: 'codeishere',
     duration: 24 * 60 * 60 * 1000,
     activeDuration: 1000 * 60 * 5 
 }));
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.get('/loginPage', delegator.loginPage);
 app.get('/loginCustomer', delegator.loginCustomer);
 app.get('/signupCustomer', delegator.signupCustomer);
 app.get('/loginDriver', delegator.loginDriver);
 app.get('/signupDriver', delegator.signupDriver);
-app.get('/updateDriver', delegator.updateDriver);
-app.get('/updateCustomer', delegator.updateCustomer);
-app.get('/customerProfile', delegator.updateCustomer);
-app.get('/customerPayment', delegator.updatePaymentCustomer);
-app.get('/loginPage', delegator.loginPage);
+app.get('/updateDriver', session.isAuthDriver, delegator.updateDriver);
+app.get('/updateCustomer', session.isAuthUser, delegator.updateCustomer);
+app.get('/customerProfile', session.isAuthUser, delegator.updateCustomer);
+app.get('/customerPayment', session.isAuthUser, delegator.updatePaymentCustomer);
 
 app.get('/admin', delegator.admin);
+app.get('/', delegator.home);
+
 app.post('/session_get_ssn', session.ssn);
 
 app.post('/bk_customer_signin', customer.signin);

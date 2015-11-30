@@ -11,3 +11,22 @@ exports.ssn = function(req, res){
 		res.send({"result":"error"});
 	}
 };
+
+
+exports.isAuthUser = function isAuthUser(req, res, next) {
+		if(req.ubersession){
+			if(req.ubersession.user){
+				return next();
+			}
+		}    
+    res.redirect('/');
+};
+
+exports.isAuthDriver = function isAuthDriver(req, res, next) {
+	if(req.ubersession){
+		if(req.ubersession.driver){
+			return next();
+		}
+	}    
+res.redirect('/');
+};

@@ -79,6 +79,14 @@ function loginPage(req, res) {
 	});
 }
 
+function home(req, res) {
+	ejs.renderFile("./views/homepage.ejs", function(err, result) {
+		if (!err) {
+			res.end(result);
+		}
+	});
+}
+
 exports.loginCustomer = loginCustomer;
 exports.signupCustomer = signupCustomer;
 exports.loginDriver = loginDriver;
@@ -88,3 +96,4 @@ exports.updateCustomer = updateCustomer;
 exports.updatePaymentCustomer = updatePaymentCustomer;
 exports.admin = admin;
 exports.loginPage = loginPage;
+exports.home = home;

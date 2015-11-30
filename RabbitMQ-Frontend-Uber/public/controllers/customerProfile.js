@@ -10,7 +10,7 @@ function customerProfileController($scope, $http, $window) {
 		data : {}
 	}).success(function(response) {
 		if (response.result != "error") {
-			alert("success");
+			alert("SSN obtained");
 			$scope.ssn=response.ssn;
 		} else {
 			alert("error");

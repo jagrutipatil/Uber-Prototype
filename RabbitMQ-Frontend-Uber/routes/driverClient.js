@@ -26,7 +26,9 @@ function signin(req, res) {
 	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
-				console.log("valid Login");				
+				console.log("valid Login");
+				req.ubersession.driver = results.value;
+				console.log("Printing session\n\n");			
 				res.send({"result":"success", "value" : results.value});
 			} else {    
 				console.log("Invalid Login");
