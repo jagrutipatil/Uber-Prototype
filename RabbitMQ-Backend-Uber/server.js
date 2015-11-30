@@ -6,6 +6,7 @@ var amqp = require('amqp')
 var driverHandler = require('./services/driverHandler');
 var customerHandler = require('./services/customerHandler');
 var billingHandler = require('./services/billingHandler');
+var ridesHandler = require('./services/ridesHandler');
 var http = require('http');
 var path = require('path');
 var amqp = require('amqp')
@@ -60,6 +61,23 @@ cnn.on('ready', function(){
 			billingHandler.handle_request(message, function(err,res){
 				console.log("Sent response from server");
 				console.log(res);
+				//return index sent
+				cnn.publish(m.replyTo, res, {
+					contentType:'application/json',
+					contentEncoding:'utf-8',
+					correlationId:m.correlationId
+				});
+			});
+		});
+	});
+	
+	cnn.queue('rides', function(q){
+		q.subscribe(function(message, headers, deliveryInfo, m){
+			util.log(util.format( deliveryInfo.routingKey, message));
+			util.log("Message: "+JSON.stringify(message));
+			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
+			ridesHandler.handle_request(message, function(err,res){
+
 				//return index sent
 				cnn.publish(m.replyTo, res, {
 					contentType:'application/json',

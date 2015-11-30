@@ -7,81 +7,14 @@
   <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-  <script src="/angular/maps_f.js"></script>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="/controllers/maps_f.js"></script>
+  <link rel='stylesheet' href='./stylesheets/style2.css' />
 
 <body ng-app="maps" style="font-family: Arial; font-size: 12px;">
 <div id="slide-menu-content" class="slide-menu__content height--full">
-<div class="flexbox flexbox--vertical">
-  <div class="flexbox__item">
-    <div class="page-header page-boundary container">
-      <div class="page-container">
-        <div class="flexbox">
-          <div class="flexbox__item one-third">
-            <ul class="nav flush visible--portable">
-            <li>
-            <a class="text--uppercase" data-slide-menu-content="#slide-menu-content" data-slide-menu="#slide-menu" href="#">
-            <span class="icon icon_menu push-half--right color--neutral micro"></span>
-            Menu
-            </a>
-            </li>
-            </ul>
-          </div>
-          <div class="flexbox__item one-third text--center">
-          <div class="icon icon_uber"></div>
-          </div>
-            <ul class="nav nav--block flush float--right hidden--desk">
-            <li>
-            <a class="free-rides-button color--primary text--uppercase" href="/invite">Free Rides</a>
-            </li>
-            </ul>
-            <ul class="nav nav--block float--right flush hidden--portable">
-            <li class="user-flyout flyout flyout--right">
-            <a class="flyout__origin" href="#">
-            <span class="icon icon_profile alpha push-half--right"></span>
-            <span class="push-half--right">Rider</span>
-            <span class="icon icon_down-arrow-2 milli"></span>
-            </a>
-            <div class="flyout__content">
-            <ul class="site-nav site-nav--flush">
-            <li>
-            <div class="grid">
-            <div class="grid__item one-quarter">
-            <img class="img--bordered img--full" src="https://d1w2poirtb3as9.cloudfront.net/default.jpeg">
-            </div>
-            <div class="grid__item three-quarters">
-            <h3 class="push-half--bottom">Rider Name</h3>
-            </div>
-            </div>
-            </li>
-            <li>
-            <a class="active" href="/trips">My Trips</a>
-            </li>
-            <li>
-            <a href="/profile">Profile</a>
-            </li>
-            <li>
-            <a href="/payment">Payment</a>
-            </li>
-            <li>
-            <a class="free-rides-button" href="/invite">
-            Free Rides
-            <div class="text--right color--primary badge text--uppercase">NEW!</div>
-            </a>
-            </li>
-            <li>
-            <a href="/logout">Log Out</a>
-            </li>
-            </ul>
-            </div>
-            </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+
    <div id="trip-e0a4ee83-d5c7-404a-a1f2-2d7512da4c57" class="collapse in">
    <div class="trip-expand trip-expand--completed">
       <div id="trip-map-e0a4ee83-d5c7-404a-a1f2-2d7512da4c57">
@@ -106,26 +39,27 @@
                 </div>
                   
                 <div class="trip-info-tools">
-                  <button type="Submit" ng-click="submit2();" class="btn btn--primary" value="Display Drivers">Display Drivers</button><br></br>
+                  <input type="Submit" ng-click="submit2();" class="btn btn--primary" value="Display Drivers"/><br></br>
                                   
                   </form>
                   
                   <button ng-click="submit();" class="btn btn--primary"  value="Request Ride">Request Ride</button>
                 </div>
               </div>
+              </form>
             </div>
+            <a href="/customerDashboard">Go Back<a>
+            
+            
       </div>
     </div>
     </div>
     
-<div class="page-footer page-boundary container"><div class="page-container"><div class="flexbox"><div class="flexbox__item one-third"><ul class="nav nav--block flush"><li><a href="https://twitter.com/uber" class="link--immutable"><span class="icon icon--circle icon_twitter"></span></a></li><li><a href="https://www.facebook.com/uber" class="link--immutable"><span class="icon icon--circle icon_facebook"></span></a></li><li><a href="http://www.linkedin.com/company/uber.com" class="link--immutable"><span class="icon icon--circle icon_linkedin"></span></a></li></ul></div><div class="flexbox__item one-third text--center brand-face hidden--portable"><ul class="nav gamma text--uppercase push-half--bottom"><li><a href="https://www.uber.com/">Uber Home</a></li><li class="soft--sides">•</li><li><a href="https://www.uber.com/cities">Cities</a></li><li class="soft--sides">•</li><li><a href="https://www.uber.com/drivers">Drivers</a></li></ul><div class="zeta text--uppercase"><ul class="nav nav--block color--neutral push--bottom"><li><a href="https://www.uber.com/about">About Us</a></li><li><a href="https://help.uber.com/">Help Center</a></li><li><a href="https://www.uber.com/jobs">Careers</a></li><li><a href="http://blog.uber.com/">Blog</a></li></ul><div class="one-third center-block"><div class="custom-select custom-select--primary"><div class="custom-select__arrow"><div class="icon icon_down-arrow"></div></div><select data-language-picker="" class="form-field--full custom-select__select text--uppercase"><option value="/id_ID/trips">Bahasa Indonesia</option><option value="/ms_MY/trips">Bahasa Melayu</option><option value="/da_DK/trips">Dansk</option><option value="/de_DE/trips">Deutsch</option><option value="/en_US/trips" selected="">English</option><option value="/es_CR/trips">Español (Costa Rica)</option><option value="/es_UY/trips">Español (Uruguay)</option><option value="/es_ES/trips">Español</option><option value="/et/trips">Eesti Keel</option><option value="/fr_FR/trips">Français</option><option value="/it_IT/trips">Italiano</option><option value="/hr/trips">Hrvatski</option><option value="/lt_LT/trips">Lietuvių</option><option value="/hu_HU/trips">Magyar</option><option value="/nl_NL/trips">Nederlands</option><option value="/pl_PL/trips">Polski</option><option value="/pt_BR/trips">Português (Brasil)</option><option value="/pt/trips">Português (Portugal)</option><option value="/ro_RO/trips">Română</option><option value="/fi_FI/trips">Suomi</option><option value="/sk_SK/trips">Slovenčina</option><option value="/sv_SE/trips">Svenska</option><option value="/sw_KE/trips">Swahili</option><option value="/tl_PH/trips">Tagalog</option><option value="/vi_VN/trips">Tiếng Việt</option><option value="/tr_TR/trips">Türkçe</option><option value="/cs_CZ/trips">Čeština</option><option value="/bg_BG/trips">български език</option><option value="/ru_RU/trips">Русский</option><option value="/he_IL/trips">עברית</option><option value="/ar_SA/trips">مصرى‎</option><option value="/ar_SA/trips">العربية</option><option value="/th_TH/trips">ไทย</option><option value="/zh_CN/trips">中文 (简体)</option><option value="/zh_TW/trips">中文 (繁體)</option><option value="/ja_JP/trips">日本語</option><option value="/ko_KR/trips">한국어</option><option value="/el/trips">ελληνικά</option></select></div></div></div></div><div class="flexbox__item one-third text--right hidden--portable"><ul class="nav"><li class="push-half--right"><a href="https://itunes.apple.com/us/app/uber/id368677368" class="link--immutable icon icon--round sprite_app-store"></a></li><li><a href="https://play.google.com/store/apps/details?id=com.ubercab" class="link--immutable icon icon--round sprite_google-play"></a></li></ul></div></div></div></div>
-  </div>
 
-</div>
 </div>
 
 </body> 
-<script src="/angular/maps_ct.js"></script>
+<script src="/controllers/maps_ct.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDihfOVNgztmzA89BEbC8h4NdjXAeCZO-w&libraries=places&callback=initAutocomplete"
          async defer></script>
 
