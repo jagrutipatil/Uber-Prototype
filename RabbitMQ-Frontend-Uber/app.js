@@ -44,26 +44,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-
-app.get('/:name', rides.partials);
-app.get('/loginPage', delegator.loginPage);
-app.get('/loginCustomer', delegator.loginCustomer);
-app.get('/signupCustomer', delegator.signupCustomer);
-app.get('/loginDriver', delegator.loginDriver);
-app.get('/signupDriver', delegator.signupDriver);
+app.get('/logout', function (req, res) {
+	  console.log('logout');
+	  req.ubersession.reset();
+	  res.redirect('/');
+});
 app.get('/updateDriver', session.isAuthDriver, delegator.updateDriver);
 app.get('/updateCustomer', session.isAuthUser, delegator.updateCustomer);
 app.get('/customerProfile', session.isAuthUser, delegator.updateCustomer);
 app.get('/customerPayment', session.isAuthUser, delegator.updatePaymentCustomer);
-
 app.get('/customerDashboard', session.isAuthUser, delegator.customerDashboard);
+app.get('/loginPage', delegator.loginPage);
+app.get('/loginCustomer', session.skipAuthUser, delegator.loginCustomer);
+app.get('/signupCustomer', session.skipAuthUser, delegator.signupCustomer);
+app.get('/loginDriver', session.skipAuthDriver, delegator.loginDriver);
+app.get('/signupDriver', session.skipAuthDriver, delegator.signupDriver);
+app.get('/:name', rides.partials);
+
 
 app.get('/admin', delegator.admin);
 app.get('/', delegator.home);
-app.get('/logout', function (req, res) {
-	  req.ubersession.reset();
-	  res.redirect('/');
-});
+
 
 app.post('/session_get_ssn', session.ssn);
 

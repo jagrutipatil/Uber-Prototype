@@ -22,7 +22,7 @@ function signupCustomerController($scope, $http, $window) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				$window.location.assign('/customerDashboard');
+				$window.location.assign('/loginCustomer');
 			} else {
 			}			
 		}).error(function(error) {
