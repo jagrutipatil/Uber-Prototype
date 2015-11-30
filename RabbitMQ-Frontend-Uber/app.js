@@ -47,6 +47,7 @@ if ('development' == app.get('env')) {
 
 app.get('/:name', rides.partials);
 app.get('/loginPage', delegator.loginPage);
+
 app.get('/loginCustomer', delegator.loginCustomer);
 app.get('/signupCustomer', delegator.signupCustomer);
 app.get('/loginDriver', delegator.loginDriver);
