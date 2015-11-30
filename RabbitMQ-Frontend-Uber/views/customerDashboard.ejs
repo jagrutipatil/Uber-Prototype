@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel='stylesheet' href='./stylesheets/style2.css' />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.3/angular-route.min.js"></script> 
+	<script src="/controllers/script.js"></script>
+		
+	  <script src="/controllers/maps_f.js"></script>
+	  <script src="/controllers/maps_ct.js"></script>
+	  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDihfOVNgztmzA89BEbC8h4NdjXAeCZO-w&libraries=places&callback=initAutocomplete" async defer></script>
+
+</head>
+<body ng-app="SinglePage">
+
+	
+<div class="container">
+	<div class="row">
+        <div class="<col-md-10 col-sm-12 col-xs-12 bhoechie-tab-container">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+              <div class="list-group">
+                <a href="/profile" class="list-group-item active text-center">
+                  <br/>My Profile
+                </a>
+                <a href="/mytrips" class="list-group-item text-center">
+                  <br/>My Trips
+                </a>
+                <a href="/requestride" class="list-group-item text-center">
+                  <br/>Request Ride
+                </a>
+                <a href="/payment" class="list-group-item text-center">
+                  <br/>Payment
+                </a>
+                <a href="/logout" class="list-group-item text-center">
+                  <br/>Logout
+                </a>
+              </div>
+            </div>
+			<ng-view>
+  				<!-- This DIV loads templates depending upon route.-->
+  			</ng-view>
+           
+        </div>
+  </div>
+
+</div>
+       
+</body>
+</html>
