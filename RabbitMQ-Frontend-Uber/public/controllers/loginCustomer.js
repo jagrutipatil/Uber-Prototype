@@ -12,7 +12,7 @@ function loginCustomerController($scope, $http, $window) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				alert("Success");
+				$window.location.assign('/customerDashboard');
 			} else {
 				alert("error");
 			}			

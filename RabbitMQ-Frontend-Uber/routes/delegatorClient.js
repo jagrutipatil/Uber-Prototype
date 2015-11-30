@@ -29,6 +29,14 @@ function loginDriver(req, res) {
 	});
 }
 
+function customerDashboard(req, res) {
+	ejs.renderFile("./views/customerDashboard.ejs", function(err, result) {
+		if (!err) {
+			res.end(result);
+		}
+	});
+}
+
 
 function signupDriver(req, res) {
 	ejs.renderFile("./views/SignupDriver.ejs", function(err, result) {
@@ -97,3 +105,4 @@ exports.updatePaymentCustomer = updatePaymentCustomer;
 exports.admin = admin;
 exports.loginPage = loginPage;
 exports.home = home;
+exports.customerDashboard = customerDashboard;

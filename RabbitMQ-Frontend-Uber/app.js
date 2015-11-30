@@ -56,6 +56,8 @@ app.get('/updateCustomer', session.isAuthUser, delegator.updateCustomer);
 app.get('/customerProfile', session.isAuthUser, delegator.updateCustomer);
 app.get('/customerPayment', session.isAuthUser, delegator.updatePaymentCustomer);
 
+app.get('/customerDashboard', session.isAuthUser, delegator.customerDashboard);
+
 app.get('/admin', delegator.admin);
 app.get('/', delegator.home);
 
