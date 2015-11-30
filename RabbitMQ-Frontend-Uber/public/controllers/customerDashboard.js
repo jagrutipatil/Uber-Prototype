@@ -40,7 +40,7 @@ function customerProfileController($scope, $http, $window) {
 			alert("SSN obtained");
 			$scope.ssn1=response.ssn;
 		} else {
-			alert("error");
+			alert("error1");
 		}			
 	}).error(function(error) {
 		console.log(error);
@@ -70,6 +70,26 @@ function customerProfileController($scope, $http, $window) {
 			console.log(error);
 		});
 	};
+	
+	// loading customer data from backend for when html loads
+		$http({
+			method : 'POST',
+			url : '/bk_customer_search_with_ssn',
+			data : {
+				"ssn" : $scope.ssn1,
+			}
+		}).success(function(response) {
+			if (response.result != "error") {
+				$scope.customerProfile=response.value;
+				alert("Success");
+			} else {
+				alert("error");
+			}			
+		}).error(function(error) {
+			console.log("call success");
+			console.log(error);
+		});
+	
 }
 
 app.controller("customerPaymentController", customerPaymentController);
