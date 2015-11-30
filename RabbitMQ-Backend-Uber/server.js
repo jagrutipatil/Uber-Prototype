@@ -57,7 +57,7 @@ cnn.on('ready', function(){
 			util.log("Message: "+JSON.stringify(message));
 			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
 			
-			customerHandler.handle_request(message, function(err,res){
+			billingHandler.handle_request(message, function(err,res){
 				console.log("Sent response from server");
 				console.log(res);
 				//return index sent

@@ -1,4 +1,5 @@
-var mysql = require('mysql');
+var ejs = require("ejs");
+var mySqlDb = require("./mysqldb");
 
 
 var getMinFare = function(carType){
@@ -182,6 +183,7 @@ var generateUniqueId = function(){
 
 var billGenerate = function(distance, startTime, endTime, totalTime, carType, source, destination, customerId, driverId, callback){
 	var billID = 0;
+	var res = {};
 
 //	var distance = req.param("distance");
 //	var startTime = req.param("startTime");
@@ -229,13 +231,26 @@ var billGenerate = function(distance, startTime, endTime, totalTime, carType, so
 		price = "An error occured"; 
 	}	
 	
-/*	if(price!== null){
+	if(price!== null){
+		console.log("inside fetch");
 		var uniqueId = generateUniqueId();
-		var insertBill = "insert into bills(ID , date, pickUpTime , DropOffTime , distance, amount, sourceLocation, destinationLocation, driverId, customerId) values ('" + uniqueId + "','" + currentDate + "','" + startTime + "','" + endTime + "','" + distance + "','" + price + "','" + source + "','" + destination + "','" + driverId + "','" + customerId +"')";
+		var insertBill = "insert into bills(billId , rideDate, pickUpTime , DropOffTime , distance, amount, sourceLocation, destinationLocation, driverId, customerId) values ('" + uniqueId + "',now(),'" + startTime + "','" + endTime + "','" + distance + "','" + price + "','" + source + "','" + destination + "','" + driverId + "','" + customerId +"')";
 
-        Section for inserting in the billing table
+ //       Section for inserting in the billing table
         
-        mysql.fetchData(function(err,results1){
+		mySqlDb.executeQuery(function(err, rows) {
+			if (!err) {
+		    	  res.code = "200";
+				  res.value = price;
+			} else {
+				  console.log(err);
+				  res.code = "401";
+				  res.value = "error";
+			}
+			callback(err, res);
+		}, insertBill);
+		
+        /*mysql.executeQuery(function(err,results1){
           if(err){
             console.log(err);
 			  res.code = "401";
@@ -254,13 +269,16 @@ var billGenerate = function(distance, startTime, endTime, totalTime, carType, so
 			  res.value = "error";                   
             }
           }
-        },insertBill);		
-	}*/
+          console.log("imp 3 " + res.code);
+          callback(err, res);
+        },insertBill);*/		
+	}
 	console.log("Price for ride : " + price);
 	//res.send({"price": price, "billID":billID});
 };
 
 var estimate = function(distance, startTime, endTime, totalTime, carType, callback){
+	var res = {};
 //	var peakTimeIndicator = getPeakTimeIndicator();
 //	var distance = req.param("distance");
 //	var startTime = req.param("startTime");
@@ -303,65 +321,48 @@ var estimate = function(distance, startTime, endTime, totalTime, carType, callba
 		res.code = "401";
 		res.value = "error";
 	}	
-	
-	res.send({price:price});
+	callback(err, res);
 };
 
 var getUserBills = function(customerId, callback){
+	var res = {};
 	var customerId = req.param("customerId");
 	
 	var fetchData = "select * from bills where customerId='" + customerId + "'";
     //Section for fetching a particular user bills from the bill table
     
-    mysql.fetchData(function(err,results1){
-      if(err){
-        console.log(err);
-		res.code = "401";
-		res.value = "error";
-      }
-      else 
-      {
-        if(results1 !== undefined){
-          console.log("Inserted Successfully ");
-          res.code = "200";
-		  res.value = results1;
-        }
-        else {              
-          console.log(err);
-		res.code = "401";
-		res.value = "error";                   
-        }
-      }
-    },fetchData);
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+	    	  res.code = "200";
+			  res.value = rows;
+		} else {
+			  console.log(err);
+			  res.code = "401";
+			  res.value = "error";
+		}
+		callback(err, res);
+	}, fetchData);
 };
 
 var getBill = function(customerId, driverId, callback){
+	var res = {};
 	//var customerId = req.param("customerId");
 	//var driverId = req.param("driverId");
 	
 	var fetchData = "select * from bills where customerId='" + customerId + "' and driverId='" + driverId + "'";
 	//Section for fetching a particular user and driver bills from the bill table
     
-    mysql.fetchData(function(err,results1){
-      if(err){
-       console.log(err);
-		res.code = "401";
-		res.value = "error";
-      }
-      else 
-      {
-        if(results1 !== undefined){
-          console.log("Inserted Successfully ");
-          res.code = "200";
-		  res.value = results1;
-        }
-        else {              
-          console.log(err);
-		res.code = "401";
-		res.value = "error";                   
-        }
-      }
-    },fetchData);
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+	    	  res.code = "200";
+			  res.value = rows;
+		} else {
+			  console.log(err);
+			  res.code = "401";
+			  res.value = "error";
+		}
+		callback(err, res);
+	}, fetchData);
 };
 
 exports.billGenerate=billGenerate;
