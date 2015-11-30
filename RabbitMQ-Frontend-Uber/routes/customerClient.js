@@ -90,10 +90,9 @@ function selectAll(req, res) {
 function selectAllUnApproved(req, res) {
 	var msg_payload = {"requestQueue":"selectAllUnApproved"};	
 	mq_client.make_request('customer',msg_payload, function(err,results){
-		    //console.log(results);
+		    console.log(results);
 			if(results.code == 200){
-				console.log("valid Login");				
-				//res.send({"result":"success"});
+				console.log("valid Login");
 				res.send({"value": results.value,"result":"success"});
 			} else {    
 				console.log("Invalid Login");
