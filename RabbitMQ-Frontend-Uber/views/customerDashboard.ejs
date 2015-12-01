@@ -23,6 +23,11 @@
   function logout(){
     window.location.href = '/logout';
   }
+
+  function delete() {
+    window.location.href = '/delete_customer';
+  }
+
   </script>
 <div class="container">
 	<div class="row">
@@ -44,6 +49,9 @@
                 <a href="/payment" class="list-group-item text-center">
                   <br/>Payment
                 </a>
+                <a onclick="delete()" class="list-group-item text-center">
+                  <br/>Deactivate Account
+                </a>                
                 <a onclick="logout()" class="list-group-item text-center">
                   <br/>Logout
                 </a>
