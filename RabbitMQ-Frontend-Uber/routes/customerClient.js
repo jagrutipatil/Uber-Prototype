@@ -16,7 +16,9 @@ function signup(req, res) {
 			"password":req.param("password"), "firstname":req.param("firstname")
 			,"lastname": req.param("lastname"),"mobileno": req.param("mobileno"),
 			"cardno": req.param("cardno"), "cvv": req.param("cvv"), "exp_month": req.param("exp_month"),
-			"exp_year": req.param("exp_year"),"postalcode": req.param("postalcode"),"requestQueue":"signup"};
+			"exp_year": req.param("exp_year"),"postalcode": req.param("postalcode"),
+			"latitude": req.param("latitude"),"longitude": req.param("longitude"),
+			"requestQueue":"signup"};
 	
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		console.log("Got callback from server");

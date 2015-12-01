@@ -2,10 +2,10 @@ var ejs = require("ejs");
 var mySqlDb = require("./mysqldb");
 var tableName = "uber.customers";
 
-function signup(ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_month, exp_year, postalcode, callback) {
+function signup(ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_month, exp_year, postalcode, latitude, longitude, callback) {
 	var res = {};
 	console.log("in singup backend module");
-	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_month, exp_year, postalcode, approved) VALUES ( '" + ssn 
+	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_month, exp_year, postalcode, approved, latitude, longitude, rating) VALUES ( '" + ssn 
 	+ "' , '" + email +
 	  "' , '" + password +  
 	  "' , '" + firstname  +
@@ -16,7 +16,11 @@ function signup(ssn, email, password, firstname, lastname, mobileno, cardno, cvv
 	  "' , '" + exp_month +
 	  "' , '" + exp_year +
 	  "' , '" + postalcode +
-	  "' , 'false' )";
+	  "' , 'false" +
+	  "' , '" + latitude +
+	  "' , '" + longitude +
+	  "' , '3.0'"+
+	  " )";
 	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {

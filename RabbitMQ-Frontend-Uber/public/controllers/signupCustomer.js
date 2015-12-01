@@ -18,7 +18,9 @@ function signupCustomerController($scope, $http, $window) {
 				"cvv" : $scope.cvv,
 				"exp_month" : $scope.exp_month,
 				"exp_year" : $scope.exp_year,
-				"postalcode" : $scope.postalcode
+				"postalcode" : $scope.postalcode,
+				"latitude" : 37.3444869629532,
+				"longitude" : -121.883543986265
 			}
 		}).success(function(response) {
 			if (response.result != "error") {

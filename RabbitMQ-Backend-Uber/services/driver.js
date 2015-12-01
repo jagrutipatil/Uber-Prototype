@@ -229,25 +229,31 @@ function selectAllUnApproved(callback) {
 }
 
 
-function selectAllAvailable(callback) {	
-	var sqlQuery = "SELECT * FROM " + tableName + " WHERE available='true'";
-	var res = {};
-	
-	mySqlDb.executeQuery(function(err, rows) {
-		if (!err) {
-			if (rows.length > 0) {
-				res.value = rows;
-				res.code = "200";
-			} else {
-				res.code = "204";	
-			}			
+function ifDriverWithinRadius(latitude, longitude) {
+	var R = 16093.4; // metres
+	var φ1 = lat1.toRadians();
+	var φ2 = lat2.toRadians();
+	var Δφ = (lat2-lat1).toRadians();
+	var Δλ = (lon2-lon1).toRadians();
+
+	var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+	        Math.cos(φ1) * Math.cos(φ2) *
+	        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+	var d = R * c;	
+}
+
+function selectAllWithinRadius(callback) {	
+	selectAllAvailable(function(err, res) {
+		if (res.code == 200) {
+			for (var i = 0; i < res.value.length; i++) {
+				
+			}
 		} else {
-			console.log(err);
-	        res.code = "401";
-			res.value = "Failed Login";
+			callback(err, res);
 		}
-		callback(err, res);
-	}, sqlQuery);
+	});
 }
 
 
