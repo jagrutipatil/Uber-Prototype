@@ -19,7 +19,11 @@
 
 </head>
 <body ng-app="SinglePage">
-	
+	<script>
+  function logout(){
+    window.location.href = '/logout';
+  }
+  </script>
 <div class="container">
 	<div class="row">
         <div class="<col-md-10 col-sm-12 col-xs-12 bhoechie-tab-container">
@@ -40,7 +44,7 @@
                 <a href="/payment" class="list-group-item text-center">
                   <br/>Payment
                 </a>
-                <a href="/logout" class="list-group-item text-center">
+                <a onclick="logout()" class="list-group-item text-center">
                   <br/>Logout
                 </a>
               </div>
