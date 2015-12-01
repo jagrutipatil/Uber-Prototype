@@ -45,13 +45,16 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.get('/delete_customer', delegator.delete_customer );
+app.get('/delete_driver', delegator.delete_driver );
+
 app.get('/logout', function (req, res) {
 	  console.log('logout');
 	  req.ubersession.reset();
 	  res.redirect('/');
 });
 
-
+app.get('/:name', rides.partials);
 
 app.get('/admin', delegator.admin);
 app.get('/', delegator.home);
@@ -71,7 +74,7 @@ app.get('/loginCustomer', session.skipAuthUser, delegator.loginCustomer);
 app.get('/signupCustomer', session.skipAuthUser, delegator.signupCustomer);
 app.get('/loginDriver', session.skipAuthDriver, delegator.loginDriver);
 app.get('/signupDriver', session.skipAuthDriver, delegator.signupDriver);
-app.get('/:name', rides.partials);
+
 
 
 

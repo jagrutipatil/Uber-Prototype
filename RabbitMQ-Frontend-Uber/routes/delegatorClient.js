@@ -102,6 +102,34 @@ function home(req, res) {
 	});
 }
 
+function delete_customer(req , res){
+	var msg_payload = { "ssn": req.ubersession.user.ssn,"requestQueue":"remove_with_ssn"};	
+	mq_client.make_request('customer',msg_payload, function(err,results){
+		    console.log(results);
+			if(results.code == 200){
+				req.ubersession.reset();
+				res.redirect('/');
+			} else {    
+				console.log("Invalid Login");
+				res.send({"result":"error"});
+			}
+	});
+}
+
+function delete_driver(req , res){
+	var msg_payload = { "ssn": req.ubersession.driver.ssn,"requestQueue":"remove_with_ssn"};	
+	mq_client.make_request('driver',msg_payload, function(err,results){
+		    console.log(results);
+			if(results.code == 200){
+				req.ubersession.reset();
+				res.redirect('/');
+			} else {    
+				console.log("Invalid Login");
+				res.send({"result":"error"});
+			}
+	});
+}
+
 exports.loginCustomer = loginCustomer;
 exports.signupCustomer = signupCustomer;
 exports.loginDriver = loginDriver;
@@ -113,4 +141,6 @@ exports.admin = admin;
 exports.loginPage = loginPage;
 exports.home = home;
 exports.customerDashboard = customerDashboard;
+exports.delete_customer = delete_customer;
+exports.delete_driver = delete_driver;
 exports.requestRide = requestRide;

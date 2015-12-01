@@ -5,7 +5,7 @@ var tableName = "uber.customers";
 function signup(ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_month, exp_year, postalcode, latitude, longitude, callback) {
 	var res = {};
 	console.log("in singup backend module");
-	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_month, exp_year, postalcode, approved, avaialabe, latitude, longitude, rating) VALUES ( '" + ssn 
+	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, cardno, cvv, exp_month, exp_year, postalcode, approved, latitude, longitude, rating) VALUES ( '" + ssn 
 	+ "' , '" + email +
 	  "' , '" + password +  
 	  "' , '" + firstname  +
