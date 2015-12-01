@@ -6,7 +6,9 @@ function signup(req, res) {
 			"password":req.param("password"), "firstname":req.param("firstname")
 			,"lastname": req.param("lastname"),"mobileno": req.param("mobileno"),
 			"address": req.param("address"), "city": req.param("city"),
-			"state": req.param("state"),"postalcode": req.param("postalcode"), "dlno": req.param("dlno"),"requestQueue":"signup"};
+			"state": req.param("state"),"postalcode": req.param("postalcode"), "dlno": req.param("dlno"),
+			"latitude": req.param("latitude"), "longitude": req.param("longitude"), "url": req.param("url")
+			,"requestQueue":"signup"};
 	
 	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
