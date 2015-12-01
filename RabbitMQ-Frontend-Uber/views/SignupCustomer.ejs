@@ -12,7 +12,7 @@
 <body  ng-app="signupCustomer" ng-controller="signupCustomerController">
 <section class="wrapper">
 	<header class="contextual">
-		<a href="https://www.uber.com/">
+		<a href="http://localhost:3000">
 	    	<i class="icon icon_uber push-large--top push--bottom"></i>
 	 	</a>
 	</header>
@@ -31,7 +31,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="signup-form">
+			<section class="signup-form" name="myForm">
 				<article class="form-container">
 					<form class="form-vertical" autocomplete="on">
 						<div class="signup-form-section account">
@@ -43,12 +43,18 @@
 							<div class="signup-form-section-line blue"></div>
 							<div class="form-group required ">
 								<label for="username">Email</label>
-								<input id="username" type="email" placeholder="name@example.com" name="username" ng-model="email">
+								<input id="username" type="email" placeholder="name@example.com" name="username" ng-model="email" required>
+								<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+								<span ng-show="myForm.email.$error.required">Email is required.</span>
+								<span ng-show="myForm.email.$error.email">Invalid email address.</span>
+								</span>
 								<div class="error-notice"></div>
 							</div>
 							<div class="form-group required ">
 								<label for="password">Password</label>
-								<input id="password" type="password" placeholder="At least 5 characters" name="password" ng-model="password">
+								<input id="password" type="password" placeholder="At least 5 characters" name="password" ng-model="password" required>
+								<span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+								<span ng-show="myForm.user.$error.required">Password is required.</span>
 								<div class="error-notice"></div>
 							</div>
 						</div>
@@ -63,7 +69,9 @@
 								<label for="name">Name</label>
 								<div class="row form-row">
 									<div class="col-md-6 col-xs-6 md-push-right-half sm-push-right-half xs-push-right-half">
-										<input id="firstname" type="text" placeholder="First Name" name="firstname" ng-model="firstname">
+										<input id="firstname" type="text" placeholder="First Name" name="firstname" ng-model="firstname" required>
+										<span style="color:red" ng-show="myForm.firstname.$dirty && myForm.firstname.$invalid">
+										<span ng-show="myForm.firstname.$error.required">Password is required.</span>
 										<div class="error-notice"></div>
 									</div>
 									<div class="col-md-6 col-xs-6 md-push-left-half xs-push-left-half">
@@ -74,7 +82,10 @@
 							</div>
 							<div class="form-group js-mobile-country required mobile-number">
 								<label for="mobile">Mobile Number</label>
-								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" ng-model="mobileno">
+								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" ng-model="mobileno" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required/>
+								<div ng-messages="myForm.mobile.$error">
+								  <div ng-message="required">This field is required</div>
+								  <div ng-message="pattern">Must be a valid 10 digit phone number</div>
 								<div class="error-notice"></div>
 							</div>
 						</div>
@@ -91,15 +102,23 @@
 							        <div class="col-md-9 col-xs-9 xs-push-right-half">
 							            <div class="form-group required ">
 							                <label for="card_number">Credit Card Number</label>
-							                <input id="card_number" type="tel" placeholder="1234 5678 9012 3456" name="card_number" ng-model="cardno">
+							                <input id="card_number" type="tel" placeholder="1234 5678 9012 3456" name="card_number" ng-model="cardno" ng-minlength="16" ng-maxlength="16" required>
 							                <div class="credit-card-icon"></div>
+							                <div ng-messages="myForm.card_number.$error">
+											  <div ng-message="required">This field is required</div>
+											  <div ng-message="minlength">Number must be under 16 characters</div>
+											  <div ng-message="maxlength">Number must not exceed 16 characters</div>
+											</div>
 							                <div class="error-notice"></div>
 							            </div>
 							        </div>
 							        <div class="col-md-3 col-xs-3 xs-push-left-half">
 							            <div class="form-group required ">
 							                <label for="card_code">CVV</label>
-							                <input id="card_code" type="tel" placeholder="123" name="card_code" ng-model="cvv">
+							                <input id="card_code" type="tel" placeholder="123" name="card_code" ng-model="cvv" required>
+							                <div ng-messages="myForm.card_code.$error">
+											  <div ng-message="required">This field is required</div>
+											</div>
 							                <div class="error-notice"></div>
 							            </div>
 							        </div>
@@ -173,7 +192,12 @@
 							<div class="credit-card-info">
 							            <div class="form-group required ">
 							                <label for="ssn_number">SSN#</label>
-							                <input id="ssn_number" type="text" placeholder="AAA-GG-SSSS" name="ssn_number" ng-model="ssn">
+							                <input id="ssn_number" type="text" placeholder="AAA-GG-SSSS" name="ssn_number" ng-model="ssn" ng-minlength="9" ng-maxlength="9">
+							                <div ng-messages="myForm.ssn_number.$error">
+											  <div ng-message="required">This field is required</div>
+											  <div ng-message="minlength">Number must be under 16 characters</div>
+											  <div ng-message="maxlength">Number must not exceed 16 characters</div>
+											</div>
 							                <div class="error-notice"></div>
 							            </div>						    
 							</div>
@@ -182,7 +206,7 @@
 						<div class="signup-form-section submit ">
 							<div class="col-md-12">							
 								<div class="form-group">
-									<button class="btn btn-primary js-submit" type="submit" ng-click="signup()">Create Account</button>
+									<button class="btn btn-primary js-submit" type="submit" ng-click="signup()" ng-disabled="	myForm.email.$dirty && myForm.email.$invalid">Create Account</button>
 								</div>
 								<div class="signup-form-section-notice">
 									Please fill out all required (
