@@ -34,7 +34,7 @@ app.controller('sendData', function($scope,$http) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				alert("Success");
+				alert("Success Ride");
 			} else {
 			}			
 		}).error(function(error) {
@@ -62,7 +62,7 @@ app.controller('sendData', function($scope,$http) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				alert("Success");
+				alert("Success Bill " + response.value);
 			} else {
 			}			
 		}).error(function(error) {
