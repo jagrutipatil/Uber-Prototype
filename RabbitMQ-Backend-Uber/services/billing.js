@@ -197,7 +197,7 @@ var billGenerate = function(distance, startTime, endTime, totalTime, carType, so
 	var currentDate = new Date();
 	console.log("distance  : " + distance);
 	console.log("totalTime  : " + totalTime);
-	var avgSpeed = distance/totalTime;
+	var avgSpeed = parseInt(distance/totalTime);
 	console.log("avgSpeed  : " + avgSpeed);
 	var priceDeviationPeekTime = getPriceDeviationPeekTime(startTime,endTime);
 	
@@ -286,7 +286,7 @@ var estimate = function(distance, startTime, endTime, totalTime, carType, callba
 //	var totalTime = req.param("totalTime");
 //	var carType = req.param("carType");
 	
-	var avgSpeed = distance/totalTime;
+	var avgSpeed = parseInt(distance/(totalTime/60));
 	var priceDeviationPeekTime = getPriceDeviationPeekTime(startTime,endTime);
 	
 	var baseFare = getBaseFare(carType);
@@ -297,31 +297,37 @@ var estimate = function(distance, startTime, endTime, totalTime, carType, callba
 	var minFare = getMinFare(carType);
 	
 	var price = 0;
-	
-	if(avgSpeed <= 0 || avgSpeed === undefined ||avgSpeed === null){
+	console.log("inside estimate "+avgSpeed + baseFare);
+	if(avgSpeed > 0 || avgSpeed != undefined ||avgSpeed != null){
 		if(avgSpeed >= 11){
 			price = baseFare + safeRideFare + (priceStepIncreaseDistanceVariable * distance); // calculate this			
 			if(price < minFare){
 				price = minFare;
 			}
+			console.log(price+"estimate price");
 			res.code = "200";
 			res.value = price;	
+			console.log(res);
+			callback(err, res);
 		}
 		else{
 			price = baseFare + safeRideFare + (priceStepIncreaseTimeVariable * totalTime); // calculate this			
 			if(price < minFare){
 				price = minFare;
-			}
+			} 
+			console.log(price+"estimate price");
 			res.code = "200";
-			res.value = price;			
+			res.value = price;	
+			console.log(res);
+			callback(err, res);
 		}
-	}
+	} 
 	else{
 		console.log(err);
 		res.code = "401";
 		res.value = "error";
-	}	
-	callback(err, res);
+		callback(err, res);
+	}callback(err, res);
 };
 
 var getUserBills = function(customerId, callback){
