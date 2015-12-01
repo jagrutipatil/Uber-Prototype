@@ -18,9 +18,10 @@ var tableName = "uber.drivers";
 				*/
 
 
-function signup(ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno, latitude, longitude, url, callback) {
+function signup(ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno,  latitude, longitude, url, callback) {
+	var GoogleMapsLoader;
 	var res = {};
-	console.log("in singup backend module");
+	console.log("In singup backend module");	
 	
 	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno, approved, available, latitude, longitude, url, rating) VALUES ( '" + ssn 
 	+ "' , '" + email +
@@ -33,8 +34,8 @@ function signup(ssn, email, password, firstname, lastname, mobileno, address, ci
 	  "' , '" + state +
 	  "' , '" + postalcode +
 	  "' , '" + dlno +
-	  "' , 'false'"+
-	  "' , 'true'"+
+	  "' , 'false"+
+	  "' , 'true"+
 	  "' , '" + latitude +
 	  "' , '" + longitude +
 	  "' , '" + url +
@@ -53,6 +54,7 @@ function signup(ssn, email, password, firstname, lastname, mobileno, address, ci
 		callback(err, res);
 	}, sqlQuery);
 }
+
 
 function updateRating(ssn, rating, callback) {
 	var res = {};
@@ -225,6 +227,29 @@ function selectAllUnApproved(callback) {
 		callback(err, res);
 	}, sqlQuery);
 }
+
+
+function selectAllAvailable(callback) {	
+	var sqlQuery = "SELECT * FROM " + tableName + " WHERE available='true'";
+	var res = {};
+	
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+			if (rows.length > 0) {
+				res.value = rows;
+				res.code = "200";
+			} else {
+				res.code = "204";	
+			}			
+		} else {
+			console.log(err);
+	        res.code = "401";
+			res.value = "Failed Login";
+		}
+		callback(err, res);
+	}, sqlQuery);
+}
+
 
 function selectAllAvailable(callback) {	
 	var sqlQuery = "SELECT * FROM " + tableName + " WHERE available='true'";
