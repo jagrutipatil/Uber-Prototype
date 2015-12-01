@@ -17,8 +17,7 @@ app.config(function($routeProvider, $locationProvider){
           })
 		  .when("/requestride",{
 		      templateUrl: "/ride.ejs", controller: 'rideController'
-		  })
-		  .otherwise($location.path='/logout');
+		  });
 });
 
 app.controller('rideController',function($scope){
