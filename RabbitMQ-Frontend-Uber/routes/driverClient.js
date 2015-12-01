@@ -6,7 +6,9 @@ function signup(req, res) {
 			"password":req.param("password"), "firstname":req.param("firstname")
 			,"lastname": req.param("lastname"),"mobileno": req.param("mobileno"),
 			"address": req.param("address"), "city": req.param("city"),
-			"state": req.param("state"),"postalcode": req.param("postalcode"), "dlno": req.param("dlno"),"requestQueue":"signup"};
+			"state": req.param("state"),"postalcode": req.param("postalcode"), "dlno": req.param("dlno"),
+			"latitude": req.param("latitude"), "longitude": req.param("longitude"), "url": req.param("url")
+			,"requestQueue":"signup"};
 	
 	mq_client.make_request('driver',msg_payload, function(err,results){
 		    console.log(results);
@@ -163,7 +165,18 @@ function selectAllUnApproved(req, res) {
 			}
 	});
 }
-
+function rating(req, res) {
+	var msg_payload = {"rating": req.param("rating"), "feedback": req.param("feedback"), "requestQueue": "driverRating"};	
+	console.log(msg_payload);
+	mq_client.make_request('driver',msg_payload, function(err,results){
+		    console.log(results);
+			if(results.code == 200){
+				res.send({"value": result.value, "result":"success"});
+			} else {    
+				res.send({"result":"error"});
+			}
+	});
+}
 
 //exports.home = home;
 exports.signup = signup;
@@ -177,3 +190,4 @@ exports.search_with_email = search_with_email;
 exports.search_with_ssn = search_with_ssn;
 exports.update = update;
 exports.approve = approve;
+exports.rating = rating;

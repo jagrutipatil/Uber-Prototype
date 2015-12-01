@@ -187,6 +187,19 @@ function search_with_email(req, res) {
 	});
 }
 
+function rating(req, res) {
+	var msg_payload = {"rating": req.param("rating"), "feedback": req.param("feedback"), "requestQueue": "customerRating"};	
+	console.log(msg_payload);
+	mq_client.make_request('customer',msg_payload, function(err,results){
+		    console.log(results);
+			if(results.code == 200){
+				res.send({"value": result.value, "result":"success"});
+			} else {    
+				res.send({"result":"error"});
+			}
+	});
+}
+
 //exports.home = home;
 exports.signup = signup;
 exports.signin = signin;
@@ -200,3 +213,4 @@ exports.search_with_ssn = search_with_ssn;
 exports.update = update;
 exports.updatePayment = updatePayment;
 exports.approve = approve;
+exports.rating = rating;

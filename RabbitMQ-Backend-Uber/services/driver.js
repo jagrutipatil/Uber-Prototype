@@ -14,12 +14,14 @@ var tableName = "uber.drivers";
 				"state":     $scope.state,
 				"postalcode" : $scope.postalcode
 				"dlno":      $scope.dlno,
+				url
 				*/
 
 
 function signup(ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno, latitude, longitude, url, callback) {
 	var res = {};
 	console.log("in singup backend module");
+	
 	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno, approved, available, latitude, longitude, url, rating) VALUES ( '" + ssn 
 	+ "' , '" + email +
 	  "' , '" + password +  

@@ -61,6 +61,7 @@ app.get('/customerDashboard', session.isAuthUser, delegator.customerDashboard);
 
 app.get('/admin', delegator.admin);
 app.get('/', delegator.home);
+
 app.get('/logout', function (req, res) {
 	  req.ubersession.reset();
 	  res.redirect('/');
@@ -80,6 +81,7 @@ app.post('/bk_customer_search_with_email', customer.search_with_email);
 app.post('/bk_customer_update', customer.update);
 app.post('/bk_customer_updatePayment', customer.updatePayment);
 app.post('/bk_customer_approve', customer.approve);
+app.post('/bk_customer_rating', customer.rating);
 
 app.post('/bk_driver_signin', driver.signin);
 app.post('/bk_driver_signup', driver.signup);
@@ -91,6 +93,7 @@ app.post('/bk_driver_search_with_name', driver.search_with_name);
 app.post('/bk_driver_search_with_ssn', driver.search_with_ssn);
 app.post('/bk_driver_update', driver.update);
 app.post('/bk_driver_approve', driver.approve);
+app.post('/bk_driver_rating', driver.rating);
 
 //rides
 app.post('/bk_rides_register', rides.register);
