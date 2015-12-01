@@ -13,6 +13,7 @@ var billing = require("./billing");
 		
 	if(msg.requestQueue=="estimate"){
 		billing.estimate(msg.distance, msg.startTime, msg.endTime, msg.totalTime, msg.carType, function(err, res) {
+			console.log("imp2 " + res);
 			callback(err, res);
 		});
 	}
