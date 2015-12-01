@@ -34,6 +34,12 @@ var driver = require("./driver");
 		});
 	}
 	
+	if(msg.requestQueue=="selectAllAvailable"){
+		driver.selectAllAvailable(function(err, res) {
+			callback(err, res);
+		});
+	}
+	
 	if(msg.requestQueue=="selectAllUnApproved"){
 		driver.selectAllUnApproved(function(err, res) {
 			callback(err, res);

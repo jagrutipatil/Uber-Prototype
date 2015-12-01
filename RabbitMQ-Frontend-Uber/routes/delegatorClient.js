@@ -11,6 +11,13 @@ function loginCustomer(req, res) {
 	});
 }
 
+function requestRide(req, res) {
+    ejs.renderFile("./views/RequestRide.ejs", function(err, result) {
+        if (!err) {
+            res.end(result);
+        }
+    });
+}
 
 function signupCustomer(req, res) {
 	ejs.renderFile("./views/SignupCustomer.ejs", function(err, result) {
@@ -106,3 +113,4 @@ exports.admin = admin;
 exports.loginPage = loginPage;
 exports.home = home;
 exports.customerDashboard = customerDashboard;
+exports.requestRide = requestRide;
