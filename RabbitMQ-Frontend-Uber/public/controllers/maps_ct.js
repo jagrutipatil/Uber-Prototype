@@ -34,7 +34,7 @@ app.controller('sendData', function($scope,$http) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				alert("Success");
+				alert("Success Ride");
 			} else {
 			}			
 		}).error(function(error) {
@@ -62,7 +62,7 @@ app.controller('sendData', function($scope,$http) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				alert("Success");
+				alert("Success Bill " + response.value);
 			} else {
 			}			
 		}).error(function(error) {
@@ -78,6 +78,7 @@ app.controller('sendData', function($scope,$http) {
 	};
 	
 	$scope.estimate = function(){
+		console.log("distance : " + dist.value)
 		$http({
 			method : 'POST',
 			url : '/estimate',
@@ -91,7 +92,7 @@ app.controller('sendData', function($scope,$http) {
 		}).success(function(response) {
 			if (response.result != "error") {
 				console.log(response);
-				alert("Success");
+				alert("Estimate Fare is : " + response.value);
 			} else {
 			}			
 		}).error(function(error) {

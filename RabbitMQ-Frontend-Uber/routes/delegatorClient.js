@@ -11,6 +11,13 @@ function loginCustomer(req, res) {
 	});
 }
 
+function requestRide(req, res) {
+    ejs.renderFile("./views/RequestRide.ejs", function(err, result) {
+        if (!err) {
+            res.end(result);
+        }
+    });
+}
 
 function signupCustomer(req, res) {
 	ejs.renderFile("./views/SignupCustomer.ejs", function(err, result) {
@@ -136,3 +143,4 @@ exports.home = home;
 exports.customerDashboard = customerDashboard;
 exports.delete_customer = delete_customer;
 exports.delete_driver = delete_driver;
+exports.requestRide = requestRide;

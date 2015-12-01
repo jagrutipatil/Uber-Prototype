@@ -279,6 +279,7 @@ var billGenerate = function(distance, startTime, endTime, totalTime, carType, so
 
 var estimate = function(distance, startTime, endTime, totalTime, carType, callback){
 	var res = {};
+	var err = "Error";
 //	var peakTimeIndicator = getPeakTimeIndicator();
 //	var distance = req.param("distance");
 //	var startTime = req.param("startTime");
