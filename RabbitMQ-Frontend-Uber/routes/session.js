@@ -13,7 +13,7 @@ exports.ssn = function(req, res){
 };
 
 
-exports.isAuthUser = function isAuthUser(req, res, next) {
+exports.isAuthUser = function(req, res, next) {
 		if(req.ubersession){
 			if(req.ubersession.user){
 				return next();
@@ -22,11 +22,30 @@ exports.isAuthUser = function isAuthUser(req, res, next) {
     res.redirect('/');
 };
 
-exports.isAuthDriver = function isAuthDriver(req, res, next) {
+exports.isAuthDriver = function(req, res, next) {
 	if(req.ubersession){
 		if(req.ubersession.driver){
 			return next();
 		}
 	}    
 res.redirect('/');
+};
+
+exports.skipAuthUser = function(req, res, next) {
+	if(req.ubersession){
+		if(req.ubersession.user){
+			res.redirect('/customerDashboard');
+		}
+	}    
+return next();
+};
+
+exports.skipAuthDriver = function(req, res, next) {
+	if(req.ubersession){
+		if(req.ubersession.driver){
+			res.redirect('/');
+		}
+	}    
+return next();
+
 };
