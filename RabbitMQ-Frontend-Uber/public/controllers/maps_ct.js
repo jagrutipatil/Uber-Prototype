@@ -101,6 +101,29 @@ app.controller('sendData', function($scope,$http) {
 	};
 });
 
+app.controller('LevelCtrl', function($scope,$http) {
+	var result;
+  $http({
+		method : 'POST',
+		url : '/bk_driver_selectAllAvailable',
+		data : { },
+		}).success(function(response){
+			console.log("code is here");
+		console.log(response.value);
+		$scope.srv = {};
+		  console.log("The response frm UI");
+		  console.log(result);
+		  $scope.data = {};
+		  $scope.data.getLevels = function() {
+		    return response.value;
+		  }
+		}).error(function(error){
+		console.log(error);
+		})
+  
+})
+
+
 /*$http({
 method : 'POST',
 url : '/billGenerate',
