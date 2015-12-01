@@ -14,6 +14,7 @@ var tableName = "uber.drivers";
 				"state":     $scope.state,
 				"postalcode" : $scope.postalcode
 				"dlno":      $scope.dlno,
+				url
 				*/
 
 
