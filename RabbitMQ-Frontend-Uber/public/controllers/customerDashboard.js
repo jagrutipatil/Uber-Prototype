@@ -93,7 +93,6 @@ function customerProfileController($scope, $http, $window) {
 		data : {}
 	}).success(function(response) {
 		if (response.result != "error") {
-			alert("SSN obtained");
 			$scope.ssn2 = response.ssn;
 			$http({
 				method : 'POST',
@@ -104,7 +103,6 @@ function customerProfileController($scope, $http, $window) {
 			}).success(function(response) {
 				if (response.result != "error") {
 					$scope.customerProfile = response.value;
-					alert("Success");
 				} else {
 					alert("error");
 				}
@@ -136,7 +134,6 @@ function customerProfileController($scope, $http, $window) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				alert("Success");
 			} else {
 				alert("error");
 			}

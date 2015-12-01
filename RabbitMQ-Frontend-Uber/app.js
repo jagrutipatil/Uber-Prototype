@@ -65,6 +65,7 @@ app.get('/updateCustomer', session.isAuthUser, delegator.updateCustomer);
 app.get('/customerProfile', session.isAuthUser, delegator.updateCustomer);
 app.get('/customerPayment', session.isAuthUser, delegator.updatePaymentCustomer);
 app.get('/customerDashboard', session.isAuthUser, delegator.customerDashboard);
+app.get('/RequestRide', delegator.requestRide);
 app.get('/loginPage', delegator.loginPage);
 app.get('/loginCustomer', session.skipAuthUser, delegator.loginCustomer);
 app.get('/signupCustomer', session.skipAuthUser, delegator.signupCustomer);
