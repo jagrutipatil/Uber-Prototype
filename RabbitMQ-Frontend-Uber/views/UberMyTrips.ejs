@@ -1,0 +1,47 @@
+<div class="container" ng-controller="myTrips" ng-init="getUserBills()">
+	<h1 style="margin-top:50px;">Summary</h1>
+	<table id="tableData" class="table table-bordered table-striped">
+          <thead>
+    <tr>
+              <th>Bill ID</th>
+              <th>Date</th>
+              <th>Pick Up Time</th>
+              <th>Drop Of Time</th>
+              <th>Distance</th>
+              <th>Amount</th>
+              <th>Source</th>
+              <th>Destination</th>
+              <th>Driver Id</th>
+              <th>Customer Id</th>
+            </tr>
+  </thead>
+          <tbody ng-repeat="item in bills">
+    <tr>
+              <td>{{ item.billId }}</td>
+              <td>{{ item.rideDate }}</td>
+              <td>{{ item.pickUpTime }}</td>
+              <td>{{ item.dropOffTime }}</td>
+              <td>{{ item.distance }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.sourceLocation }}</td>
+              <td>{{ item.destinationLocation }}</td>
+              <td>{{ item.driverId }}</td>
+              <td>{{ item.customerId }}</td>
+              
+            </tr>
+   
+  </tbody>
+        </table>
+        
+         <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+
+    <button ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>
+ </div>
+       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>

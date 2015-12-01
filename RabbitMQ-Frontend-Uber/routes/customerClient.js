@@ -16,7 +16,9 @@ function signup(req, res) {
 			"password":req.param("password"), "firstname":req.param("firstname")
 			,"lastname": req.param("lastname"),"mobileno": req.param("mobileno"),
 			"cardno": req.param("cardno"), "cvv": req.param("cvv"), "exp_month": req.param("exp_month"),
-			"exp_year": req.param("exp_year"),"postalcode": req.param("postalcode"),"requestQueue":"signup"};
+			"exp_year": req.param("exp_year"),"postalcode": req.param("postalcode"),
+			"latitude": req.param("latitude"),"longitude": req.param("longitude"),
+			"requestQueue":"signup"};
 	
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		console.log("Got callback from server");
@@ -187,6 +189,19 @@ function search_with_email(req, res) {
 	});
 }
 
+function rating(req, res) {
+	var msg_payload = {"rating": req.param("rating"), "feedback": req.param("feedback"), "requestQueue": "customerRating"};	
+	console.log(msg_payload);
+	mq_client.make_request('customer',msg_payload, function(err,results){
+		    console.log(results);
+			if(results.code == 200){
+				res.send({"value": result.value, "result":"success"});
+			} else {    
+				res.send({"result":"error"});
+			}
+	});
+}
+
 //exports.home = home;
 exports.signup = signup;
 exports.signin = signin;
@@ -200,3 +215,4 @@ exports.search_with_ssn = search_with_ssn;
 exports.update = update;
 exports.updatePayment = updatePayment;
 exports.approve = approve;
+exports.rating = rating;

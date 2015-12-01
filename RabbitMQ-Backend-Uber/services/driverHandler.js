@@ -3,8 +3,9 @@ var driver = require("./driver");
 
 	var res = {};	
 	function handle_request (msg, callback) {
+		
 	if(msg.requestQueue=="signup"){
-		driver.signup(msg.ssn, msg.email, msg.password, msg.firstname, msg.lastname, msg.mobileno, msg.address, msg.city, msg.state, msg.postalcode, msg.dlno, function(err, res){
+		driver.signup(msg.ssn, msg.email, msg.password, msg.firstname, msg.lastname, msg.mobileno, msg.address, msg.city, msg.state, msg.postalcode, msg.dlno, msg.latitude, msg.longitude,msg.url , function(err, res){
 			callback(err, res);
 		});
 	}

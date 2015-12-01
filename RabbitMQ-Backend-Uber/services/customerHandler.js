@@ -4,7 +4,7 @@ var customer = require("./customer");
 	var res = {};	
 	function handle_request (msg, callback) {
 	if(msg.requestQueue=="signup"){
-		customer.signup(msg.ssn, msg.email, msg.password, msg.firstname, msg.lastname, msg.mobileno, msg.cardno, msg.cvv, msg.exp_month, msg.exp_year, msg.postalcode, function(err, res) {
+		customer.signup(msg.ssn, msg.email, msg.password, msg.firstname, msg.lastname, msg.mobileno, msg.cardno, msg.cvv, msg.exp_month, msg.exp_year, msg.postalcode, msg.latitude, msg.longitude, function(err, res) {
 			callback(err, res);
 		});
 	}

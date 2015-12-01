@@ -14,13 +14,16 @@ var tableName = "uber.drivers";
 				"state":     $scope.state,
 				"postalcode" : $scope.postalcode
 				"dlno":      $scope.dlno,
+				url
 				*/
 
 
-function signup(ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno, callback) {
+function signup(ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno,  latitude, longitude, url, callback) {
+	var GoogleMapsLoader;
 	var res = {};
-	console.log("in singup backend module");
-	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno, approved) VALUES ( '" + ssn 
+	console.log("In singup backend module");	
+	
+	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno, approved, available, latitude, longitude, url, rating) VALUES ( '" + ssn 
 	+ "' , '" + email +
 	  "' , '" + password +  
 	  "' , '" + firstname  +
@@ -31,8 +34,49 @@ function signup(ssn, email, password, firstname, lastname, mobileno, address, ci
 	  "' , '" + state +
 	  "' , '" + postalcode +
 	  "' , '" + dlno +
-	  "' , 'false' )";
+	  "' , 'false"+
+	  "' , 'true"+
+	  "' , '" + latitude +
+	  "' , '" + longitude +
+	  "' , '" + url +
+	  "' , '3.0'"+
+	  " )";
 	
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+	    	  res.code = "200";
+			  res.value = "success";
+		} else {
+			  console.log(err);
+			  res.code = "401";
+			  res.value = "error";
+		}
+		callback(err, res);
+	}, sqlQuery);
+}
+
+
+function updateRating(ssn, rating, callback) {
+	var res = {};
+	var sqlQuery = "UPDATE "+ tableName + " SET rating = '"+ rating+"' WHERE ssn = '" + ssn+"'";
+	  	
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+	    	  res.code = "200";
+			  res.value = "success";
+		} else {
+			  console.log(err);
+			  res.code = "401";
+			  res.value = "error";
+		}
+		callback(err, res);
+	}, sqlQuery);
+}
+
+function makeDriverUnavailable(ssn, callback) {
+	var res = {};
+	var sqlQuery = "UPDATE "+ tableName + " SET available = 'false' WHERE ssn = '" + ssn+"'";
+	  	
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
@@ -53,7 +97,7 @@ function approve(ssn, callback) {
 	mySqlDb.executeQuery(function(err, rows) {
 		if (!err) {
 	    	  res.code = "200";
-			  res.value = "sucess";
+			  res.value = "success";
 		} else {
 			  console.log(err);
 			  res.code = "401";
@@ -111,12 +155,14 @@ function search_with_email(email, callback) {
 				res.value = rows[0];
 				res.code = "200";
 			} else {
-				console.log(err);
-		        res.code = "401";
-				res.value = "Failed Login";				
+				res.code = "204";				
 			}			
-			callback(err, res);
+		} else {
+			console.log(err);
+	        res.code = "401";
+			res.value = "Failed Login";
 		}
+		callback(err, res);
 	}, sqlQuery);	
 }
 
@@ -130,11 +176,13 @@ function search_with_name(firstname, lastname, callback) {
 				res.value = rows;
 				res.code = "200";
 			} else {
-				console.log(err);
-		        res.code = "401";
-				res.value = "Failed Login";				
+				res.code = "204";
 			}			
 			callback(err, res);
+		} else {
+			console.log(err);
+	        res.code = "401";
+			res.value = "Failed Login";				
 		}
 	}, sqlQuery);	
 }
@@ -169,12 +217,64 @@ function selectAllUnApproved(callback) {
 				res.value = rows;
 				res.code = "200";
 			} else {
-				console.log(err);
-		        res.code = "401";
-				res.value = "Failed Login";				
+				res.code = "401";				
 			}			
+		} else {
+			console.log(err);
+	        res.code = "401";
+			res.value = "Failed Login";
+		}
+		callback(err, res);
+	}, sqlQuery);
+}
+
+
+function ifDriverWithinRadius(latitude, longitude) {
+	var R = 16093.4; // metres
+	var φ1 = lat1.toRadians();
+	var φ2 = lat2.toRadians();
+	var Δφ = (lat2-lat1).toRadians();
+	var Δλ = (lon2-lon1).toRadians();
+
+	var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+	        Math.cos(φ1) * Math.cos(φ2) *
+	        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+	var d = R * c;	
+}
+
+function selectAllWithinRadius(callback) {	
+	selectAllAvailable(function(err, res) {
+		if (res.code == 200) {
+			for (var i = 0; i < res.value.length; i++) {
+				
+			}
+		} else {
 			callback(err, res);
 		}
+	});
+}
+
+
+function selectAllAvailable(callback) {	
+	var sqlQuery = "SELECT * FROM " + tableName + " WHERE available='true'";
+	var res = {};
+	
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+			if (rows.length > 0) {
+				res.value = rows;
+				res.code = "200";
+			} else {
+				res.code = "204";	
+			}			
+		} else {
+			console.log(err);
+	        res.code = "401";
+			res.value = "Failed Login";
+		}
+		callback(err, res);
 	}, sqlQuery);
 }
 
@@ -189,12 +289,14 @@ function selectAll(callback) {
 				res.value = rows;
 				res.code = "200";
 			} else {
-				console.log(err);
-		        res.code = "401";
-				res.value = "Failed Login";				
+				res.code = "204";
 			}			
-			callback(err, res);
+		} else {
+			console.log(err);
+	        res.code = "401";
+			res.value = "Failed Login";
 		}
+		callback(err, res);
 	}, sqlQuery);
 }
 
