@@ -1,5 +1,4 @@
-<div ng-controller="myTrips" ng-init="getUserBills()">
-<button ng-click="getUserBills()">click</button>
+<div class="container" ng-controller="myTrips" ng-init="getUserBills()">
 	<h1 style="margin-top:50px;">Summary</h1>
 	<table id="tableData" class="table table-bordered table-striped">
           <thead>
@@ -16,7 +15,7 @@
               <th>Customer Id</th>
             </tr>
   </thead>
-          <tbody ng-repeat="item in getData() | startFrom:currentPage*pageSize | limitTo:pageSize">
+          <tbody ng-repeat="item in bills">
     <tr>
               <td>{{ item.billId }}</td>
               <td>{{ item.rideDate }}</td>
