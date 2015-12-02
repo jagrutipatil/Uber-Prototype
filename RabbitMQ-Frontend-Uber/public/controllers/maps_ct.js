@@ -158,24 +158,61 @@ app.controller('sendData', function($scope,$http) {
 
 app.controller('LevelCtrl', function($scope,$http) {
 	var result;
-	var ssn
-  $http({
+	var ssn5;
+	var lat;
+	var lng;
+	$http({
 		method : 'POST',
-		url : '/bk_driver_selectAllAvailable',
-		data : { },
-		}).success(function(response){
-			console.log("code is here for ssn");
-		console.log(response.value[0].ssn);
-		$scope.srv = {};
-		  console.log("The response frm UI");
-		  console.log(result);
-		  $scope.data = {};
-		  $scope.data.getLevels = function() {
-		    return response.value;
-		  }
-		}).error(function(error){
+		url : '/session_get_ssn',
+		data : {}
+	}).success(function(response) {
+		if (response.result != "error") {
+			console.log("SSN obtained for rides");
+			ssn5 = response.ssn;		
+			
+			$http({
+				method : 'POST',
+				url : '/bk_customer_search_with_ssn',
+				data : {"ssn": ssn5}
+			}).success(function(response) {
+				if (response.result != "error") {
+					console.log("Customer search with ssn");
+					console.log(response.value.latitude);
+					lat = response.value.latitude;
+					lng = response.value.longitude;
+					
+					$http({
+						method : 'POST',
+						url : '/bk_driver_selectAllAvailable',
+						data : {"latitude": lat,
+					  		 	"longitude": lng },
+						}).success(function(response){
+							console.log("code is here for ssn");
+						//console.log(response.value[0].ssn);
+						$scope.srv = {};
+						  console.log("The response frm UI");
+						  console.log(response);
+						  $scope.data = {};
+						  $scope.data.getLevels = function() {
+						    return response.value;
+						  }
+						}).error(function(error){
+						console.log(error);
+						})
+					
+				} else {
+					alert("error");
+				}
+			}).error(function(error) {
+				console.log(error);
+			});
+			
+		} else {
+			alert("error");
+		}
+	}).error(function(error) {
 		console.log(error);
-		})
+	});  
   
 })
 
