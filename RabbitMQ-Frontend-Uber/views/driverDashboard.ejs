@@ -15,7 +15,16 @@
 
 </head>
 <body ng-app="SinglePageDriver">
+  <script>
+ 
+ function delete_driver(){
+    window.location.href = '/delete_driver';
+  }
 
+  function logout(){
+    window.location.href = '/logout';
+  }
+  </script>
 	
 <div class="container">
 	<div class="row">
@@ -31,7 +40,10 @@
                 <a href="/invoice" class="list-group-item text-center">
                   <br/>Invoice
                 </a>
-                <a href="/logout" class="list-group-item text-center">
+                <a onclick="delete_driver()" class="list-group-item text-center">
+                  <br/>Deactivate Account
+                </a>
+                <a onclick="logout()" class="list-group-item text-center">
                   <br/>Logout
                 </a>
               </div>
