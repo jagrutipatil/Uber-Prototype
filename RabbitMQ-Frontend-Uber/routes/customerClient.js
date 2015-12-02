@@ -228,8 +228,6 @@ exports.addImagesToRide = function(req, res){
 	    var Grid = require('gridfs-stream');
 	    Grid.mongo = mongoose.mongo;
 
-	    //console.log("files " + req.files);
-
 	    var dirname = require('path').dirname(__dirname);
 	    var filename = req.files.file.name;
 	    var path = req.files.file.path;
@@ -239,14 +237,6 @@ exports.addImagesToRide = function(req, res){
 	        console.log('open');
 	        var gfs = Grid(conn.db);
 
-	        // streaming to gridfs
-	        //filename to store in mongodb
-	        //var writestream = gfs.createWriteStream(dirname + '/' + path);
-
-	        /*    {
-	            filename: 'newFile1.jpg'
-	        });*/
-
 	        var writestream = gfs.createWriteStream({
 	            filename: filename
 	        });
@@ -254,7 +244,6 @@ exports.addImagesToRide = function(req, res){
 	        fs.createReadStream(path).pipe(writestream);
 
 	        writestream.on('close', function (file) {
-	            // do something with `file`
 	            console.log(file.filename + 'Written To DB');
 	            res.redirect('/');
 	        });
@@ -278,34 +267,14 @@ exports.getImagesOfRide = function (req, res) {
 	        console.log('open');
 	        console.log('image name ' + image);
 	        var gfs = Grid(conn.db);
-
-	        //var dirname = require('path').dirname(__dirname);
-	        //var newPath = dirname + "/uploads/"+image;
-
-	        //var writestream = fs.createWriteStream(newPath);
-
-
-	        //var str = image.substring(1, image.length);
-
-	        //res.contentType('image/png');
-
-	        //console.log("str " + str);
 	        gfs.createReadStream({
-	            //_id: '5649b270c73c2e4c1746f9ca'
 	            filename: image
-	            //_id: '565c1f1c3d4803e82c5d0830'
 	        }).pipe(res);
 
-	        /*writestream.on('close', function (file) {
-	            res.redirect('/');
-	        });*/
-
-	        //res.send("kuch bhi");
 	    });
 	};
 
 
-//exports.home = home;
 exports.signup = signup;
 exports.signin = signin;
 exports.remove_with_email = remove_with_email;
