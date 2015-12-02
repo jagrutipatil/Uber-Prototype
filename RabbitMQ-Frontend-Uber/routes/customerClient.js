@@ -202,7 +202,86 @@ function rating(req, res) {
 	});
 }
 
-//exports.home = home;
+exports.getImage = function(req, res){
+    ejs.renderFile("./views/getImage.ejs", function(err, result) {
+        if (!err) {
+            res.end(result);
+        }
+    });
+};
+
+exports.renderAddImagesToRide = function(req, res){
+	  ejs.renderFile("./views/addImagesToRide.ejs", function(err, result) {
+	        if (!err) {
+	            res.end(result);
+	        }
+	    });
+	};
+
+exports.addImagesToRide = function(req, res){
+	    var mongoose = require('mongoose');
+	    var Schema = mongoose.Schema;
+	    var conn = mongoose.createConnection('mongodb://localhost:27017/neuber');
+
+	    var mongo = require("./mongo");
+	    var mongoURL = "mongodb://localhost:27017/users";
+	    
+	    var fs = require('fs');
+	    console.log(req.ubersession.user.ssn);
+	    var Grid = require('gridfs-stream');
+	    var uid = require('uid2');
+	    
+	    Grid.mongo = mongoose.mongo;
+
+	    var dirname = require('path').dirname(__dirname);
+	    var filename = req.files.file.name;
+	    var extension = req.files.file.path.split(/[. ]+/).pop();
+	    var targetName = req.ubersession.user.ssn + uid(22) + '.' + extension;  
+	    var path = req.files.file.path;
+	    var type = req.files.file.mimetype;
+
+	    conn.once('open', function () {
+	        console.log('open');
+	        var gfs = Grid(conn.db);
+
+	        var writestream = gfs.createWriteStream({
+	            filename: targetName
+	        });
+	        fs.createReadStream(path).pipe(writestream);
+	        writestream.on('close', function (file) {
+	        	//ADD value to customer database	       
+	            console.log(targetName + 'Written To DB');
+	            res.send({"value": targetName, "result":"success"});
+	        });
+	        
+	    });
+	};
+
+
+
+exports.getImagesOfRide = function (req, res) {
+		res.set('Content-Type', 'image');
+	    var image = req.param('image');
+	    var mongoose = require('mongoose');
+	    var Schema = mongoose.Schema;
+
+	    var conn = mongoose.createConnection('mongodb://localhost:27017/neuber');
+	    var fs = require('fs');
+
+	    var Grid = require('gridfs-stream');
+	    Grid.mongo = mongoose.mongo;
+
+	    conn.once('open', function () {
+	        console.log('open');
+	        console.log('image name ' + image);
+	        var gfs = Grid(conn.db);
+	        gfs.createReadStream({
+	            filename: image
+	        }).pipe(res);
+	    });
+	};
+
+
 exports.signup = signup;
 exports.signin = signin;
 exports.remove_with_email = remove_with_email;

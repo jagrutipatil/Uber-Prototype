@@ -22,7 +22,7 @@ function billGenerate(req, res) {
 
 
 function estimate(req, res) {
-	var msg_payload = { "startTime": req.param("distance"), "startTime": req.param("startTime"), 
+	var msg_payload = { "distance": req.param("distance"), "startTime": req.param("startTime"), 
 			"endTime":req.param("endTime"), "totalTime":req.param("totalTime")
 			,"carType": req.param("carType"),"requestQueue":"estimate"};
 	

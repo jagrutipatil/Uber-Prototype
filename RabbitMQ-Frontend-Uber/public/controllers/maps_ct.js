@@ -17,13 +17,12 @@ app.controller('sendData', function($scope,$http) {
    			 }
    			 return s3() + '-' + s2() + '-' + s4();
     	}
-    	var ssn = generateUniqueId;
-    	console.log(ssn);
+    	var ride_id = generateUniqueId();
     	$http({
 			method : 'POST',
 			url : '/bk_rides_register',
 			data : {
-				"ride_id" : "000000",
+				"ride_id" : ride_id,
 				"cust_id" : "111111",
 				"driver_id": "222222",
 				"origin" : $(".orig").val(),
@@ -35,7 +34,35 @@ app.controller('sendData', function($scope,$http) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				alert("Success");
+				alert("Success Ride");
+			} else {
+			}			
+		}).error(function(error) {
+			console.log(error);
+		});
+    	
+    	$http({
+			method : 'POST',
+			url : '/billGenerate',
+			data : {
+				"ride_id" : ride_id,
+				"customerId" : "111111",
+				"driverId": "222222",
+				"source" : $(".orig").val(),
+				"destination" : $(".dest").val(),
+				"date" : "29112015",
+				"distance" : parseInt(dist.value),
+				"duration" : parseInt(dur.value),
+				"distance" : parseInt(dist.value),
+				"totalTime" : parseInt(dur.value),
+				"startTime" : "11",
+				"endTime" : "12",
+				"flag" : "0",
+				"carType" : "uberx"
+			}
+		}).success(function(response) {
+			if (response.result != "error") {
+				alert("Success Bill " + response.value);
 			} else {
 			}			
 		}).error(function(error) {
@@ -49,7 +76,53 @@ app.controller('sendData', function($scope,$http) {
     	console.log("List of Drivers");
     	console.log(orig);
 	};
+	
+	$scope.estimate = function(){
+		console.log("distance : " + dist.value)
+		$http({
+			method : 'POST',
+			url : '/estimate',
+			data : {
+				"distance" : parseInt(dist.value),
+				"totalTime" : parseInt(dur.value),
+				"startTime" : "11",
+				"endTime" : "12",
+				"carType" : "uberx"
+			}
+		}).success(function(response) {
+			if (response.result != "error") {
+				console.log(response);
+				alert("Estimate Fare is : " + response.value);
+			} else {
+			}			
+		}).error(function(error) {
+			console.log(error);
+		});
+	};
 });
+
+app.controller('LevelCtrl', function($scope,$http) {
+	var result;
+  $http({
+		method : 'POST',
+		url : '/bk_driver_selectAllAvailable',
+		data : { },
+		}).success(function(response){
+			console.log("code is here");
+		console.log(response.value);
+		$scope.srv = {};
+		  console.log("The response frm UI");
+		  console.log(result);
+		  $scope.data = {};
+		  $scope.data.getLevels = function() {
+		    return response.value;
+		  }
+		}).error(function(error){
+		console.log(error);
+		})
+  
+})
+
 
 /*$http({
 method : 'POST',

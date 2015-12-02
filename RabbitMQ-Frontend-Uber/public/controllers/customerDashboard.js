@@ -3,6 +3,12 @@ app.config(function($routeProvider, $locationProvider){
 	$locationProvider.html5Mode(true);
 	console.log("Code is here");
       $routeProvider
+      	  .when('/customerDashboard',{
+      		templateUrl: '/viewProfileCustomer.ejs', controller: 'viewProfileController'
+      	  })
+      	  .when('/viewProfile',{
+      		  templateUrl: '/viewProfileCustomer.ejs', controller: 'viewProfileController'
+      	  })
           .when('/profile',{
               templateUrl: '/UberProfile.ejs', controller: 'customerProfileController'
           })
@@ -12,43 +18,157 @@ app.config(function($routeProvider, $locationProvider){
           .when('/mytrips',{
                 templateUrl: '/UberMyTrips.ejs', controller: 'myTrips'
           })
+          .when('/addImages',{
+                templateUrl: '/addImagesToRide.ejs', controller: 'addImages'
+          })
+          .when('/rideImages',{
+                templateUrl: '/RideImages.ejs', controller: 'rideImages'
+          })
 		  .when("/requestride",{
 		      templateUrl: "/ride.ejs", controller: 'rideController'
 		  });
 });
 
-app.controller('rideController',function($scope){
-		$scope.model = {
-				message: "This is sum"
-		}
-		$scope.requestRide = function() {
-			window.location.href = '/RequestRide';
-		}
-		$scope.estimateRide = function() {
-			window.location.href = '/RequestRide';
-		}
-});
-
-app.controller("customerProfileController", customerProfileController);
-customerProfileController.$inject = [ '$scope', '$http', '$window'];
-function customerProfileController($scope, $http, $window) {
-	//TODO Ankita fetch this value from session
-	
+app.controller('rideImages', function($scope) {
 	$http({
 		method : 'POST',
 		url : '/session_get_ssn',
 		data : {}
 	}).success(function(response) {
 		if (response.result != "error") {
-			alert("SSN obtained");
-			$scope.ssn1=response.ssn;
+			console.log("SSN obtained for rides");
+			$scope.ssn5 = response.ssn;			
 		} else {
-			alert("error1");
-		}			
+			alert("error");
+		}
 	}).error(function(error) {
 		console.log(error);
 	});
-	
+
+	$scope.model = {
+		message : "This is sum"
+	}
+	$scope.requestRide = function() {
+		window.location.href = '/RequestRide';
+	}
+	$scope.estimateRide = function() {
+		window.location.href = '/RequestRide';
+	}
+});
+
+app.controller('addImages', function($scope) {	
+	$http({
+		method : 'POST',
+		url : '/session_get_ssn',
+		data : {}
+	}).success(function(response) {
+		if (response.result != "error") {
+			console.log("SSN obtained for rides");
+			$scope.ssn5 = response.ssn;			
+		} else {
+			alert("error");
+		}
+	}).error(function(error) {
+		console.log(error);
+	});
+});
+
+
+app.controller('rideController', function($scope) {
+	$http({
+		method : 'POST',
+		url : '/session_get_ssn',
+		data : {}
+	}).success(function(response) {
+		if (response.result != "error") {
+			console.log("SSN obtained for rides");
+			$scope.ssn1 = response.ssn;
+		} else {
+			alert("error");
+		}
+	}).error(function(error) {
+		console.log(error);
+	});
+
+	$scope.model = {
+		message : "This is sum"
+	}
+	$scope.requestRide = function() {
+		window.location.href = '/RequestRide';
+	}
+	$scope.estimateRide = function() {
+		window.location.href = '/RequestRide';
+	}
+});
+
+app.controller("viewProfileController", viewProfileController);
+viewProfileController.$inject = [ '$scope', '$http', '$window' ];
+function viewProfileController($scope, $http, $window) {
+	$http({
+		method : 'POST',
+		url : '/session_get_ssn',
+		data : {}
+	}).success(function(response) {
+		if (response.result != "error") {
+			$scope.ssn2 = response.ssn;
+			$http({
+				method : 'POST',
+				url : '/bk_customer_search_with_ssn',
+				data : {
+					"ssn" : $scope.ssn2,
+				}
+			}).success(function(response) {
+				if (response.result != "error") {
+					$scope.customerProfile = response.value;
+				} else {
+					alert("error");
+				}
+			}).error(function(error) {
+				console.log("call success");
+				console.log(error);
+			});
+		} else {
+			alert("error");
+		}
+	}).error(function(error) {
+		console.log(error);
+	});
+}
+
+app.controller("customerProfileController", customerProfileController);
+customerProfileController.$inject = [ '$scope', '$http', '$window' ];
+function customerProfileController($scope, $http, $window) {
+	$http({
+		method : 'POST',
+		url : '/session_get_ssn',
+		data : {}
+	}).success(function(response) {
+		if (response.result != "error") {
+			$scope.ssn2 = response.ssn;
+			$http({
+				method : 'POST',
+				url : '/bk_customer_search_with_ssn',
+				data : {
+					"ssn" : $scope.ssn2,
+				}
+			}).success(function(response) {
+				if (response.result != "error") {
+					$scope.customerProfile = response.value;
+				} else {
+					alert("error");
+				}
+			}).error(function(error) {
+				console.log("call success");
+				console.log(error);
+			});
+		} else {
+			alert("error");
+		}
+	}).error(function(error) {
+		console.log(error);
+	});
+
+	// loading customer data from backend for when html loads
 	console.log("CustomerProfile 1");
 	$scope.update = function() {
 		console.log("Update Profile");
@@ -56,67 +176,41 @@ function customerProfileController($scope, $http, $window) {
 			method : 'POST',
 			url : '/bk_customer_update',
 			data : {
-				"ssn" : $scope.ssn1,
+				"ssn" : $scope.ssn2,
 				"email" : $scope.email,
-				"password": $scope.password,
-				"firstname": $scope.firstname,
-				"lastname": $scope.lastname,
+				"password" : $scope.password,
+				"firstname" : $scope.firstname,
+				"lastname" : $scope.lastname,
 				"mobileno" : $scope.mobileno
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				alert("Success");
 			} else {
 				alert("error");
-			}			
+			}
 		}).error(function(error) {
 			console.log(error);
 		});
 	};
-	
-	// loading customer data from backend for when html loads
-		$http({
-			method : 'POST',
-			url : '/bk_customer_search_with_ssn',
-			data : {
-				"ssn" : $scope.ssn1,
-			}
-		}).success(function(response) {
-			if (response.result != "error") {
-				$scope.customerProfile=response.value;
-				alert("Success");
-			} else {
-				alert("error");
-			}			
-		}).error(function(error) {
-			console.log("call success");
-			console.log(error);
-		});
-	
 }
 
 app.controller("customerPaymentController", customerPaymentController);
 customerPaymentController.$inject = [ '$scope', '$http', '$window'];
 function customerPaymentController($scope, $http, $window) {
-	//TODO Ankita fetch this value from session
-	
-	
 	$http({
 		method : 'POST',
 		url : '/session_get_ssn',
 		data : {}
 	}).success(function(response) {
 		if (response.result != "error") {
-			alert("SSN obtained");
-			$scope.ssn=response.ssn;
+			$scope.ssn3=response.ssn;			
 		} else {
+			console.log("Payment controller");
 			alert("error");
 		}			
 	}).error(function(error) {
 		console.log(error);
 	});
-	
-	console.log("UpdatePaymentd");
 	
 	$scope.updatePayment = function() {
 		console.log("UpdtePayment.js");
@@ -124,7 +218,7 @@ function customerPaymentController($scope, $http, $window) {
 			method : 'POST',
 			url : '/bk_customer_updatePayment',
 			data : {
-				"ssn" : $scope.ssn,
+				"ssn" : $scope.ssn3,
 				"cardno" : $scope.cardno,
 				"cvv": $scope.cvv,
 				"exp_month": $scope.exp_month,
@@ -132,7 +226,7 @@ function customerPaymentController($scope, $http, $window) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				alert("Success");
+				console.log("in update payment");
 			} else {
 				alert("error");
 			}			
@@ -142,8 +236,7 @@ function customerPaymentController($scope, $http, $window) {
 	};
 }
 
-app.controller('sendData', function($scope,$http) {
-	
+app.controller('sendData', function($scope,$http) {	
     console.log("Code is here");
     $scope.submit = function(){
     	console.log("################################################################");
@@ -173,17 +266,16 @@ app.controller('sendData', function($scope,$http) {
 				"date" : "29112015",
 				"distance" : parseInt(dist.value),
 				"duration" : parseInt(dur.value),
-				"flag" : "0",
+				"flag" : "0"
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				alert("Success");
+				console.log("success from send data controller");
 			} else {
 			}			
 		}).error(function(error) {
 			console.log(error);
 		});
-    	
 	};
 	
 	$scope.submit2 = function(){
@@ -196,25 +288,7 @@ app.controller('sendData', function($scope,$http) {
 
 app.controller("myTrips", myTrips);
 myTrips.$inject = [ '$scope', '$http', '$window'];
-function myTrips($scope, $http, $window) {
-	
-	
-//	$http({
-//		method : 'POST',
-//		url : '/session_get_ssn',
-//		data : {}
-//	}).success(function(response) {
-//		if (response.result != "error") {
-//			alert("SSN obtained");
-//			$scope.ssn2=response.ssn;
-//		} else {
-//			alert("error");
-//		}			
-//	}).error(function(error) {
-//		console.log(error);
-//	});
-	
-	
+function myTrips($scope, $http, $window) {	
 	$scope.bills = [];
 	 $scope.currentPage = 0;
 	 $scope.pageSize = 2;

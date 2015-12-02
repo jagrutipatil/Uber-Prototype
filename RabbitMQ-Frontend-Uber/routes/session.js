@@ -3,10 +3,12 @@ exports.ssn = function(req, res){
 		if(req.ubersession.user){
 			res.send({"ssn": req.ubersession.user.ssn, "result":"success"});			
 		}else if(req.ubersession.driver){
+
 			console.log("Session fetchedfor Driver");
 			console.log(req.ubersession.driver.ssn);
 			res.send({"driver": req.ubersession.driver, "result":"success"});
 			console.log(req.ubersession.driver);
+
 		}else{
 			console.log("Invalid Session");
 			res.send({"result":"error"});
@@ -18,7 +20,7 @@ exports.ssn = function(req, res){
 };
 
 
-exports.isAuthUser = function isAuthUser(req, res, next) {
+exports.isAuthUser = function(req, res, next) {
 		if(req.ubersession){
 			if(req.ubersession.user){
 				return next();
@@ -27,11 +29,30 @@ exports.isAuthUser = function isAuthUser(req, res, next) {
     res.redirect('/');
 };
 
-exports.isAuthDriver = function isAuthDriver(req, res, next) {
+exports.isAuthDriver = function(req, res, next) {
 	if(req.ubersession){
 		if(req.ubersession.driver){
 			return next();
 		}
 	}    
 res.redirect('/');
+};
+
+exports.skipAuthUser = function(req, res, next) {
+	if(req.ubersession){
+		if(req.ubersession.user){
+			res.redirect('/customerDashboard');
+		}
+	}    
+return next();
+};
+
+exports.skipAuthDriver = function(req, res, next) {
+	if(req.ubersession){
+		if(req.ubersession.driver){
+			res.redirect('/');
+		}
+	}    
+return next();
+
 };

@@ -2,33 +2,13 @@ var app = angular.module('signupDriver', []);
 app.controller("signupDriverController", signupDriverController);
 signupDriverController.$inject = [ '$scope', '$http', '$window'];
 function signupDriverController($scope, $http, $window) {
-		 
-	function randomGeo(center, radius) {
-	    var y0 = center.latitude;
-	    var x0 = center.longitude;
-	    var rd = radius / 111300;  //TODO need to verify this number its generting drivers very near
+		 	
+	$scope.geocoder = new google.maps.Geocoder();
 
-	    var u = Math.random();
-	    var v = Math.random();
-
-	    var w = rd * Math.sqrt(u);
-	    var t = 2 * Math.PI * v;
-	    var x = w * Math.cos(t);
-	    var y = w * Math.sin(t);
-
-	    var xp = x / Math.cos(y0);
-
-	    return {
-	        'latitude': y + y0,
-	        'longitude': x + x0
-	    };
-	}
-
-	
 	$scope.signup = function() {
-		
-		var mapcenter = {'latitude' : 37.3444869629532, 'longitude': -121.883543986265}; 
-		var latlong = randomGeo(mapcenter, 16093.4);
+		$scope.geocoder.geocode({'address': "95112"}, function(results) {
+			console.log("inside callback function");
+		});
 
 		$http({
 			method : 'POST',
@@ -45,14 +25,16 @@ function signupDriverController($scope, $http, $window) {
 				"state":     $scope.state,
 				"dlno":      $scope.dlno,
 				"postalcode" : $scope.postalcode,
-				"latitude" : latlong.latitude,
-				"longitude" : latlong.longitude,
+				"latitude" : "123",
+				"longitude" : "123",
 				"url" : "https://www.youtube.com/watch?v=gXTBd87LUH8" 
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
+
 				alert("Success");
 			$window.location.assign('/loginDriver');	
+
 			} else {
 				alert("error");
 			}			
