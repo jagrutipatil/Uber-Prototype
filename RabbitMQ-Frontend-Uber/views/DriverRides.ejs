@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Driver - Rides Page</title>		
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+   		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+   		<script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+    	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="/js/driverRequest.js"></script>
+		<style>
+			.hidden{
+				visibility : hidden !important;
+			}
+		</style>
+		<script>
+		setTimeout(function(){
+            console.log(driverSSN);
+         },300);		
+		</script>
+	</head>
+
+	<body>
+	
+		<div id="dialog-message" class="hidden" title="Ride Request">
+		  <p>
+		    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+		    	Incoming Ride Request!
+		  </p>
+		</div>
+	  	
+	  	
+	  	
+		<h1 id="initialHeader">Waiting for incoming ride requests</h1>
+		    
+		<div id="afterLogin" class="hidden">Ride has ended. Redirecting to submit feedback...</div>
+		   
+		<button id="endBtn" class="hidden" onclick="endRide()">End Ride</button> 
+	
+	</body>
+</html>
+

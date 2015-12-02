@@ -1,14 +1,13 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
 	<Title>Signup Driver</Title>
     <link rel="stylesheet" href="/stylesheets/uber-icons.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/superfine.css" type="text/css">
 	<link rel="stylesheet" href="/stylesheets/Signup.css">
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
-
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="/controllers/signupDriver.js"></script> 
 </head>
 
@@ -84,15 +83,15 @@
 								<label for="mobile">Mobile Number</label>
 								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" ng-model="mobileno" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required/>
 								<div ng-messages="myForm.mobile.$error">
-								  <div ng-message="required">This field is required</div>
+								  <!--div ng-message="required">This field is required</div-->
 								  <div ng-message="pattern">Must be a valid 10 digit phone number</div>
 							</div>
 							
 							<div class="form-group required">
 								<label for="Address">Address</label>
 								<input id="addressLineOne" type="text" placeholder="Address Line #1" name="Address1" ng-model="address" required>
-								<span style="color:red" ng-show="myForm.Address1.$dirty && myForm.Address1.$invalid">
-								<span ng-show="myForm.Address1.$error.required">Address is required.</span>
+								<!--span style="color:red" ng-show="myForm.Address1.$dirty && myForm.Address1.$invalid">
+								<span ng-show="myForm.Address1.$error.required">Address is required.</span-->
 								<br/><br/>
 								<input id="city" type="text" placeholder="city" name="city" ng-model="city">
 								<br/><br/>
@@ -154,9 +153,7 @@
 									<button class="btn btn-primary js-submit" type="submit" ng-click="signup()">Create Account</button>
 								</div>
 								<div class="signup-form-section-notice">
-									Please fill out all required (
-									<span class="star">*</span>
-									) fields.
+									Please fill out all required (<span class="star">*</span>) fields.
 								</div>
 							</div>
 							<div class="signup-form-section-number  blue"></div>
@@ -178,9 +175,5 @@
 			</section>
 		</div>
 	</section>
-
-
-
 </section>
-</body>
 </html>

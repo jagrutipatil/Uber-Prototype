@@ -13,7 +13,7 @@ var driver = require('./routes/driverClient');
 var delegator = require('./routes/delegatorClient');
 var bill = require('./routes/billingClient');
 var rides = require('./routes/ridesClient');
-
+var multer = require('multer');
 var http = require('http');
 var path = require('path');
 var amqp = require('amqp');
@@ -54,6 +54,11 @@ app.get('/logout', function (req, res) {
 	  res.redirect('/');
 });
 
+app.get('/addImagesToRide',customer.renderAddImagesToRide);
+app.post('/addImagesToRide',customer.addImagesToRide);
+app.get('/getImagesOfRide', customer.getImagesOfRide);
+app.get('/getImage', customer.getImage);
+
 app.get('/:name', rides.partials);
 
 app.get('/admin', delegator.admin);
@@ -84,6 +89,10 @@ app.get('/index2',function(req, res){
 });
 
 
+
+app.get('/driverRides',function(req, res){
+	  res.render('DriverRides', { title: 'Express' });
+});
 
 app.post('/session_get_ssn', session.ssn);
 
