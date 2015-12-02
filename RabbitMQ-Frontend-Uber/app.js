@@ -18,6 +18,7 @@ var http = require('http');
 var path = require('path');
 var amqp = require('amqp');
 var session = require('./routes/session');
+var administrator = require('./routes/administratorClient')
 
 var app = express();
 
@@ -114,6 +115,7 @@ app.post('/bk_driver_signup', driver.signup);
 app.post('/bk_driver_remove_with_email', driver.remove_with_email);
 app.post('/bk_driver_remove_with_ssn', driver.remove_with_ssn);
 app.post('/bk_driver_selectAll', driver.selectAll);
+app.post('/bk_driver_selectAllUnApproved', driver.selectAllUnApproved);
 app.post('/bk_driver_selectAllAvailable', driver.selectAllAvailable);
 app.post('/bk_driver_search_with_name', driver.search_with_name);
 app.post('/bk_driver_search_with_ssn', driver.search_with_ssn);
@@ -121,6 +123,20 @@ app.post('/bk_driver_update', driver.update);
 app.post('/bk_driver_updateLatLng', driver.updateLatLng);
 app.post('/bk_driver_approve', driver.approve);
 app.post('/bk_driver_rating', driver.rating);
+
+
+app.post('/bk_admin_reviewDriver', administrator.reviewDriver);
+app.post('/bk_admin_reviewCustomer', administrator.reviewCustomer);
+app.post('/bk_admin_searchbill_by_driverid',administrator.searchbill_by_driverid);
+app.post('/bk_admin_searchbill_by_customerid', administrator.searchbill_by_customerid);
+app.post('/bk_admin_searchbill_by_billid', administrator.searchbill_by_billid);
+app.post('/bk_admin_searchbill_by_date', administrator.searchbill_by_date);
+app.post('/bk_admin_rides_perdriver', administrator.rides_perdriver);
+app.post('/bk_admin_rides_percustomer', administrator.rides_percustomer);
+app.post('/bk_admin_rides_perpickuplocation', administrator.rides_perpickuplocation);
+app.post('/bk_admin_rides_perdropofflocation', administrator.rides_perdropofflocation);
+app.post('/bk_admin_revenueperday', administrator.revenueperday);
+app.post('/bk_admin_deletebill_billId',administrator.deletebill_billId);
 
 //rides
 app.post('/bk_rides_register', rides.register);

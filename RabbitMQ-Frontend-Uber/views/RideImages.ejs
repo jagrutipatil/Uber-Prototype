@@ -1,0 +1,11 @@
+<div ng-controller="getImages">
+        <div style = "margin:0 auto !important;">
+            <div class="col-md-8">
+                <h2>Uploaded Images:</h2>
+                	<div ng-repeat="image in images">
+                		<img src='/img/{image.name}'>
+                	<div>
+                <br>
+            </div>
+        </div>
+</div>
