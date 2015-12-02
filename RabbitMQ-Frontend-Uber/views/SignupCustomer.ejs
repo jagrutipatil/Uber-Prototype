@@ -10,6 +10,17 @@
 	<script type="text/javascript" src="/controllers/signupCustomer.js"></script>    
 </head>
 <body  ng-app="signupCustomer" ng-controller="signupCustomerController">
+<script>
+	function isNumberOnly(num) {
+	    var keyCode = (num.which) ? num.which : event.keyCode
+	    if (keyCode > 31 && (keyCode != 46 &&(keyCode < 48 || keyCode > 57))) {
+	      return false;
+	    } else {
+	      return true;
+	    }
+	}
+
+</script>	
 <section class="wrapper">
 	<header class="contextual">
 		<a href="http://localhost:3000">
@@ -82,9 +93,8 @@
 							</div>
 							<div class="form-group js-mobile-country required mobile-number">
 								<label for="mobile">Mobile Number</label>
-								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" ng-model="mobileno" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required/>
+								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" ng-model="mobileno" onkeypress="return isNumberOnly(event)" required/>
 								<div ng-messages="myForm.mobile.$error">
-								  <div ng-message="required">This field is required</div>
 								  <div ng-message="pattern">Must be a valid 10 digit phone number</div>
 								<div class="error-notice"></div>
 							</div>
@@ -174,7 +184,7 @@
 							            </div>
 							            <div class="col-md-4 col-xs-12">
 							                <label for="billing_zip">Postal Code</label>
-							                <input id="billing_zip" type="text" placeholder="94103" name="billing_zip" ng-model="postalcode">
+							                <input id="billing_zip" type="text" placeholder="94103" name="billing_zip" ng-model="postalcode" onkeypress="return isNumberOnly(event)" >
 							                <div class="error-notice"></div>
 							            </div>
 							        </div>

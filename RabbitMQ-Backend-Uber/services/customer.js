@@ -167,7 +167,7 @@ function search_with_name(firstname, lastname, callback) {
 
 
 function signin(email, password, callback) {	
-	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"'";
+	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"' AND approved='true'";
 	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {

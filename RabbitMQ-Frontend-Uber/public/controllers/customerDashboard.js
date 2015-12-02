@@ -1,7 +1,6 @@
 var app=angular.module('SinglePage',['ngRoute']);
 app.config(function($routeProvider, $locationProvider){
 	$locationProvider.html5Mode(true);
-	console.log("Code is here");
       $routeProvider
       	  .when('/customerDashboard',{
       		templateUrl: '/viewProfileCustomer.ejs', controller: 'viewProfileController'
@@ -39,7 +38,7 @@ app.controller('rideImages', function($scope) {
 			console.log("SSN obtained for rides");
 			$scope.ssn5 = response.ssn;			
 		} else {
-			alert("error");
+			console.log("Error in obtained for rides");
 		}
 	}).error(function(error) {
 		console.log(error);

@@ -1,8 +1,10 @@
 var app=angular.module('SinglePageDriver',['ngRoute']);
 app.config(function($routeProvider, $locationProvider){
 	$locationProvider.html5Mode(true);
-	console.log("In Route provider of Driver");
       $routeProvider
+          .when('/driverDashboard',{
+    		templateUrl: '/UberDriverProfile.ejs', controller: 'driverProfileController'
+    	  })
           .when('/profile',{
               templateUrl: '/UberDriverProfile.ejs', controller: 'driverProfileController'
           })
@@ -14,31 +16,89 @@ app.config(function($routeProvider, $locationProvider){
           })
 });
 
-app.controller("driverProfileController", driverProfileController);
-driverProfileController.$inject = [ '$scope', '$http', '$window'];
-function driverProfileController($scope, $http, $window) {
-	//TODO Ankita fetch this value from session
-	
+
+app.controller("driverSummaryController", driverSummaryController);
+driverSummaryController.$inject = [ '$scope', '$http', '$window'];
+function driverSummaryController($scope, $http, $window) {	
 	$http({
 		method : 'POST',
 		url : '/session_get_ssn',
 		data : {}
 	}).success(function(response) {
 		if (response.result != "error") {
-			alert("SSN obtained");
+			$scope.ssn1=response.driver.ssn;
+			console.log("session received in controller");
+			console.log($scope.ssn1);
+			if (response.result != "error") {
+				$http({
+					method : 'POST',
+					url : '/bk_driver_search_with_ssn',
+					data : {
+						"ssn" : $scope.ssn1,
+					}
+				}).success(function(response) {
+					if (response.result != "error") {
+						$scope.driverprofile=response.value;
+						console.log("Success bk_driver_search_with_ssn");
+					} else {
+						console.log("error bk_driver_search_with_ssn");
+					}			
+				}).error(function(error) {
+					console.log("call success");
+					console.log(error);
+				});
+			} else {
+				console.log(error);
+			}
+		}					
+	}).error(function(error) {
+		console.log(error);
+	});
+}
+
+
+
+app.controller("driverProfileController", driverProfileController);
+driverProfileController.$inject = [ '$scope', '$http', '$window'];
+function driverProfileController($scope, $http, $window) {	
+	$http({
+		method : 'POST',
+		url : '/session_get_ssn',
+		data : {}
+	}).success(function(response) {
+		if (response.result != "error") {
 			$scope.ssn=response.driver.ssn;
-			$scope.firstname= response.driver.firstname;
-			$scope.lastname= response.driver.lastname;
-			$scope.mobileno= response.driver.mobileno;
-			$scope.email= response.driver.email;
+			console.log("session received in controller");
+			console.log($scope.ssn);
+			$http({
+				method : 'POST',
+				url : '/bk_driver_search_with_ssn',
+				data : {
+					"ssn" : $scope.ssn,
+				}
+			}).success(function(response) {
+				if (response.result != "error") {
+					$scope.ssn=response.value.ssn;
+					$scope.firstname= response.value.firstname;
+					$scope.lastname= response.value.lastname;
+					$scope.mobileno= response.value.mobileno;
+					$scope.email= response.value.email;
+					console.log("Success bk_driver_search_with_ssn");
+				} else {
+					console.log("error bk_driver_search_with_ssn");
+				}			
+			}).error(function(error) {
+				console.log("call success");
+				console.log(error);
+			});
 		} else {
-			alert("error1");
+			console.log(error);
 		}			
 	}).error(function(error) {
 		console.log(error);
 	});
+
 	
-	console.log("DriverProfile 1");
 	$scope.update = function() {
 		console.log("Update Driver Profile");
 		$http({
@@ -54,34 +114,14 @@ function driverProfileController($scope, $http, $window) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				alert("Success");
+				console.log("updated sucessfully");
 			} else {
-				alert("error");
+				console.log("error");
 			}			
 		}).error(function(error) {
 			console.log(error);
 		});
-	};
-	
-//	// loading customer data from backend for when html loads
-		$http({
-			method : 'POST',
-			url : '/bk_driver_search_with_ssn',
-			data : {
-				"ssn" : $scope.ssn,
-			}
-		}).success(function(response) {
-			if (response.result != "error") {
-				$scope.driverProfile=response.value;
-				alert("Success");
-			} else {
-				alert("error");
-			}			
-		}).error(function(error) {
-			console.log("call success");
-			console.log(error);
-		});
-	
+	};	
 }
 
 app.controller("myTrips", myTrips);
