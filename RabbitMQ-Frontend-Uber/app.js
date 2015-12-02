@@ -58,7 +58,7 @@ app.get('/customerProfile', session.isAuthUser, delegator.updateCustomer);
 app.get('/customerPayment', session.isAuthUser, delegator.updatePaymentCustomer);
 
 app.get('/customerDashboard', session.isAuthUser, delegator.customerDashboard);
-
+app.get('/driverDashboard', session.isAuthDriver, delegator.driverDashboard);
 app.get('/admin', delegator.admin);
 app.get('/', delegator.home);
 
@@ -103,6 +103,9 @@ app.post('/billGenerate', bill.billGenerate);
 app.post('/estimate', bill.estimate);
 app.post('/getUserBills', bill.getUserBills);
 app.post('/getBill', bill.getBill);
+
+app.post('/getDriverSummary', bill.getDriverSummary);
+
 
 
 

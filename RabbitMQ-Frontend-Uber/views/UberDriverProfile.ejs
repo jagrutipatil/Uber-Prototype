@@ -1,0 +1,65 @@
+
+<div ng-controller="driverProfileController">
+<div class="container" style="padding-top: 60px;">
+  <h1 class="page-header">Update Profile</h1>
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="text-center">
+        <!--img src="../img/linkedin profile.jpg" class="avatar img-circle img-thumbnail" alt="avatar"-->
+        <input type="file" class="text-center center-block well well-sm">
+      </div>
+    </div>
+    <!-- edit form column -->
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">    
+      <h3>Personal info</h3>
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-lg-3 control-label">First name:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value=driverProfile.firstname placeholder="Enter First Name" type="text" ng-model="firstname">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Last name:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value=driverProfile.lastname placeholder="Enter Last Name" type="text" ng-model="lastname">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Mobile no:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value=driverProfile.mobileno placeholder="Enter Mobile no" ng-model="mobileno">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Email:</label>
+          <div class="col-lg-8">
+            <input class="form-control" value=driverProfile.email placeholder="Enter Email id" type="email" ng-model="email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Password:</label>
+          <div class="col-md-8">
+            <input class="form-control" value="" placeholder="Enter Password"  type="password" ng-model="password">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Confirm password:</label>
+          <div class="col-md-8">
+            <input class="form-control" value="" placeholder="Re Enter Password" type="password">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <input class="btn btn-primary" value="Update" type="submit" ng-click="update()">
+            <span></span>
+            <input class="btn btn-default" value="Cancel" type="reset">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
