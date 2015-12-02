@@ -3,12 +3,34 @@ app.controller("signupDriverController", signupDriverController);
 signupDriverController.$inject = [ '$scope', '$http', '$window'];
 function signupDriverController($scope, $http, $window) {
 		 	
-	$scope.geocoder = new google.maps.Geocoder();
-
+	
 	$scope.signup = function() {
-		$scope.geocoder.geocode({'address': "95112"}, function(results) {
-			console.log("inside callback function");
-		});
+		var lat;
+		var lng;
+		var postalcode = $scope.postalcode;
+		  var getJSON = function(url) {
+			  return new Promise(function(resolve, reject) {
+			    var xhr = new XMLHttpRequest();
+			    xhr.open('get', url, true);
+			    xhr.responseType = 'json';
+			    xhr.onload = function() {
+			      var status = xhr.status;
+			      if (status == 200) {
+			        resolve(xhr.response);
+			      } else {
+			        reject(status);
+			      }
+			    };
+			    xhr.send();
+			  });
+			};
+
+			getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=postalcode').then(function(data) {
+				//console.log(data.results[0].geometry.location.lat);
+				lat = data.results[0].geometry.location.lat;
+				lng = data.results[0].geometry.location.lng;
+				lat = lat.toFixed(3);
+				lng = lng.toFixed(3);
 
 		$http({
 			method : 'POST',
@@ -25,8 +47,8 @@ function signupDriverController($scope, $http, $window) {
 				"state":     $scope.state,
 				"dlno":      $scope.dlno,
 				"postalcode" : $scope.postalcode,
-				"latitude" : "123",
-				"longitude" : "123",
+				"latitude" : lat,
+				"longitude" : lng,
 				"url" : "https://www.youtube.com/watch?v=gXTBd87LUH8" 
 			}
 		}).success(function(response) {
@@ -38,5 +60,8 @@ function signupDriverController($scope, $http, $window) {
 		}).error(function(error) {
 			console.log(error);
 		});
+			}, function(status) { //error detection....
+				  alert('Something went wrong.');
+				});
 	};
 }
