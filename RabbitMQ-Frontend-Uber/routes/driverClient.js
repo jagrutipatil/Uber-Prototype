@@ -147,6 +147,21 @@ function update(req, res) {
 	});
 }
 
+function updateLatLng(req, res) {
+	var msg_payload = {"ssn": req.param("ssn"), "latitude": req.param("latitude"), 
+			"longitude": req.param("longitude"),"requestQueue":"updateLatLng"};	
+	mq_client.make_request('driver',msg_payload, function(err,results){
+		    console.log(results);
+			if(results.code == 200){
+				console.log("valid Login");				
+				res.send({"result":"success", "value" : results.value});
+			} else {    
+				console.log("Invalid Login");
+				res.send({"result":"error"});
+			}
+	});
+}
+
 function approve(req, res) {
 	var msg_payload = {"ssn": req.param("ssn"), "requestQueue":"approve"};	
 	mq_client.make_request('driver',msg_payload, function(err, results){
@@ -211,6 +226,7 @@ exports.search_with_name = search_with_name;
 exports.search_with_email = search_with_email; 
 exports.search_with_ssn = search_with_ssn;
 exports.update = update;
+exports.updateLatLng = updateLatLng;
 exports.approve = approve;
 exports.rating = rating;
 exports.selectAllAvailable = selectAllAvailable;

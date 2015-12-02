@@ -57,6 +57,22 @@ function signup(ssn, email, password, firstname, lastname, mobileno, address, ci
 	
 }
 
+function updateLatLng(ssn, latitude, longitude, callback) {
+	var res = {};
+	var sqlQuery = "UPDATE "+ tableName + " SET latitude = '"+latitude+"' , longitude = '"+longitude+"' WHERE ssn = '" + ssn+"'";
+	  	
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+	    	  res.code = "200";
+			  res.value = "success";
+		} else {
+			  console.log(err);
+			  res.code = "401";
+			  res.value = "error";
+		}
+		callback(err, res);
+	}, sqlQuery);
+}
 
 function updateRating(ssn, rating, callback) {
 	var res = {};
@@ -230,8 +246,7 @@ function selectAllUnApproved(callback) {
 
 function selectAllAvailableWithin10Miles(latitude, longitude, callback) {
 	
-	var sqlQuery = "SELECT ssn, firstname, lastname, ( 1320 * acos( cos( radians("+ latitude +") ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( "+longitude +") ) + sin( radians( "+ latitude + ") ) * sin( radians( latitude ) ) ) ) AS distance FROM "+ tableName +" WHERE available='true' HAVING distance < 10 ORDER BY distance;"
-	
+	var sqlQuery = "SELECT ssn, firstname, lastname, ( 1320 * acos( cos( radians("+ latitude +") ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( "+longitude +") ) + sin( radians( "+ latitude + ") ) * sin( radians( latitude ) ) ) ) AS distance FROM "+ tableName +" WHERE available='true' HAVING distance < 10 ORDER BY distance;"	
 //	var sqlQuery = "SELECT * FROM " + tableName + " WHERE available='true'";
 	var res = {};
 	
@@ -361,5 +376,6 @@ exports.search_with_name = search_with_name;
 exports.search_with_email = search_with_email; 
 exports.search_with_ssn = search_with_ssn;
 exports.update = update;
+exports.updateLatLng = updateLatLng;
 exports.approve = approve;
 exports.selectAllUnApproved = selectAllUnApproved;

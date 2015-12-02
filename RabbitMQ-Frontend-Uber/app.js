@@ -118,8 +118,11 @@ app.post('/bk_driver_selectAllAvailable', driver.selectAllAvailable);
 app.post('/bk_driver_search_with_name', driver.search_with_name);
 app.post('/bk_driver_search_with_ssn', driver.search_with_ssn);
 app.post('/bk_driver_update', driver.update);
+app.post('/bk_driver_updateLatLng', driver.updateLatLng);
 app.post('/bk_driver_approve', driver.approve);
 app.post('/bk_driver_rating', driver.rating);
+
+
 
 //rides
 app.post('/bk_rides_register', rides.register);
