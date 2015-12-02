@@ -17,6 +17,11 @@ function signupCustomerController($scope, $http, $window) {
 	    var re = /^\d{5}$/;
 	    return re.test(postalCode);
 	}
+	
+	function validateMobileNo(mobileno) {
+	    var re = /^\d{10}$/;
+	    return re.test(mobileno);
+	}
 
 	function validateCardNo(cardno) {
 	    var re = /^\d{16}$/;
@@ -30,7 +35,7 @@ function signupCustomerController($scope, $http, $window) {
 	
 	$scope.signup = function() {
 		if (validateSSN($scope.ssn) && validateEmail($scope.email) && validatePostalCode($scope.postalcode) 
-				&& validateCardNo($scope.cardno) && validateCvv($scope.cvv)) {
+				&& validateCardNo($scope.cardno) && validateCvv($scope.cvv) && validateMobileNo($scope.mobileno)) {
 
 			var lat;
 			var lng;
@@ -82,6 +87,7 @@ function signupCustomerController($scope, $http, $window) {
 						if (response.result != "error") {
 							$window.location.assign('/loginCustomer');
 						} else {
+							alert("Error: Customer SSN, Email, Mobile no already exists. Please provide unique SSN, mobile no and email");
 						}			
 					}).error(function(error) {
 						console.log(error);
@@ -101,6 +107,8 @@ function signupCustomerController($scope, $http, $window) {
 				alert("Error: Card No should be 16 digit");
 			}else if (!validateCvv($scope.cvv)) {
 				alert("Error: CVV should be 3 digit");
+			} else if (!validateMobileNo($scope.mobileno)) {
+				alert("Error: Mobile No should be 10 digit");
 			}
 		}
 	};

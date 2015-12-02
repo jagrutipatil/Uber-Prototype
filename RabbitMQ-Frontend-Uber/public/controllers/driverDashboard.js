@@ -3,10 +3,13 @@ app.config(function($routeProvider, $locationProvider){
 	$locationProvider.html5Mode(true);
       $routeProvider
           .when('/driverDashboard',{
-    		templateUrl: '/UberDriverProfile.ejs', controller: 'driverProfileController'
+        	  templateUrl: '/UberDriverSummary.ejs', controller: 'driverSummaryController'
     	  })
           .when('/profile',{
               templateUrl: '/UberDriverProfile.ejs', controller: 'driverProfileController'
+          })
+          .when('/rides',{
+              templateUrl: '/DriverRides.ejs', controller: 'RidesController'
           })
           .when('/summary',{
                 templateUrl: '/UberDriverSummary.ejs', controller: 'driverSummaryController'
@@ -16,6 +19,11 @@ app.config(function($routeProvider, $locationProvider){
           })
 });
 
+
+app.controller("RidesController", RidesController);
+RidesController.$inject = [ '$scope', '$http', '$window'];
+function RidesController($scope, $http, $window) {	
+}
 
 app.controller("driverSummaryController", driverSummaryController);
 driverSummaryController.$inject = [ '$scope', '$http', '$window'];
