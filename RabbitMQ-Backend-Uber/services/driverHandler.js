@@ -64,6 +64,12 @@ var driver = require("./driver");
 		});
 	}
 	
+	if(msg.requestQueue=="updateLatLng"){
+		driver.updateLatLng(msg.ssn, msg.latitude, msg.longitude, function(err, res) {
+			callback(err, res);
+		});
+	}
+	
 	if(msg.requestQueue=="approve"){
 		driver.approve(msg.ssn, function(err, res) {
 			callback(err, res);

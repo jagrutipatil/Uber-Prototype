@@ -1,7 +1,6 @@
 var app=angular.module('SinglePage',['ngRoute']);
 app.config(function($routeProvider, $locationProvider){
 	$locationProvider.html5Mode(true);
-	console.log("Code is here");
       $routeProvider
       	  .when('/customerDashboard',{
       		templateUrl: '/viewProfileCustomer.ejs', controller: 'viewProfileController'
@@ -39,7 +38,7 @@ app.controller('rideImages', function($scope) {
 			console.log("SSN obtained for rides");
 			$scope.ssn5 = response.ssn;			
 		} else {
-			alert("error");
+			console.log("Error in obtained for rides");
 		}
 	}).error(function(error) {
 		console.log(error);
@@ -295,6 +294,20 @@ function myTrips($scope, $http, $window) {
 	 $scope.data = [];
 	 $scope.q = '';
 	 
+	 $http({
+			method : 'POST',
+			url : '/session_get_ssn',
+			data : {}
+		}).success(function(response) {
+			if (response.result != "error") {
+				$scope.ssn6=response.ssn;			
+			} else {
+				console.log("Payment controller");
+				alert("error");
+			}			
+		}).error(function(error) {
+			console.log(error);
+		});
 	 
 	 $scope.getData = function () {
 	        var arr = [];
@@ -325,14 +338,13 @@ function myTrips($scope, $http, $window) {
 			method : "POST",
 			url : '/getUserBills',
 			data : {
-				"customerId" : "1"
+				"customerId" : $scope.ssn6
 			}
 		}).success(function(data) {
 			console.log("data recieved : " + data.value[0]);
 		    $scope.bills = data.value;
 			
-		}).error(function(error) {
-			
+		}).error(function(error) {			
 		});
 	};
 	

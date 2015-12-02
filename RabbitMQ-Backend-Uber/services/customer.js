@@ -52,6 +52,23 @@ function approve(ssn, callback) {
 	}, sqlQuery);
 }
 
+function updateLatLng(ssn, latitude, longitude, callback) {
+	var res = {};
+	var sqlQuery = "UPDATE "+ tableName + " SET latitude = '"+latitude+"' , longitude = '"+longitude+"' WHERE ssn = '" + ssn+"'";
+	  	
+	mySqlDb.executeQuery(function(err, rows) {
+		if (!err) {
+	    	  res.code = "200";
+			  res.value = "success";
+		} else {
+			  console.log(err);
+			  res.code = "401";
+			  res.value = "error";
+		}
+		callback(err, res);
+	}, sqlQuery);
+}
+
 
 function updateProfile(ssn, email, password, firstname, lastname, mobileno, callback) {
 	var sqlQuery = "UPDATE "+ tableName + " SET email = '"+ email 
@@ -150,7 +167,7 @@ function search_with_name(firstname, lastname, callback) {
 
 
 function signin(email, password, callback) {	
-	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"'";
+	var sqlQuery = "SELECT * FROM " + tableName + " WHERE email='"+ email +"' AND password='"+ password+"' AND approved='true'";
 	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
@@ -251,5 +268,7 @@ exports.search_with_email = search_with_email;
 exports.search_with_ssn = search_with_ssn;
 exports.update = updateProfile;
 exports.updatePayment = updatePayment;
+exports.updateLatLng = updateLatLng;
 exports.approve = approve;
 exports.selectAllUnApproved = selectAllUnApproved;
+

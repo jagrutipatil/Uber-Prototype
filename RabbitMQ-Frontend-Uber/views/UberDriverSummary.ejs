@@ -1,33 +1,72 @@
-<div class="container" ng-controller="driverSummaryController" ng-init="getDriverSummary()">
-	<h1 style="margin-top:50px;">Summary</h1>
-	<table id="tableData" class="table table-bordered table-striped">
-   <thead>
-    <tr>
-              <th>Driver Name</th>
-              <th>Rating</th>
-              <th>Total No. of Trips</th>
-            </tr>
-  </thead>
-          <tbody ng-repeat="item in data">
-    <tr>
-              <td>{{ item.drivername }}</td>
-              <td>{{ item.rating }}</td>
-              <td>{{ item.nooftrips }}</td>
-              
-            </tr>
-   
-  </tbody>
-        </table>
-        
-         <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
-        Previous
-    </button>
-
-    <button ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">
-        Next
-    </button>
- </div>
-       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<div ng-controller="driverSummaryController">
+<div class="container" style="padding-top: 60px;">
+  <h1 class="page-header">Driver Profile</h1>
+  <div class="row">
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">    
+      <h3>Personal info</h3>
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Name:</label>
+          <div class="col-lg-8">
+            <label> {{driverprofile.firstname}} {{driverprofile.lastname}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Mobile no:</label>
+          <div class="col-lg-8">
+            <label>{{driverprofile.mobileno}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Email:</label>
+          <div class="col-lg-8">
+            <label>{{driverprofile.email}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Address</label>
+          <div class="col-lg-8">
+            <label>{{driverprofile.address}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">City</label>
+          <div class="col-lg-8">
+            <label>{{driverprofile.city}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">State</label>
+          <div class="col-lg-8">
+            <label>{{driverprofile.state}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Zip Code</label>
+          <div class="col-lg-8">
+            <label>{{driverprofile.postalcode}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">SSN</label>
+          <div class="col-lg-8">
+            <label>{{driverprofile.ssn}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Licenece No</label>
+          <div class="col-lg-8">
+            <label>{{driverprofile.dlno}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Rating</label>
+          <div class="col-lg-8">
+            <label>{{driverprofile.rating}}</label>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

@@ -12,6 +12,17 @@
 </head>
 
 <body ng-app="signupDriver" ng-controller="signupDriverController">
+<script>
+	function isNumberOnly(num) {
+	    var keyCode = (num.which) ? num.which : event.keyCode
+	    if (keyCode > 31 && (keyCode != 46 &&(keyCode < 48 || keyCode > 57))) {
+	      return false;
+	    } else {
+	      return true;
+	    }
+	}
+
+</script>
 <section class="wrapper">
 	<header class="contextual">
 		<a href="https://www.uber.com/">
@@ -81,9 +92,8 @@
 							</div>
 							<div class="form-group js-mobile-country required mobile-number">
 								<label for="mobile">Mobile Number</label>
-								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" ng-model="mobileno" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required/>
+								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" ng-model="mobileno" onkeypress="return isNumberOnly(event)" required/>
 								<div ng-messages="myForm.mobile.$error">
-								  <!--div ng-message="required">This field is required</div-->
 								  <div ng-message="pattern">Must be a valid 10 digit phone number</div>
 							</div>
 							
@@ -102,7 +112,7 @@
 										<span ng-show="myForm.state.$error.required">State is required.</span>
 									</div>
 									<div class="col-md-6 col-xs-6 md-push-left-half xs-push-left-half">
-										<input id="zipcode" type="text" placeholder="Zipcode" name="zipcode" ng-model="postalcode">
+										<input id="zipcode" type="text" placeholder="Zipcode" name="zipcode" ng-model="postalcode" onkeypress="return isNumberOnly(event)">
 										<span style="color:red" ng-show="myForm.zipcode.$dirty && myForm.zipcode.$invalid">
 										<span ng-show="myForm.zipcode.$error.required">Zip Code is required.</span>
 									</div>
@@ -121,7 +131,7 @@
 							<div class="credit-card-info">
 							            <div class="form-group required ">
 							                <label for="ssn_number">SSN#</label>
-							                <input id="ssn_number" type="text" placeholder="AAA-GG-SSSS" name="ssn_number" ng-model="ssn" required>
+							                <input id="ssn_number" type="text" placeholder="111-22-3333" name="ssn_number" ng-model="ssn" required>
 							                <span style="color:red" ng-show="myForm.ssn_number.$dirty && myForm.ssn_number.$invalid">
 										<span ng-show="myForm.ssn_number.$error.required">9 digit SSN is required.</span>
 							            </div>						    
@@ -162,7 +172,7 @@
 						
 						<div class="form-group agree-terms">
 							<p>
-								By clicking "Create Account" , you agree to Uber's
+								By clicking "Create Account" , you agree to Ubers
 								<a href="https://www.uber.com/legal/terms">Terms and Conditions</a>
 								and
 								<a href="https://www.uber.com/legal/privacy">Privacy Policy</a>

@@ -20,6 +20,7 @@ function executeQuery(callback, sqlQuery) {
 	conn.query(sqlQuery, function(err, rows, fields) {
 		if (err) {
 			console.log(err.message);
+			callback(err, rows);
 		} else {
 			console.log("DB Data:" + rows);
 			callback(err, rows);
