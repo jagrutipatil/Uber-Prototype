@@ -1,5 +1,12 @@
-var app = angular.module('maps');
 
+var app = angular.module('maps');
+var driverSsn;
+$(document).ready(function(){
+    $("#driver_ssn").change(function() {
+    	driverSsn = $('#driver_ssn option:selected').text();
+    	alert("You have Selected  :: "+driverSsn);
+  });  
+});
 app.controller('sendData', function($scope,$http) {
 	
     console.log("Code is here");
@@ -68,6 +75,54 @@ app.controller('sendData', function($scope,$http) {
 		}).error(function(error) {
 			console.log(error);
 		});
+    	var socket = io.connect('http://localhost:3000');
+    	//Socket function starts here
+    	
+    	
+			var data = {};
+			data.ssn = driverSsn;
+			data.request = 'Start Ride';
+			socket.emit('Server', data);
+			console.log(data);
+			
+	  
+	  	socket.on('Customer', function (data) {
+			console.log(data);
+			if(data.ssn.toString() === driverSsn && data.request.toString() === 'Ride Accepted'){
+				$("#reqBtn").addClass("hidden");	    
+				$("#dialog-message").removeClass("hidden");
+		    	$(function() {
+					    $( "#dialog-message" ).dialog({
+					      modal: true,
+					      buttons: {
+					        Ok: function() {
+					          $( this ).dialog( "close" );
+					          $("#startRideDiv").removeClass("hidden");
+					        }
+					      }
+					    });
+				});
+			}
+			
+			if(data.ssn.toString() === driverSsn && data.request.toString() === 'Ride Ended'){
+				$("#reqBtn").addClass("hidden");	    
+				$("#dialog-message").addClass("hidden");
+				$("#dialog-message2").removeClass("hidden");
+				$("#startRideDiv").addClass("hidden");
+		    	$(function() {
+					    $( "#dialog-message2" ).dialog({
+					      modal: true,
+					      buttons: {
+					        Ok: function() {
+					          $( this ).dialog( "close" );
+					          
+					          $("#startNewRideDiv").removeClass("hidden");
+					        }
+					      }
+					    });
+				});
+			}
+	  });
     	
 	};
 	
@@ -103,13 +158,14 @@ app.controller('sendData', function($scope,$http) {
 
 app.controller('LevelCtrl', function($scope,$http) {
 	var result;
+	var ssn
   $http({
 		method : 'POST',
 		url : '/bk_driver_selectAllAvailable',
 		data : { },
 		}).success(function(response){
-			console.log("code is here");
-		console.log(response.value);
+			console.log("code is here for ssn");
+		console.log(response.value[0].ssn);
 		$scope.srv = {};
 		  console.log("The response frm UI");
 		  console.log(result);
@@ -123,17 +179,53 @@ app.controller('LevelCtrl', function($scope,$http) {
   
 })
 
-
-/*$http({
-method : 'POST',
-url : '/billGenerate',
-data : { 'distance':parseInt(dist.value),
-		'totalTime':parseInt(dur.value),
-		'startTime':3,
-		'endTime':6,
-		'carType':"uberx"},
-}).success(function(response){
-$window.location.assign('/afterSignIn');
-}).error(function(error){
-console.log(error);
-});*/
+	/*
+		var socket = io.connect('http://localhost:3005');
+		
+		var driverSsn;
+		function sendRequest(ssn){
+			var data = {};
+			data.ssn = driverSsn=ssn;
+			data.request = 'Start Ride';
+			socket.emit('Server', data);
+			console.log(data);
+		}	
+	  
+	  	socket.on('Customer', function (data) {
+			console.log(data);
+			if(data.ssn.toString() === driverSsn && data.request.toString() === 'Ride Accepted'){
+				$("#reqBtn").addClass("hidden");	    
+				$("#dialog-message").removeClass("hidden");
+		    	$(function() {
+					    $( "#dialog-message" ).dialog({
+					      modal: true,
+					      buttons: {
+					        Ok: function() {
+					          $( this ).dialog( "close" );
+					          $("#startRideDiv").removeClass("hidden");
+					        }
+					      }
+					    });
+				});
+			}
+			
+			if(data.ssn.toString() === driverSsn && data.request.toString() === 'Ride Ended'){
+				$("#reqBtn").addClass("hidden");	    
+				$("#dialog-message").addClass("hidden");
+				$("#dialog-message2").removeClass("hidden");
+				$("#startRideDiv").addClass("hidden");
+		    	$(function() {
+					    $( "#dialog-message2" ).dialog({
+					      modal: true,
+					      buttons: {
+					        Ok: function() {
+					          $( this ).dialog( "close" );
+					          
+					          $("#startNewRideDiv").removeClass("hidden");
+					        }
+					      }
+					    });
+				});
+			}
+	  });
+*/
