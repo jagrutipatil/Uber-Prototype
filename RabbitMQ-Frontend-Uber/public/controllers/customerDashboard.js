@@ -287,66 +287,91 @@ app.controller('sendData', function($scope,$http) {
 
 app.controller("myTrips", myTrips);
 myTrips.$inject = [ '$scope', '$http', '$window'];
-function myTrips($scope, $http, $window) {	
-	$scope.bills = [];
-	 $scope.currentPage = 0;
-	 $scope.pageSize = 2;
-	 $scope.data = [];
-	 $scope.q = '';
-	 
-	 $http({
-			method : 'POST',
-			url : '/session_get_ssn',
-			data : {}
-		}).success(function(response) {
-			if (response.result != "error") {
-				$scope.ssn6=response.ssn;			
-			} else {
-				console.log("Payment controller");
-				alert("error");
-			}			
-		}).error(function(error) {
-			console.log(error);
-		});
-	 
-	 $scope.getData = function () {
-	        var arr = [];
-	        if($scope.q == '') {
-	            arr = $scope.bills;
-	        } else {
-	            for(var ea in $scope.bills) {
-	                if($scope.bills[ea].indexOf($scope.q) > -1) {
-	                    arr.push( $scope.bills[ea] );
-	                }
-	            }
-	        }
-	        return arr;
-	       
-	    };
-	    
-	    $scope.numberOfPages=function(){
-	        return Math.ceil($scope.getData().length/$scope.pageSize);                
-	    };
-	    
-	    for (var i=0; i<200000; i++) {
-	        $scope.data.push("Item "+i);
-	    }
-	 
-	$scope.getUserBills = function() {
-		console.log("recieved" );
-		$http({
-			method : "POST",
-			url : '/getUserBills',
-			data : {
-				"customerId" : $scope.ssn6
-			}
-		}).success(function(data) {
-			console.log("data recieved : " + data.value[0]);
-		    $scope.bills = data.value;
+function myTrips($scope, $http, $window) {$scope.bills = [];
+$scope.currentPage = 0;
+$scope.pageSize = 2;
+$scope.data = [];
+$scope.q = '';
+
+$http({
+		method : 'POST',
+		url : '/session_get_ssn',
+		data : {}
+	}).success(function(response) {
+		if (response.result != "error") {
+			$scope.ssn6=response.ssn;			
+		} else {
+			console.log("Payment controller");
+			alert("error");
+		}			
+	}).error(function(error) {
+		console.log(error);
+	});
+
+$scope.getData = function () {
+       var arr = [];
+       if($scope.q == '') {
+           arr = $scope.bills;
+       } else {
+           for(var ea in $scope.bills) {
+               if($scope.bills[ea].indexOf($scope.q) > -1) {
+                   arr.push( $scope.bills[ea] );
+               }
+           }
+       }
+       return arr;
+      
+   };
+   
+   $scope.numberOfPages=function(){
+       return Math.ceil($scope.getData().length/$scope.pageSize);                
+   };
+   
+   for (var i=0; i<200000; i++) {
+       $scope.data.push("Item "+i);
+   }
+
+$scope.getUserBills = function() {
+	console.log("recieved" );
+	$http({
+		method : 'POST',
+		url : '/session_get_ssn',
+		data : {}
+	}).success(function(response) {
+		if (response.result != "error") {
+			$scope.ssn6=response.ssn;	
 			
-		}).error(function(error) {			
-		});
-	};
+			$http({
+				method : "POST",
+				url : '/getUserBills',
+				data : {
+					"customerId" :response.ssn
+				}
+			}).success(function(data1) {
+				console.log("data recieved : " + data1.value[0]);
+			    $scope.bills = data1.value;
+				
+			}).error(function(error) {			
+			});
+		} else {
+			console.log("Payment controller");
+			alert("error");
+		}			
+	}).error(function(error) {
+		console.log(error);
+	});
 	
-	
+	/*$http({
+		method : "POST",
+		url : '/getUserBills',
+		data : {
+			"customerId" : $scope.ssn6
+		}
+	}).success(function(data) {
+		console.log("data recieved : " + data.value[0]);
+	    $scope.bills = data.value;
+		
+	}).error(function(error) {			
+	});*/
+};
 }
