@@ -13,7 +13,7 @@ var driver = require('./routes/driverClient');
 var delegator = require('./routes/delegatorClient');
 var bill = require('./routes/billingClient');
 var rides = require('./routes/ridesClient');
-
+var multer = require('multer');
 var http = require('http');
 var path = require('path');
 var amqp = require('amqp');
@@ -88,8 +88,6 @@ app.get('/driverRides',function(req, res){
 	  res.render('DriverRides', { title: 'Express' });
 });
 
-
-
 app.post('/session_get_ssn', session.ssn);
 
 app.post('/bk_customer_signin', customer.signin);
@@ -150,6 +148,15 @@ io.on('connection', function (socket) {
 	
 });
 /*
+=======
+//images
+app.get('/addImagesToRide',customer.renderAddImagesToRide);
+app.post('/addImagesToRide',customer.addImagesToRide);
+app.get('/getImagesOfRide', customer.getImagesOfRide);
+app.get('/getImage', customer.getImage);
+
+
+>>>>>>> 223e3964a1e42be711e58d4d72e3761255ccb595
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

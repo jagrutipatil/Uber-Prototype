@@ -1,14 +1,13 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
 	<Title>Signup Driver</Title>
     <link rel="stylesheet" href="/stylesheets/uber-icons.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/superfine.css" type="text/css">
 	<link rel="stylesheet" href="/stylesheets/Signup.css">
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
-
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="/controllers/signupDriver.js"></script> 
 </head>
 
@@ -34,7 +33,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="signup-form">
+			<section class="signup-form" name="myForm">
 				<article class="form-container">
 					<form class="form-vertical" autocomplete="on">
 						<div class="signup-form-section account">
@@ -46,13 +45,17 @@
 							<div class="signup-form-section-line blue"></div>
 							<div class="form-group required">
 								<label for="username">Email</label>
-								<input id="username" type="email" placeholder="name@example.com" name="username" ng-model="email"/>
-								<div class="error-notice"></div>
+								<input id="username" type="email" placeholder="name@example.com" name="username" ng-model="email" required>
+								<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+								<span ng-show="myForm.email.$error.required">Email is required.</span>
+								<span ng-show="myForm.email.$error.email">Invalid email address.</span>
+								</span>
 							</div>
 							<div class="form-group required ">
 								<label for="password">Password</label>
-								<input id="password" type="password" placeholder="At least 5 characters" name="password" ng-model="password">
-								<div class="error-notice"></div>
+								<input id="password" type="password" placeholder="At least 5 characters" name="password" ng-model="password" required>
+								<span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+								<span ng-show="myForm.user.$error.required">Password is required.</span>
 							</div>
 						</div>
 						
@@ -66,8 +69,9 @@
 								<label for="name">Name</label>
 								<div class="row form-row">
 									<div class="col-md-6 col-xs-6 md-push-right-half sm-push-right-half xs-push-right-half">
-										<input id="firstname" type="text" placeholder="First Name" name="firstname" ng-model="firstname">
-										<div class="error-notice"></div>
+										<input id="firstname" type="text" placeholder="First Name" name="firstname" ng-model="firstname" required>
+										<span style="color:red" ng-show="myForm.firstname.$dirty && myForm.firstname.$invalid">
+										<span ng-show="myForm.firstname.$error.required">First Name is required.</span>
 									</div>
 									<div class="col-md-6 col-xs-6 md-push-left-half xs-push-left-half">
 										<input id="lastname" type="text" placeholder="Last Name" name="lastname" ng-model="lastname">
@@ -77,24 +81,30 @@
 							</div>
 							<div class="form-group js-mobile-country required mobile-number">
 								<label for="mobile">Mobile Number</label>
-								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" ng-model="mobileno">
-								<div class="error-notice"></div>
+								<input id="mobile" type="tel" placeholder="(201) 555-5555" name="mobile" ng-model="mobileno" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required/>
+								<div ng-messages="myForm.mobile.$error">
+								  <!--div ng-message="required">This field is required</div-->
+								  <div ng-message="pattern">Must be a valid 10 digit phone number</div>
 							</div>
 							
 							<div class="form-group required">
 								<label for="Address">Address</label>
-								<input id="addressLineOne" type="text" placeholder="Address Line #1" name="Address1" ng-model="address">
+								<input id="addressLineOne" type="text" placeholder="Address Line #1" name="Address1" ng-model="address" required>
+								<!--span style="color:red" ng-show="myForm.Address1.$dirty && myForm.Address1.$invalid">
+								<span ng-show="myForm.Address1.$error.required">Address is required.</span-->
 								<br/><br/>
 								<input id="city" type="text" placeholder="city" name="city" ng-model="city">
 								<br/><br/>
 								<div class="row form-row">
 									<div class="col-md-6 col-xs-6 md-push-right-half sm-push-right-half xs-push-right-half">
-										<input id="state" type="text" placeholder="State" name="state" ng-model="state">
-										<div class="error-notice"></div>
+										<input id="state" type="text" placeholder="State" name="state" ng-model="state" required>
+										<span style="color:red" ng-show="myForm.state.$dirty && myForm.state.$invalid">
+										<span ng-show="myForm.state.$error.required">State is required.</span>
 									</div>
 									<div class="col-md-6 col-xs-6 md-push-left-half xs-push-left-half">
 										<input id="zipcode" type="text" placeholder="Zipcode" name="zipcode" ng-model="postalcode">
-										<div class="error-notice"></div>
+										<span style="color:red" ng-show="myForm.zipcode.$dirty && myForm.zipcode.$invalid">
+										<span ng-show="myForm.zipcode.$error.required">Zip Code is required.</span>
 									</div>
 								</div>
 							</div>
@@ -111,8 +121,9 @@
 							<div class="credit-card-info">
 							            <div class="form-group required ">
 							                <label for="ssn_number">SSN#</label>
-							                <input id="ssn_number" type="text" placeholder="AAA-GG-SSSS" name="ssn_number" ng-model="ssn">
-							                <div class="error-notice"></div>
+							                <input id="ssn_number" type="text" placeholder="AAA-GG-SSSS" name="ssn_number" ng-model="ssn" required>
+							                <span style="color:red" ng-show="myForm.ssn_number.$dirty && myForm.ssn_number.$invalid">
+										<span ng-show="myForm.ssn_number.$error.required">9 digit SSN is required.</span>
 							            </div>						    
 							</div>
 							
@@ -129,7 +140,8 @@
 							            <div class="form-group required ">
 							                <label for="dl_number">License#</label>
 							                <input id="dl_number" type="text" placeholder="########" name="dl_number" ng-model="dlno">
-							                <div class="error-notice"></div>
+							                <span style="color:red" ng-show="myForm.dl_number.$dirty && myForm.dl_number.$invalid">
+										<span ng-show="myForm.dl_number.$error.required">Drivers License is required.</span>
 							            </div>						    
 							</div>
 							
@@ -141,9 +153,7 @@
 									<button class="btn btn-primary js-submit" type="submit" ng-click="signup()">Create Account</button>
 								</div>
 								<div class="signup-form-section-notice">
-									Please fill out all required (
-									<span class="star">*</span>
-									) fields.
+									Please fill out all required (<span class="star">*</span>) fields.
 								</div>
 							</div>
 							<div class="signup-form-section-number  blue"></div>
@@ -165,9 +175,5 @@
 			</section>
 		</div>
 	</section>
-
-
-
 </section>
-</body>
 </html>

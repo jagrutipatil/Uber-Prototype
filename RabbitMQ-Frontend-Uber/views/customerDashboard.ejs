@@ -20,9 +20,16 @@
 </head>
 <body ng-app="SinglePage">
 	<script>
+ 
+ function delete_customer(){
+    window.location.href = '/delete_customer';
+  }
+
   function logout(){
     window.location.href = '/logout';
   }
+
+
   </script>
 <div class="container">
 	<div class="row">
@@ -44,6 +51,9 @@
                 <a href="/payment" class="list-group-item text-center">
                   <br/>Payment
                 </a>
+                <a onclick="delete_customer()" class="list-group-item text-center">
+                  <br/>Deactivate Account
+                </a>                
                 <a onclick="logout()" class="list-group-item text-center">
                   <br/>Logout
                 </a>

@@ -116,6 +116,8 @@ function delete_customer(req , res){
 	});
 }
 
+
+
 function delete_driver(req , res){
 	var msg_payload = { "ssn": req.ubersession.driver.ssn,"requestQueue":"remove_with_ssn"};	
 	mq_client.make_request('driver',msg_payload, function(err,results){

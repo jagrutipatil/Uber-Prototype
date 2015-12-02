@@ -8,7 +8,7 @@ $.ajax({
                 driverSSN = data.ssn;                
         });
 
-var socket = io.connect('http://localhost:3005');
+var socket = io.connect('http://localhost:3000');
 
 setTimeout(function(){
     console.log(driverSSN);
