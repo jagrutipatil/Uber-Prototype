@@ -25,56 +25,75 @@ app.controller('sendData', function($scope,$http) {
    			 return s3() + '-' + s2() + '-' + s4();
     	}
     	var ride_id = generateUniqueId();
-    	$http({
-			method : 'POST',
-			url : '/bk_rides_register',
-			data : {
-				"ride_id" : ride_id,
-				"cust_id" : "111111",
-				"driver_id": "222222",
-				"origin" : $(".orig").val(),
-				"dest" : $(".dest").val(),
-				"date" : "29112015",
-				"distance" : parseInt(dist.value),
-				"duration" : parseInt(dur.value),
-				"flag" : "0",
-			}
-		}).success(function(response) {
-			if (response.result != "error") {
-				alert("Success Ride");
-			} else {
-			}			
-		}).error(function(error) {
-			console.log(error);
-		});
     	
     	$http({
-			method : 'POST',
-			url : '/billGenerate',
-			data : {
-				"ride_id" : ride_id,
-				"customerId" : "111111",
-				"driverId": "222222",
-				"source" : $(".orig").val(),
-				"destination" : $(".dest").val(),
-				"date" : "29112015",
-				"distance" : parseInt(dist.value),
-				"duration" : parseInt(dur.value),
-				"distance" : parseInt(dist.value),
-				"totalTime" : parseInt(dur.value),
-				"startTime" : "11",
-				"endTime" : "12",
-				"flag" : "0",
-				"carType" : "uberx"
-			}
-		}).success(function(response) {
-			if (response.result != "error") {
-				alert("Success Bill " + response.value);
-			} else {
-			}			
-		}).error(function(error) {
-			console.log(error);
-		});
+    		method : 'POST',
+    		url : '/session_get_ssn',
+    		data : {}
+    	}).success(function(response) {
+    		if (response.result != "error") {
+    			console.log("SSN obtained for rides");
+    			ssn = response.ssn;		
+    			
+    			$http({
+    				method : 'POST',
+    				url : '/bk_rides_register',
+    				data : {
+    					"ride_id" : ride_id,
+    					"cust_id" : ssn,
+    					"driver_id": driverSsn,
+    					"origin" : $(".orig").val(),
+    					"dest" : $(".dest").val(),
+    					"date" : "29112015",
+    					"distance" : parseInt(dist.value),
+    					"duration" : parseInt(dur.value),
+    					"flag" : "0",
+    				}
+    			}).success(function(response) {
+    				if (response.result != "error") {
+    					alert("Success Ride");
+    				} else {
+    				}			
+    			}).error(function(error) {
+    				console.log(error);
+    			});
+    	    	
+    	    	$http({
+    				method : 'POST',
+    				url : '/billGenerate',
+    				data : {
+    					"ride_id" : ride_id,
+    					"customerId" : ssn,
+    					"driverId": driverSsn,
+    					"source" : $(".orig").val(),
+    					"destination" : $(".dest").val(),
+    					"date" : "29112015",
+    					"distance" : parseInt(dist.value),
+    					"duration" : parseInt(dur.value),
+    					"distance" : parseInt(dist.value),
+    					"totalTime" : parseInt(dur.value),
+    					"startTime" : "5",
+    					"endTime" : "6",
+    					"flag" : "0",
+    					"carType" : "uberx"
+    				}
+    			}).success(function(response) {
+    				if (response.result != "error") {
+    					alert("Success Bill " + response.value);
+    				} else {
+    				}			
+    			}).error(function(error) {
+    				console.log(error);
+    			});
+    			
+    		} else {
+    			alert("error");
+    		}
+    	}).error(function(error) {
+    		console.log(error);
+    	});
+    	
+    	
     	var socket = io.connect('http://localhost:3000');
     	//Socket function starts here
     	
@@ -114,6 +133,7 @@ app.controller('sendData', function($scope,$http) {
 					      modal: true,
 					      buttons: {
 					        Ok: function() {
+					        	window.open('/driverRating');
 					          $( this ).dialog( "close" );
 					          
 					          $("#startNewRideDiv").removeClass("hidden");

@@ -5,7 +5,7 @@ $.ajax({
             url         : '/session_get_ssn', // the url where we want to POST
             data        :  {}
         }).done(function(data) {
-                driverSSN = data.ssn;                
+                driverSSN = data.driver.ssn;                
         });
 
 var socket = io.connect('http://localhost:3000');
@@ -37,6 +37,8 @@ setTimeout(function(){
 
 function endRide(){
 		socket.emit('Server', { ssn : driverSSN, request: 'Ride Ended' });
+		console.log("Function end ride");
+		window.open('/customerRating');
 		$("#endBtn").addClass("hidden");
 		$("#afterLogin").removeClass("hidden");
 }

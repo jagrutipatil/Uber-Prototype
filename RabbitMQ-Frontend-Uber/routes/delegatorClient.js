@@ -140,6 +140,22 @@ function delete_driver(req , res){
 	});
 }
 
+exports.customerRating = function(req, res){
+	ejs.renderFile("./views/customerRating.ejs", function(err, result) {
+		if (!err) {
+			res.end(result);
+		}
+	});
+}
+
+exports.driverRating = function(req, res){
+	ejs.renderFile("./views/driverRating.ejs", function(err, result) {
+		if (!err) {
+			res.end(result);
+		}
+	});
+}
+
 exports.index = function(req, res){
 	  res.render('index', { title: 'Express' });
 	};
