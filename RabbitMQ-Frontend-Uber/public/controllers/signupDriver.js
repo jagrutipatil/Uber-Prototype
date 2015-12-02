@@ -70,9 +70,8 @@ function signupDriverController($scope, $http, $window) {
 						if (response.result != "error") {
 							alert("Success");
 							$window.location.assign('/loginDriver');
-
 						} else {
-							alert("error");
+							alert("Error: Driver SSN, Email, Mobile no already exists. Please provide unique SSN, mobile no and email");
 						}
 					}).error(function(error) {
 						console.log(error);
