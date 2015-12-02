@@ -21,6 +21,7 @@ var tableName = "uber.drivers";
 function signup(ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno,  latitude, longitude, url, callback) {
 	var GoogleMapsLoader;
 	var res = {};
+	
 	console.log("In singup backend module");	
 	
 	var sqlQuery = "INSERT INTO "+ tableName + " ( ssn, email, password, firstname, lastname, mobileno, address, city, state, postalcode, dlno, approved, available, latitude, longitude, url, rating) VALUES ( '" + ssn 
@@ -53,6 +54,7 @@ function signup(ssn, email, password, firstname, lastname, mobileno, address, ci
 		}
 		callback(err, res);
 	}, sqlQuery);
+	
 }
 
 
@@ -108,9 +110,7 @@ function approve(ssn, callback) {
 }
 
 function update(ssn, email, password, firstname, lastname, mobileno, postalcode, callback) {
-	var sqlQuery = "UPDATE "+ tableName + " SET email = '"+ email 
-	+ "', password = '"+password+"' , firstname = '"+firstname+"' , lastname = '"+lastname+"', +" +
-			" mobileno = '"+mobileno+"', postalcode = '"+postalcode+"') WHERE ssn = '" + ssn+"'";
+	var sqlQuery = "UPDATE "+ tableName + " SET email = '"+email+ "', password = '"+password+"' , firstname = '"+firstname+"' , lastname = '"+lastname+"',mobileno = '"+mobileno+"' WHERE ssn = '" + ssn+"'";
 	  	
 	var res = {};
 	mySqlDb.executeQuery(function(err, rows) {
@@ -122,7 +122,7 @@ function update(ssn, email, password, firstname, lastname, mobileno, postalcode,
 			  res.code = "401";
 			  res.value = "error";
 		}
-		callback(err, res);
+//		callback(err, res);
 	}, sqlQuery);
 }
 

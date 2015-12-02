@@ -54,10 +54,6 @@ app.get('/logout', function (req, res) {
 	  res.redirect('/');
 });
 
-app.get('/addImagesToRide',customer.renderAddImagesToRide);
-app.post('/addImagesToRide',customer.addImagesToRide);
-app.get('/getImagesOfRide', customer.getImagesOfRide);
-app.get('/getImage', customer.getImage);
 
 app.get('/:name', rides.partials);
 
@@ -73,6 +69,10 @@ app.get('/updateCustomer', session.isAuthUser, delegator.updateCustomer);
 app.get('/customerProfile', session.isAuthUser, delegator.updateCustomer);
 app.get('/customerPayment', session.isAuthUser, delegator.updatePaymentCustomer);
 app.get('/customerDashboard', session.isAuthUser, delegator.customerDashboard);
+
+app.get('/driverDashboard', session.isAuthDriver, delegator.driverDashboard);
+app.get('/admin', delegator.admin);
+app.get('/', delegator.home);
 app.get('/RequestRide', delegator.requestRide);
 app.get('/loginPage', delegator.loginPage);
 app.get('/loginCustomer', session.skipAuthUser, delegator.loginCustomer);
@@ -80,14 +80,12 @@ app.get('/signupCustomer', session.skipAuthUser, delegator.signupCustomer);
 app.get('/loginDriver', session.skipAuthDriver, delegator.loginDriver);
 app.get('/signupDriver', session.skipAuthDriver, delegator.signupDriver);
 
-
 app.get('/index',function(req, res){
 	  res.render('index', { title: 'Express' });
 });
 app.get('/index2',function(req, res){
 	  res.render('index2', { title: 'Express' });
 });
-
 
 
 app.get('/driverRides',function(req, res){
@@ -131,6 +129,19 @@ app.post('/billGenerate', bill.billGenerate);
 app.post('/estimate', bill.estimate);
 app.post('/getUserBills', bill.getUserBills);
 app.post('/getBill', bill.getBill);
+
+
+app.post('/getDriverSummary', bill.getDriverSummary);
+
+
+
+//Images
+app.get('/addImagesToRide', session.isAuthDriver, customer.renderAddImagesToRide);
+app.post('/addImagesToRide', customer.addImagesToRide);
+app.get('/getImagesOfRide', session.isAuthDriver, customer.getImagesOfRide);
+app.get('/getImage', session.isAuthDriver, customer.getImage);
+
+
 
 var server = require('http').Server(app);
 var io = require('socket.io')(server);

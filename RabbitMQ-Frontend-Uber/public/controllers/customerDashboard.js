@@ -18,10 +18,61 @@ app.config(function($routeProvider, $locationProvider){
           .when('/mytrips',{
                 templateUrl: '/UberMyTrips.ejs', controller: 'myTrips'
           })
+          .when('/addImages',{
+                templateUrl: '/addImagesToRide.ejs', controller: 'addImages'
+          })
+          .when('/rideImages',{
+                templateUrl: '/RideImages.ejs', controller: 'rideImages'
+          })
 		  .when("/requestride",{
 		      templateUrl: "/ride.ejs", controller: 'rideController'
 		  });
 });
+
+app.controller('rideImages', function($scope) {
+	$http({
+		method : 'POST',
+		url : '/session_get_ssn',
+		data : {}
+	}).success(function(response) {
+		if (response.result != "error") {
+			console.log("SSN obtained for rides");
+			$scope.ssn5 = response.ssn;			
+		} else {
+			alert("error");
+		}
+	}).error(function(error) {
+		console.log(error);
+	});
+
+	$scope.model = {
+		message : "This is sum"
+	}
+	$scope.requestRide = function() {
+		window.location.href = '/RequestRide';
+	}
+	$scope.estimateRide = function() {
+		window.location.href = '/RequestRide';
+	}
+});
+
+app.controller('addImages', function($scope) {	
+	$http({
+		method : 'POST',
+		url : '/session_get_ssn',
+		data : {}
+	}).success(function(response) {
+		if (response.result != "error") {
+			console.log("SSN obtained for rides");
+			$scope.ssn5 = response.ssn;			
+		} else {
+			alert("error");
+		}
+	}).error(function(error) {
+		console.log(error);
+	});
+});
+
 
 app.controller('rideController', function($scope) {
 	$http({

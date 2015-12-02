@@ -13,6 +13,7 @@ function loginDriverController($scope, $http, $window) {
 		}).success(function(response) {
 			if (response.result != "error") {
 				alert("Success");
+			$window.location.assign('/driverDashboard');
 			} else {
 				alert("error");
 			}			

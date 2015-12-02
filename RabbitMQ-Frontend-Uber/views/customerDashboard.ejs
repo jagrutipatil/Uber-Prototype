@@ -18,12 +18,14 @@
 	  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDihfOVNgztmzA89BEbC8h4NdjXAeCZO-w&libraries=places&callback=initAutocomplete" async defer></script>
 
 </head>
+
 <body ng-app="SinglePage">
 	<script>
  
  function delete_customer(){
     window.location.href = '/delete_customer';
   }
+
 
   function logout(){
     window.location.href = '/logout';
@@ -53,6 +55,12 @@
                 </a>
                 <a onclick="delete_customer()" class="list-group-item text-center">
                   <br/>Deactivate Account
+                </a>
+                <a href="/addImages" class="list-group-item text-center">
+                  <br/>Upload Images
+                </a>
+                <a href="/rideImages" class="list-group-item text-center">
+                  <br/>View Images
                 </a>                
                 <a onclick="logout()" class="list-group-item text-center">
                   <br/>Logout

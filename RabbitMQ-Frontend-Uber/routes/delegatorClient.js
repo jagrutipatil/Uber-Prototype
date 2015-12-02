@@ -44,6 +44,14 @@ function customerDashboard(req, res) {
 	});
 }
 
+function driverDashboard(req, res) {
+	ejs.renderFile("./views/driverDashboard.ejs", function(err, result) {
+		if (!err) {
+			res.end(result);
+		}
+	});
+}
+
 
 function signupDriver(req, res) {
 	ejs.renderFile("./views/SignupDriver.ejs", function(err, result) {
@@ -150,6 +158,10 @@ exports.admin = admin;
 exports.loginPage = loginPage;
 exports.home = home;
 exports.customerDashboard = customerDashboard;
+
+exports.driverDashboard = driverDashboard;
+
 exports.delete_customer = delete_customer;
 exports.delete_driver = delete_driver;
 exports.requestRide = requestRide;
+

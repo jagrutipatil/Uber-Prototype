@@ -53,7 +53,10 @@ function signupDriverController($scope, $http, $window) {
 			}
 		}).success(function(response) {
 			if (response.result != "error") {
-				$window.location.assign('/loginDriver');
+
+				alert("Success");
+			$window.location.assign('/loginDriver');	
+
 			} else {
 				alert("error");
 			}			

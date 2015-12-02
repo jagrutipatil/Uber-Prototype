@@ -30,7 +30,9 @@ function signin(req, res) {
 			if(results.code == 200){
 				console.log("valid Login");
 				req.ubersession.driver = results.value;
-				console.log("Printing session\n\n");			
+				console.log("Printing session\n\n");	
+				console.log(req.ubersession.driver);
+				console.log("session Available\n\n");	
 				res.send({"result":"success", "value" : results.value});
 			} else {    
 				console.log("Invalid Login");
@@ -110,6 +112,7 @@ function search_with_name(req, res) {
 }
 
 function search_with_ssn(req, res) {
+	console.log(req.param("ssn"));
 	var msg_payload = {"ssn": req.param("ssn"), "requestQueue":"search_with_ssn"};	
 	mq_client.make_request('driver',msg_payload, function(err, results){
 		    console.log(results);
