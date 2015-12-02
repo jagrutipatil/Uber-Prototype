@@ -84,7 +84,7 @@ function selectAll(req, res) {
 }
 
 function selectAllAvailable(req, res) {
-	var msg_payload = {"requestQueue":"selectAllAvailable"};	
+	var msg_payload = {"latitude" : req.param("latitude"),"longitude" : req.param("longitude"), "requestQueue":"selectAllAvailable"};	
 	mq_client.make_request('driver',msg_payload, function(err, results){
 		    console.log(results);
 			if(results.code == 200){
@@ -97,6 +97,8 @@ function selectAllAvailable(req, res) {
 	});
 }
 
+
+
 function search_with_name(req, res) {
 	var msg_payload = {"firstname": req.param("firstname"), "lastname": req.param("lastname"), "requestQueue":"search_with_name"};	
 	mq_client.make_request('driver',msg_payload, function(err, results){
@@ -104,7 +106,9 @@ function search_with_name(req, res) {
 			if(results.code == 200){
 				console.log("valid Login");				
 				res.send({"result":"success", "value" : results.value});
-			} else {    
+			} else if (results.code == 204) {
+				res.send({"result":"success", "value" : ""});
+			}else {    
 				console.log("Invalid Login");
 				res.send({"result":"error"});
 			}

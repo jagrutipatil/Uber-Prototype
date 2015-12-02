@@ -228,8 +228,11 @@ function selectAllUnApproved(callback) {
 	}, sqlQuery);
 }
 
-function selectAllAvailable(callback) {	
-	var sqlQuery = "SELECT * FROM " + tableName + " WHERE available='true'";
+function selectAllAvailableWithin10Miles(latitude, longitude, callback) {
+	
+	var sqlQuery = "SELECT ssn, firstname, lastname, ( 1320 * acos( cos( radians("+ latitude +") ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians( "+longitude +") ) + sin( radians( "+ latitude + ") ) * sin( radians( latitude ) ) ) ) AS distance FROM "+ tableName +" WHERE available='true' HAVING distance < 10 ORDER BY distance;"
+	
+//	var sqlQuery = "SELECT * FROM " + tableName + " WHERE available='true'";
 	var res = {};
 	
 	mySqlDb.executeQuery(function(err, rows) {
@@ -353,7 +356,7 @@ exports.signin = signin;
 exports.remove_with_email = remove_with_email;
 exports.remove_with_ssn = remove_with_ssn;
 exports.selectAll = selectAll;
-exports.selectAllAvailable = selectAllAvailable;
+exports.selectAllAvailable = selectAllAvailableWithin10Miles;
 exports.search_with_name = search_with_name;
 exports.search_with_email = search_with_email; 
 exports.search_with_ssn = search_with_ssn;
