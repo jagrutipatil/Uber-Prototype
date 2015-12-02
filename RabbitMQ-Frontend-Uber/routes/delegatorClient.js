@@ -130,6 +130,13 @@ function delete_driver(req , res){
 	});
 }
 
+exports.index = function(req, res){
+	  res.render('index', { title: 'Express' });
+	};
+exports.index2 = function(req, res){
+	  res.render('index2', { title: 'Express' });
+};
+
 exports.loginCustomer = loginCustomer;
 exports.signupCustomer = signupCustomer;
 exports.loginDriver = loginDriver;

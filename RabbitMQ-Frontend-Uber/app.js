@@ -76,6 +76,17 @@ app.get('/loginDriver', session.skipAuthDriver, delegator.loginDriver);
 app.get('/signupDriver', session.skipAuthDriver, delegator.signupDriver);
 
 
+app.get('/index',function(req, res){
+	  res.render('index', { title: 'Express' });
+});
+app.get('/index2',function(req, res){
+	  res.render('index2', { title: 'Express' });
+});
+
+
+app.get('/driverRides',function(req, res){
+	  res.render('DriverRides', { title: 'Express' });
+});
 
 
 
@@ -117,8 +128,29 @@ app.post('/estimate', bill.estimate);
 app.post('/getUserBills', bill.getUserBills);
 app.post('/getBill', bill.getBill);
 
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+server.listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
 
-
+io.on('connection', function (socket) {
+	var count = 0;
+	socket.broadcast.emit('news', { hello: 'world' });
+	socket.on('Server', function (data) {
+		console.log(data);
+	  if(data.request == 'Start Ride'){
+		  socket.broadcast.emit('Driver', data);
+	  } else if(data.request == 'Ride Accepted'){
+		  socket.broadcast.emit('Customer', data);
+	  }	 else if(data.request == 'Ride Ended'){
+		  socket.broadcast.emit('Customer', data);
+	  }	      
+	});
+	
+});
+/*
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+*/
