@@ -35,4 +35,5 @@ function register(req, res) {
 			}
 	});
 }
+
 exports.register=register;

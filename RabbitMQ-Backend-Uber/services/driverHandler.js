@@ -35,7 +35,7 @@ var driver = require("./driver");
 	}
 	
 	if(msg.requestQueue=="selectAllAvailable"){
-		driver.selectAllAvailable(function(err, res) {
+		driver.selectAllAvailable(msg.latitude, msg.longitude, function(err, res) {
 			callback(err, res);
 		});
 	}

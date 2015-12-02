@@ -131,7 +131,7 @@ app.post('/getUserBills', bill.getUserBills);
 app.post('/getBill', bill.getBill);
 
 
-app.post('/getDriverSummary', bill.getDriverSummary);
+//app.post('/getDriverSummary', rides.getDriverSummary);
 
 
 
@@ -164,3 +164,8 @@ io.on('connection', function (socket) {
 	});
 	
 });
+/*
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
+*/

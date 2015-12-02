@@ -10,9 +10,19 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
   <script src="/controllers/maps_f.js"></script>
+  <script src="/controllers/maps_ct.js"></script>
   <script data-require="angular.js@*" data-semver="1.3.0-beta.5" src="https://code.angularjs.org/1.3.0-beta.5/angular.js"></script>
-  <link rel='stylesheet' href='./stylesheets/style2.css' />
+  <link rel='stylesheet' href='./stylesheets/style2.css' />   
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
+  <style>
+  .hidden{
+		visibility : hidden !important;
+	}
+  </style>
+	  
 <body ng-app="maps" style="font-family: Arial; font-size: 12px;">
 <div id="slide-menu-content" class="slide-menu__content height--full">
 
@@ -40,16 +50,16 @@
                 </div>
                   
                 <div class="trip-info-tools">
-                  <input type="Submit" ng-click="submit2();" class="btn btn--primary" value="Display Drivers"/><br></br>
+                   <input type="Submit" ng-click="submit2();" class="btn btn--primary" value="Display Drivers"/><br></br>
                                   
                   </form>
                   
                   <button ng-click="submit();" class="btn btn--primary"  value="Request Ride">Request Ride</button>
 
-<div ng-controller='LevelCtrl'>
-                  <label for="field1"><h2 ng-bind-template='DRIVERS Selected: {{srv.level.id}}'></h2></label>
-                  <label for="field1"><select class="form-control" name="level" ng-model="srv.level.id" ng-options="level.ssn as level.firstname for level in data.getLevels() ">
-                    <option value='0'>--choose level--</option>
+                  <div ng-controller='LevelCtrl'>
+                  <label for="field1">DRIVERS Selected: <h2 data-ng-model="driver_ssn" value="{{srv.level.id}}" ng-bind-template='{{srv.level.id}}'></h2></label>
+                  <label for="field1"><select  id="driver_ssn" class="form-control" name="level" ng-model="srv.level.id" ng-options="level.ssn as level.ssn for level in data.getLevels() ">
+                    <option value='0'>--SELECT Driver--</option>
                   </select></label>
                   </div>
 
@@ -90,8 +100,37 @@
 
 </div>
 
+<!-- Socket script below -->
+<p></p>
+
+<div id="dialog-message" class="hidden" title="Ride Started">
+	  <p>
+	    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+	    	Your Uber driver is on the way!
+	  </p>
+</div>
+
+ <div id="dialog-message2" class="hidden" title="Ride Ended">
+	  <p>
+	    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+	    	Thank you for Riding with Uber. Your Ride has ended. Have a great day!
+	  </p>
+</div>
+
+<div class="hidden" id="startRideDiv">
+	<p>
+		Your Ride has Started.
+	</p>
+</div>
+
+<div class="hidden" id="startNewRideDiv">
+	<p>
+		Your Ride has Ended. Please go to the request new rides page to ride again with Uber! Redirecting to submit feedback...
+	</p>
+</div>
+<!-- Socket script ends -->
+
 </body> 
-<script src="/controllers/maps_ct.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDihfOVNgztmzA89BEbC8h4NdjXAeCZO-w&libraries=places&callback=initAutocomplete"
          async defer></script>
 
