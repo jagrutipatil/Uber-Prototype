@@ -70,12 +70,12 @@ function getBill(req, res) {
 }
 
 function getDriverSummary(req, res) {
-	var msg_payload = {"driverId": req.param("driverId"),"requestQueue":"getDriverSummary"};
+	var msg_payload = { "driverId": req.param("driverId"),"requestQueue":"getDriverSummary"};
 	
 	mq_client.make_request('billing',msg_payload, function(err,results){
 		    console.log(results);
 			if(results.code == 200){
-				console.log("valid Login");				
+				console.log(results.value);				
 				res.send({"result":"success", "value" : results.value});
 			} else {    
 				console.log("Invalid Login");
@@ -91,3 +91,4 @@ exports.estimate = estimate;
 exports.getUserBills = getUserBills;
 exports.getBill = getBill;
 exports.getDriverSummary = getDriverSummary;
+

@@ -120,21 +120,53 @@ function myTrips($scope, $http, $window) {
 //	        $scope.data.push("Item "+i);
 //	    }
 	 
-	$scope.getDriverSummary = function() {
-		$http({
-			method : "POST",
-			url : '/getDriverSummary',
-			data : {
-				"DriverId" : "1"
-			}
-		}).success(function(response) {
-			console.log("data recieved : " + response.value[0]);
-		    $scope.data = response.value;
-			
-		}).error(function(error) {
-			
-		});
-	};
+//	 $scope.getDriverSummary = function() {
+//	 $http({
+//			method : 'POST',
+//			url : '/session_get_ssn',
+//			data : {}
+//		}).success(function(response) {
+//			if (response.result != "error") {
+//				alert("SSN obtained");
+//				var ssn = response.driver.ssn;
+//				console.log(ssn);
+//				console.log("Reached SSN");
+//				$http({
+//					method : "POST",
+//					url : '/getDriverSummary',
+//					data : {
+//						"DriverId" : ssn
+//					}
+//				}).success(function(response) {
+//					console.log("data recieved : " + response.value[0]);
+//				    $scope.data = response.value;
+//					
+//				}).error(function(error) {
+//					
+//				});
+//			} else {
+//				alert("error1");
+//			}			
+//		}).error(function(error) {
+//			console.log(error);
+//		});
+//		};
+	 
+//	 $scope.getDriverSummary = function() {
+//			$http({
+//				method : "POST",
+//				url : '/getDriverSummary',
+//				data : {
+//					"DriverId" : ssn
+//				}
+//			}).success(function(response) {
+//				console.log("data recieved : " + response.value[0]);
+//			    $scope.data = response.value;
+//				
+//			}).error(function(error) {
+//				
+//			});
+//		};
 
 	
 }
