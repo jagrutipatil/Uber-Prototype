@@ -19,7 +19,7 @@ function signup(req, res) {
 			"exp_year": req.param("exp_year"),"postalcode": req.param("postalcode"),
 			"latitude": req.param("latitude"),"longitude": req.param("longitude"),
 			"requestQueue":"signup"};
-	
+	console.log(msg_payload);
 	mq_client.make_request('customer',msg_payload, function(err,results){
 		console.log("Got callback from server");
 			if(results.code == 200){
@@ -35,7 +35,7 @@ function signup(req, res) {
 
 function signin(req, res) {
 	var msg_payload = { "email": req.param("email"), "password": req.param("password"),"requestQueue":"signin"};	
-	mq_client.make_request('customer',msg_payload, function(err,results){
+	mq_client.make_request('customer',msg_payload, function(err,results){			
 		    console.log(results);
 			if(results.code === "200"){
 				console.log("valid login");
@@ -223,7 +223,7 @@ exports.addImagesToRide = function(req, res){
 	    var Schema = mongoose.Schema;
 	    var conn = mongoose.createConnection('mongodb://localhost:27017/neuber');
 
-	    var mongo = require("./mongo");
+	    var mongo = require("mongo");
 	    var mongoURL = "mongodb://localhost:27017/users";
 	    
 	    var fs = require('fs');
@@ -236,7 +236,7 @@ exports.addImagesToRide = function(req, res){
 	    var dirname = require('path').dirname(__dirname);
 	    var filename = req.files.file.name;
 	    var extension = req.files.file.path.split(/[. ]+/).pop();
-	    var targetName = req.ubersession.user.ssn + uid(22) + '.' + extension;  
+	    var targetName = req.ubersession.user.ssn +'_' + uid(22) + '.' + extension;  
 	    var path = req.files.file.path;
 	    var type = req.files.file.mimetype;
 

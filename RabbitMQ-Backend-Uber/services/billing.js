@@ -371,7 +371,26 @@ var getBill = function(customerId, driverId, callback){
 	}, fetchData);
 };
 
+//function getDriverSummary(driverId, callback) {	
+//	var sqlQuery = "SELECT COUNT(billid) FROM uber.bills where driverid='"+driverId+"'";
+//	var res = {};
+//	
+//	mySqlDb.executeQuery(function(err, rows) {
+//		if (!err) {
+//			console.log("In Driver Summary Query");
+//	    	  res.code = "200";
+//			  res.value = rows;
+//			  
+//		} else {
+//			  console.log(err);
+//			  res.code = "401";
+//			  res.value = "Failed Login";
+//		}
+//	}, sqlQuery);
+//}
+
 exports.billGenerate=billGenerate;
 exports.estimate=estimate;
 exports.getUserBills=getUserBills;
 exports.getBill=getBill;
+//exports.getDriverSummary = getDriverSummary;

@@ -131,7 +131,7 @@ app.post('/getUserBills', bill.getUserBills);
 app.post('/getBill', bill.getBill);
 
 
-app.post('/getDriverSummary', bill.getDriverSummary);
+//app.post('/getDriverSummary', rides.getDriverSummary);
 
 
 
