@@ -54,6 +54,11 @@ app.get('/logout', function (req, res) {
 	  res.redirect('/');
 });
 
+app.get('/addImagesToRide',customer.renderAddImagesToRide);
+app.post('/addImagesToRide',customer.addImagesToRide);
+app.get('/getImagesOfRide', customer.getImagesOfRide);
+app.get('/getImage', customer.getImage);
+
 app.get('/:name', rides.partials);
 
 app.get('/admin', delegator.admin);
@@ -82,6 +87,11 @@ app.get('/index',function(req, res){
 app.get('/index2',function(req, res){
 	  res.render('index2', { title: 'Express' });
 });
+
+
+
+
+
 
 
 app.get('/driverRides',function(req, res){
@@ -147,17 +157,3 @@ io.on('connection', function (socket) {
 	});
 	
 });
-/*
-=======
-//images
-app.get('/addImagesToRide',customer.renderAddImagesToRide);
-app.post('/addImagesToRide',customer.addImagesToRide);
-app.get('/getImagesOfRide', customer.getImagesOfRide);
-app.get('/getImage', customer.getImage);
-
-
->>>>>>> 223e3964a1e42be711e58d4d72e3761255ccb595
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
-*/

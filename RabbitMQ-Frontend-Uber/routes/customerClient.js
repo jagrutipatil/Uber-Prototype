@@ -263,7 +263,7 @@ exports.addImagesToRide = function(req, res){
 	};
 
 exports.getImagesOfRide = function (req, res) {
-
+		res.set('Content-Type', 'image');
 	    var image = req.param('image');
 	    var mongoose = require('mongoose');
 	    var Schema = mongoose.Schema;
@@ -279,10 +279,10 @@ exports.getImagesOfRide = function (req, res) {
 	        console.log('image name ' + image);
 	        var gfs = Grid(conn.db);
 
-	        var dirname = require('path').dirname(__dirname);
-	        var newPath = dirname + "/uploads/"+image;
+	        //var dirname = require('path').dirname(__dirname);
+	        //var newPath = dirname + "/uploads/"+image;
 
-	        var writestream = fs.createWriteStream(newPath);
+	        //var writestream = fs.createWriteStream(newPath);
 
 
 	        //var str = image.substring(1, image.length);
@@ -294,13 +294,13 @@ exports.getImagesOfRide = function (req, res) {
 	            //_id: '5649b270c73c2e4c1746f9ca'
 	            filename: image
 	            //_id: '565c1f1c3d4803e82c5d0830'
-	        }).pipe(writestream);
+	        }).pipe(res);
 
 	        /*writestream.on('close', function (file) {
 	            res.redirect('/');
 	        });*/
 
-	        res.send("kuch bhi");
+	        //res.send("kuch bhi");
 	    });
 	};
 
