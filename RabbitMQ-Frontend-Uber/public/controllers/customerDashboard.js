@@ -295,6 +295,20 @@ function myTrips($scope, $http, $window) {
 	 $scope.data = [];
 	 $scope.q = '';
 	 
+	 $http({
+			method : 'POST',
+			url : '/session_get_ssn',
+			data : {}
+		}).success(function(response) {
+			if (response.result != "error") {
+				$scope.ssn6=response.ssn;			
+			} else {
+				console.log("Payment controller");
+				alert("error");
+			}			
+		}).error(function(error) {
+			console.log(error);
+		});
 	 
 	 $scope.getData = function () {
 	        var arr = [];
@@ -325,14 +339,13 @@ function myTrips($scope, $http, $window) {
 			method : "POST",
 			url : '/getUserBills',
 			data : {
-				"customerId" : "1"
+				"customerId" : $scope.ssn6
 			}
 		}).success(function(data) {
 			console.log("data recieved : " + data.value[0]);
 		    $scope.bills = data.value;
 			
-		}).error(function(error) {
-			
+		}).error(function(error) {			
 		});
 	};
 	
