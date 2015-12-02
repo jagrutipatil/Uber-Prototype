@@ -104,6 +104,7 @@ app.post('/bk_customer_search_with_name', customer.search_with_name);
 app.post('/bk_customer_search_with_ssn', customer.search_with_ssn);
 app.post('/bk_customer_search_with_email', customer.search_with_email);
 app.post('/bk_customer_update', customer.update);
+app.post('/bk_customer_updateLatLng', customer.updateLatLng);
 app.post('/bk_customer_updatePayment', customer.updatePayment);
 app.post('/bk_customer_approve', customer.approve);
 app.post('/bk_customer_rating', customer.rating);
@@ -113,7 +114,6 @@ app.post('/bk_driver_signup', driver.signup);
 app.post('/bk_driver_remove_with_email', driver.remove_with_email);
 app.post('/bk_driver_remove_with_ssn', driver.remove_with_ssn);
 app.post('/bk_driver_selectAll', driver.selectAll);
-app.post('/bk_driver_selectAll', driver.selectAll);
 app.post('/bk_driver_selectAllAvailable', driver.selectAllAvailable);
 app.post('/bk_driver_search_with_name', driver.search_with_name);
 app.post('/bk_driver_search_with_ssn', driver.search_with_ssn);
@@ -121,8 +121,6 @@ app.post('/bk_driver_update', driver.update);
 app.post('/bk_driver_updateLatLng', driver.updateLatLng);
 app.post('/bk_driver_approve', driver.approve);
 app.post('/bk_driver_rating', driver.rating);
-
-
 
 //rides
 app.post('/bk_rides_register', rides.register);
@@ -133,17 +131,13 @@ app.post('/estimate', bill.estimate);
 app.post('/getUserBills', bill.getUserBills);
 app.post('/getBill', bill.getBill);
 
-
 //app.post('/getDriverSummary', rides.getDriverSummary);
-
-
 
 //Images
 app.get('/addImagesToRide', session.isAuthDriver, customer.renderAddImagesToRide);
 app.post('/addImagesToRide', customer.addImagesToRide);
 app.get('/getImagesOfRide', session.isAuthDriver, customer.getImagesOfRide);
 app.get('/getImage', session.isAuthDriver, customer.getImage);
-
 
 
 var server = require('http').Server(app);
