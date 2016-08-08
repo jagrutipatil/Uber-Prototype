@@ -14,5 +14,5 @@ Implemented location based transportation system providing below features:<br/>
 Performance Testing for: 10,000 drivers, 10000 customers and 100,000 billing records.
 <br/>
 
-<b>Technologies:</b>Node.js, AngularJS, REST API, RabbitMQ, MongoDB
+Technologies:Node.js, AngularJS, REST API, RabbitMQ, MongoDB
 <br/>
