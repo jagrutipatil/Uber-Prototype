@@ -1,0 +1,500 @@
+<!--author @ankitaravalji-->
+
+
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Admin</title>
+      <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+      <script type="text/javascript" src="/controllers/admin.js"></script>
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+      <script src="http://code.jquery.com/jquery-1.4.min.js" type="text/javascript"></script>
+      <title>My Example</title>
+      <!-- Bootstrap 4 alpha CSS -->
+      <!-- IMPORTANT: Don't use this .css file in production. Use Bootstrap 3 until Bootstrap 4.0.0 is released. -->
+      <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+      <style type="text/css">
+      <style>
+         body{
+         padding: 0;
+         margin: 0;
+         }
+         #canvas-holder{
+         width:100%;
+         }
+      </style>
+   </head>
+   <body ng-app="administrator" ng-controller="adminController">
+      <div class="container">
+      <div class="page-header">
+         <h1>Administrator<small> | Dave Craig </small></h1>
+      </div>
+      <div class="row" style="min-height:100px;" >
+      <div  class="col-sm-6 ">
+         <h3>Requests</h3>
+         <hr/>
+         <div class="col-xs-4" >
+            <!-- required for floating -->
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs tabs-left">
+               <li class="active"><a href="#home" data-toggle="tab">Driver Requests</a></li>
+               <li><a href="#profile" data-toggle="tab">Customer Requests</a></li>
+            </ul>
+         </div>
+         <div class="col-xs-7">
+            <!-- Tab panes -->
+            <div class="tab-content">
+               <div class="tab-pane active" id="home">
+                  <div ng-repeat="driver in approveDrivers" style="min-width:400px !important;">
+                     <div class="col-md-5">
+                        {{driver.number}}.{{driver.firstname}}&nbsp;{{driver.lastname}} 
+                     </div>
+                     <button type="submit" ng-click="update2(driver.ssn)" class="btn btn-primary" style="margin-left:50px !important;">Add </button>
+                     <button type="button" class="btn btn-info">Deny </button> 
+                     <br><br>     
+                  </div>
+               </div>
+               <div class="tab-pane" id="profile">
+                  <div ng-repeat="customer in approveCustomers" style="min-width:400px !important;">
+                     <div class="col-md-5"> 
+                        {{customer.number}}.{{customer.firstname}}&nbsp;{{customer.lastname}}
+                     </div>
+                     <button type="submit" ng-click="update(customer.ssn)" class="btn btn-primary" style="margin-left:50px !important;">Add </button>
+                     <button type="button" class="btn btn-info">Deny </button> 
+                     <br><br>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div  class="col-md-7">
+         <h3>Review Drivers</h3>
+         <hr/>
+         <div class="col-md-7">
+            <!-- Tab panes -->
+            <div class="tab-content">
+               <div class="tab-pane active" id="home-r" >
+                  <div class="col-md-7" ng-repeat="driver in drivers">
+                     {{driver.number}}<br>
+                     SSN :  {{driver.ssn}}<br>
+                     Firstname : {{driver.firstname}}&nbsp;<br>
+                     Lastname :  {{driver.lastname}}<br>
+                     Email : {{driver.email}} <br>
+                     Password : {{driver.password}}<br>
+                     Mobile Number : {{driver.mobileno}}<br>
+                     Address : {{driver.address}}<br>
+                     City : {{driver.city}}<br>
+                     State : {{driver.state}}<br>
+                     Postal Code : {{driver.state}}<br>
+                     Driving Licence Number : {{driver.state}}<br><br><br>
+                  </div>
+                  <div class="col-md-2">
+                     <img src="" height="100" width="100">
+                  </div>
+               </div>
+               <div class="tab-pane" id="profile-r">
+                  <div class="col-md-6">
+                     DriverID 2<br><br>
+                     Firstname Lastname <br><br>
+                     Address <br><br>
+                     City <br><br>
+                     State <br><br>
+                     Zip Code<br><br>
+                     Phone number <br><br>
+                     Email <br><br>
+                     Car Details <br><br>
+                     Rating <br><br>
+                     Reviews <br><br>
+                     Introduction<br><br>
+                     Ride History <br><br>
+                  </div>
+                  <div class="col-md-2">
+                     <img src="" height="100" width="100">
+                  </div>
+               </div>
+               <div class="tab-pane" id="messages-r">
+                  <div class="col-md-6">
+                     DriverID 3<br><br>
+                     Firstname Lastname <br><br>
+                     Address <br><br>
+                     City <br><br>
+                     State <br><br>
+                     Zip Code<br><br>
+                     Phone number <br><br>
+                     Email <br><br>
+                     Car Details <br><br>
+                     Rating <br><br>
+                     Reviews <br><br>
+                     Introduction<br><br>
+                     Ride History <br><br>
+                  </div>
+                  <div class="col-md-2">
+                     <img src="" height="100" width="100">
+                  </div>
+               </div>
+               <div class="tab-pane" id="settings-r">
+                  <div class="col-md-6">
+                     DriverID 4<br><br>
+                     Firstname Lastname <br><br>
+                     Address <br><br>
+                     City <br><br>
+                     State <br><br>
+                     Zip Code<br><br>
+                     Phone number <br><br>
+                     Email <br><br>
+                     Car Details <br><br>
+                     Rating <br><br>
+                     Reviews <br><br>
+                     Introduction<br><br>
+                     Ride History <br><br>
+                  </div>
+                  <div class="col-md-2">
+                     <img src="" height="100" width="100">
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-xs-3">
+            <!-- required for floating -->
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs tabs-right">
+               <li class="active"><a href="#home-r" data-toggle="tab">Driver 1</a></li>
+               <li><a href="#profile-r" data-toggle="tab">Driver 2</a></li>
+               <li><a href="#messages-r" data-toggle="tab">Driver 3</a></li>
+               <li><a href="#settings-r" data-toggle="tab">Driver 4</a></li>
+            </ul>
+         </div>
+      </div>
+      <div class="row" style="min-height:100px;">
+         <div  class="col-md-7">
+            <h3>Review Customers</h3>
+            <hr/>
+            <div class="col-md-7">
+               <!-- Tab panes -->
+               <div class="tab-content" >
+                  <div class="tab-pane active" id="home-a" >
+                     <div class="col-md-7"  ng-repeat="customer in customers">
+                        {{customer.number}}<br>
+                        SSN:         {{customer.ssn}}<br>
+                        Firstname: {{customer.firstname}}&nbsp;<br>
+                        Lastname:  {{customer.lastname}}<br>
+                        Email: {{customer.email}}<br>
+                        Password: {{customer.password}}<br>
+                        Mobile Number: {{customer.mobileno}}<br>
+                        Card Number: {{customer.cardno}}<br>
+                        CVV : {{customer.cvv}}<br>
+                        Expiration Month:{{customer.exp_month}}<br>
+                        Expiration Year: {{customer.exp_year}}<br>
+                        Postal Code: {{customer.postalcode}}<br><br><br>
+                     </div>
+                     <div class="col-md-2">
+                        <img src="" height="100" width="100">
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="profile-a">
+                     <div class="col-md-7">
+                        CustomerID 2<br><br>
+                        Firstname Lastname <br><br>
+                        Address <br><br>
+                        City <br><br>
+                        State <br><br>
+                        Zip Code<br><br>
+                        Phone number <br><br>
+                        Email <br><br>
+                        Car Details <br><br>
+                        Rating <br><br>
+                        Reviews <br><br>
+                        Introduction<br><br>
+                        Ride History <br><br>
+                     </div>
+                     <div class="col-md-2">
+                        <img src="" height="100" width="100">
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="messages-a">
+                     <div class="col-md-7">
+                        CustomerID 3<br><br>
+                        Firstname Lastname <br><br>
+                        Address <br><br>
+                        City <br><br>
+                        State <br><br>
+                        Zip Code<br><br>
+                        Phone number <br><br>
+                        Email <br><br>
+                        Car Details <br><br>
+                        Rating <br><br>
+                        Reviews <br><br>
+                        Introduction<br><br>
+                        Ride History <br><br>
+                     </div>
+                     <div class="col-md-2">
+                        <img src="" height="100" width="100">
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="settings-a">
+                     <div class="col-md-7">
+                        CustomerID 4<br><br>
+                        Firstname Lastname <br><br>
+                        Address <br><br>
+                        City <br><br>
+                        State <br><br>
+                        Zip Code<br><br>
+                        Phone number <br><br>
+                        Email <br><br>
+                        Car Details <br><br>
+                        Rating <br><br>
+                        Reviews <br><br>
+                        Introduction<br><br>
+                        Ride History <br><br>
+                     </div>
+                     <div class="col-md-2">
+                        <img src="" height="100" width="100">
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-xs-5">
+               <!-- required for floating -->
+               <!-- Nav tabs -->
+               <ul class="nav nav-tabs tabs-right">
+                  <li class="active"><a href="#home-a" data-toggle="tab">Customer 1</a></li>
+                  <li><a href="#profile-a" data-toggle="tab">Customer 2</a></li>
+                  <li><a href="#messages-a" data-toggle="tab">Customer 3</a></li>
+                  <li><a href="#settings-a" data-toggle="tab">Customer 4</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div  class="col-sm-6">
+         <h3>Revenue - Day Wise</h3>
+         <hr/>
+         <div class="col-xs-9" ng-repeat="revenue in revenues">
+            <!-- Tab panes -->
+            <div class="tab-content">
+               <div id="chart"></div>
+               {{revenue.number}}<br>
+               Day :  {{revenue.datee | date : format : timezone}}<br>
+               Revenue :  {{revenue.total}}<br><br><br>
+            </div>
+         </div>
+      </div>
+      <div  class="col-sm-6">
+         <h3>Revenue - Area Wise</h3>
+         <hr/>
+         <div class="col-xs-6">
+            <!-- Tab panes -->
+            <div class="tab-content">
+               <div class="tab-pane active" id="home-vr">Cupertino.
+               </div>
+               <div class="tab-pane" id="profile-vr">Los Gatos.
+               </div>
+               <div class="tab-pane" id="messages-vr">Silver Creek</div>
+               <div class="tab-pane" id="settings-vr">Almaden.
+               </div>
+            </div>
+         </div>
+         <div class="col-xs-3">
+            <!-- required for floating -->
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs tabs-right sideways">
+               <li class="active"><a href="#home-vr" data-toggle="tab">Cupertino
+                  </a>
+               </li>
+               <li><a href="#profile-vr" data-toggle="tab">Los Gatos</a></li>
+               <li><a href="#messages-vr" data-toggle="tab">Silver Creek</a></li>
+               <li><a href="#settings-vr" data-toggle="tab">Almaden</a></li>
+            </ul>
+         </div>
+      </div>
+      <div class="row">
+         <div  class="col-md-8">
+            <h3>Ride - Area Wise - Origin </h3>
+            <hr/>
+            <div class="col-md-8">
+               <!-- required for floating -->
+               <!-- Nav tabs -->
+               <ul class="nav nav-tabs tabs-left sideways">
+                  <li class="active"><a href="#home-v" data-toggle="tab">Cupertino</a></li>
+                  <li><a href="#profile-v" data-toggle="tab">Almaden</a></li>
+                  <li><a href="#messages-v" data-toggle="tab">Los Gatos</a></li>
+                  <li><a href="#settings-v" data-toggle="tab">Silver Creek</a></li>
+                  <li><a href="#settings-v" data-toggle="tab">Willow Glen</a></li>
+               </ul>
+            </div>
+            <div class="col-md-8">
+               <!-- Tab panes -->
+               <div class="tab-content">
+                  <div class="tab-pane active" id="home-v"  ng-repeat="administrator in administrators">
+                     {{administrator.number}}.
+                     Origin : {{administrator.origin}}<br>
+                     Total Rides : {{administrator.totalrides}}<br><br>
+                  </div>
+                  <div class="tab-pane" id="profile-v">
+                     Almaden
+                     <div style="width: 100%">
+                        <canvas id="canvas" height="500" width="800"></canvas>
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="messages-v">
+                     Los Gatos
+                     <div style="width: 100%">
+                        <canvas id="canvas" height="500" width="800"></canvas>
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="settings-v">
+                     Silver Creek
+                     <div style="width: 100%">
+                        <canvas id="canvas" height="500" width="800"></canvas>
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="settings-v">
+                     Willow Glen
+                     <div style="width: 100%">
+                        <canvas id="canvas" height="500" width="800"></canvas>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div  class="col-md-8">
+            <h3> Rides - Area Wise - DropOff</h3>
+            <hr/>
+            <div class="col-md-8" ng-repeat="dropoff in dropoffs">
+               <!-- Tab panes -->
+               {{dropoff.number}}.
+               Destination : {{dropoff.dest}}<br>
+               Total Rides : {{dropoff.totalridesp}}<br><br>
+               <div id="canvas-holder">
+                  <canvas id="chart-area" width="0" height="0"/>
+               </div>
+            </div>
+         </div>
+      </div>
+      <br><br>
+      <div class="row">
+         <div  class="col-sm-6">
+            <h3> Rides - Driver Wise</h3>
+            <hr/>
+            <div class="col-md-6" ng-repeat="rided in rideds">
+               <!-- Tab panes -->
+               Driver Id : {{rided.driver_id}}<br>
+               Total Rides : {{rided.totalri}}<br><br><br>
+               <div id="canvas-holder">
+                  <canvas id="chart-area" width="0" height="0"/>
+               </div>
+            </div>
+         </div>
+         <div  class="col-sm-6">
+            <h3> Rides - Customer Wise</h3>
+            <hr/>
+            <div class="col-md-6" ng-repeat="ridec in ridecs">
+               <!-- Tab panes -->
+               Customer Id : {{ridec.cust_id}}<br>
+               Total Rides : {{ridec.totalric}}<br><br><br>
+            </div>
+         </div>
+      </div>
+      <div  class="col-sm-7">
+      <h3>Search Bill</h3>
+      <hr/>
+      <div class="tabbable" style="margin-bottom: 18px;">
+      <ul>
+         <li class="active"><a href="#tab1" data-toggle="tab">By Driver_Id</a></li>
+         <li class=""><a href="#tab2" data-toggle="tab">By Customer_Id</a></li>
+         <li class=""><a href="#tab3" data-toggle="tab">By Bill_Id</a></li>
+         <li class=""><a href="#tab4" data-toggle="tab">By Date</a></li>
+      </ul>
+      <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;" >
+         <div class="tab-pane active" id="tab1" >
+            <br><br>
+            <input type="text" id="driverId" placeholder="Enter Driver Id" ng-model="driver_id" > </input>
+            <button type="button" id="submit" class="btn btn-warning" ng-click="generate(driver_id)">Click to Search by Driver_Id</button><br><br>
+            <div style="background-color:#D1D0CE;"    ng-repeat="DB in DBs" margin-top="20px"
+               margin-right ="20px"
+               margin-bottom="20px"
+               margin-left="20px" >
+               {{DB.number}}.
+               Driver Id : {{DB.driverId}} <br>
+               Customer Id : {{DB.customerId}} <br>
+               Bill Id : {{DB.billId}} <br>
+               Ride Date: {{DB.rideDate}} <br>
+               Customer Pick Up Time : {{DB.pickUpTime}}<br>
+               Customer Drop Off Time : {{DB.DropOffTime}}<br>
+               Distance travelled : {{DB.distance}}<br>
+               Bill Amount Charged : {{DB.amount}} <br>
+               Source Location : {{DB.sourceLocation}} <br>
+               Destination Location : {{DB.destinationLocation}}<br><br>
+               <button type="button" class="btn btn-info">Delete Bill</button>
+               </p>
+            </div>
+            <br><br><br>
+         </div>
+         <div class="tab-pane" id="tab2">
+            <br><br>
+            <input type="text" id="customerId" placeholder="Enter Customer Id" ng-model="customerId" > </input>
+            <button type="button" id="submit" class="btn btn-warning" ng-click="generate1(customerId)">Click to Search by Customer_Id</button><br><br>
+            <div style="background-color:#D1D0CE;"    ng-repeat="CB in CBs" margin-top="20px"
+               margin-right ="20px"
+               margin-bottom="20px"
+               margin-left="20px" >
+               {{CB.number}}. Customer Id : {{CB.customerId}} <br>
+               Driver Id : {{CB.driverId}} <br>
+               Bill Id : {{CB.billId}} <br>
+               Ride Date: {{CB.rideDate}} <br>
+               Customer Pick Up Time : {{CB.pickUpTime}}<br>
+               Customer Drop Off Time : {{CB.DropOffTime}}<br>
+               Distance travelled : {{CB.distance}}<br>
+               Bill Amount Charged : {{CB.amount}} <br>
+               Source Location : {{CB.sourceLocation}} <br>
+               Destination Location : {{CB.destinationLocation}}<br><br>
+               <button type="button" class="btn btn-info">Delete Bill</button>
+               </p>
+            </div>
+            <br><br><br>
+         </div>
+         <div class="tab-pane" id="tab3">
+            <br><br>
+            <input type="text" id="billId" placeholder="Enter Bill Id" ng-model="billId" > </input>
+            <button type="button" id="submit" class="btn btn-warning" ng-click="generate2(billId)">Click to Search by Bill_Id</button><br><br>
+            <div style="background-color:#D1D0CE;"    ng-repeat="BB in BBs" margin-top="20px"
+               margin-right ="20px"
+               margin-bottom="20px"
+               margin-left="20px" >
+               {{BB.number}}. Bill Id : {{BB.billId}} <br>
+               Driver Id : {{BB.driverId}} <br>
+               Customer Id : {{BB.billId}} <br>
+               Ride Date: {{BB.rideDate}} <br>
+               Customer Pick Up Time : {{BB.pickUpTime}}<br>
+               Customer Drop Off Time : {{BB.DropOffTime}}<br>
+               Distance travelled : {{BB.distance}}<br>
+               Bill Amount Charged : {{BB.amount}} <br>
+               Source Location : {{BB.sourceLocation}} <br>
+               Destination Location : {{BB.destinationLocation}}<br><br>
+               <button type="button" class="btn btn-info">Delete Bill</button>
+               </p>
+            </div>
+            <br><br><br>
+         </div>
+         <div class="tab-pane" id="tab4">
+            <br><br>
+            <input type="text" id="date" placeholder="Enter Date"> </input>
+            <button type="button" class="btn btn-warning">Click to Search by Date</button><br><br>
+            <button type="button" class="btn btn-info">Delete Bill</button>
+         </div>
+         <br>
+         <br>
+      </div>
+      <br><br>
+      <footer class="footer" style="width:100%; text-align:center; padding-bottom:20px;">
+      </footer>
+      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+      <!-- Bootstrap 4 Alpha JS -->
+      <!-- IMPORTANT: Don't use this .js file in production. Use Bootstrap 3 until Bootstrap 4.0.0 is released. -->
+      <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script> 
+   </body>
+</html>
