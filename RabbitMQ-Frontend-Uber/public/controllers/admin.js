@@ -1,3 +1,7 @@
+/*
+* author @ankitaravalji
+*/
+
 var app = angular.module('administrator', []);
 app.controller("adminController", adminController);
 adminController.$inject = ['$scope', '$http', '$window'];
